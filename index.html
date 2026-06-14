@@ -217,7 +217,6 @@ main{max-width:1200px;margin:0 auto;padding:12px 12px 50px;}
     <button class="nav-btn" onclick="tab('grupos',this)">📊 GRUPOS</button>
     <button class="nav-btn" onclick="tab('estadisticas',this)">🏆 ESTADÍSTICAS</button>
     <button class="nav-btn" onclick="tab('camino',this)">🔮 CAMINO AL TÍTULO</button>
-    <button class="nav-btn" onclick="tab('reglas',this)">📋 REGLAS FIFA</button>
   </nav>
 </header>
 
@@ -425,11 +424,11 @@ main{max-width:1200px;margin:0 auto;padding:12px 12px 50px;}
 <!-- ESTADÍSTICAS -->
 <div id="s-estadisticas" class="section">
   <div class="pg-title">🏆 <span>ESTADÍSTICAS</span></div>
-  <div class="pg-sub">8 partidos terminados · Datos verificados · 13 junio · Día 3 completo</div>
+  <div class="pg-sub">9 partidos terminados · Actualizado Día 4 · 14 junio</div>
   <div class="g3 mb10">
-    <div class="award"><div class="award-icon">👟</div><div class="award-lbl">Bota de Oro</div><div class="award-name">Folarin Balogun</div><div class="award-detail">🇺🇸 EEUU</div><div class="award-stat">2 ⚽</div></div>
+    <div class="award"><div class="award-icon">👟</div><div class="award-lbl">Bota de Oro</div><div class="award-name">Kai Havertz</div><div class="award-detail">🇩🇪 Alemania · doblete</div><div class="award-stat">2 ⚽</div></div>
     <div class="award"><div class="award-icon">🧤</div><div class="award-lbl">Mejor Portero</div><div class="award-name">Guillermo Ochoa</div><div class="award-detail">🇲🇽 México · 0 GC</div><div class="award-stat">0 GC 🧱</div></div>
-    <div class="award"><div class="award-icon">⭐</div><div class="award-lbl">Mejor Jugador</div><div class="award-name">Christian Pulisic</div><div class="award-detail">🇺🇸 EEUU · 1G+2A</div><div class="award-stat">MVP 🎖</div></div>
+    <div class="award"><div class="award-icon">⭐</div><div class="award-lbl">Mejor Jugador</div><div class="award-name">Jamal Musiala</div><div class="award-detail">🇩🇪 Alemania · 1G+2A</div><div class="award-stat">MVP 🎖</div></div>
   </div>
   <div class="g2">
     <div class="card">
@@ -438,22 +437,65 @@ main{max-width:1200px;margin:0 auto;padding:12px 12px 50px;}
     </div>
     <div>
       <div class="card mb10">
-        <div class="card-hd"><div class="card-title">🟥 <span class="ac">TARJETAS ROJAS</span></div></div>
+        <div class="card-hd"><div class="card-title">🧤 PORTEROS <span class="ac">MENOS VENCIDOS</span></div></div>
+        <div class="p12">
+          <div class="scorer"><div class="s-rank r1">1</div><div class="s-flag">🇲🇽</div><div class="s-info"><div class="s-name">Guillermo Ochoa</div><div class="s-team">México · 1PJ · 0 GC</div></div><div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--green);">0 GC</div></div>
+          <div class="scorer"><div class="s-rank r1">1</div><div class="s-flag">🇦🇺</div><div class="s-info"><div class="s-name">Patrick Beach</div><div class="s-team">Australia · 1PJ · 0 GC · 3 paradas</div></div><div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--green);">0 GC</div></div>
+          <div class="scorer"><div class="s-rank r2">3</div><div class="s-flag">🇩🇪</div><div class="s-info"><div class="s-name">Manuel Neuer</div><div class="s-team">Alemania · 1PJ · 1 GC · 3 paradas</div></div><div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--neon);">1 GC</div></div>
+          <div class="scorer"><div class="s-rank r3">4</div><div class="s-flag">🇺🇸</div><div class="s-info"><div class="s-name">Matt Freese</div><div class="s-team">EEUU · 1PJ · 1 GC · 4 paradas</div></div><div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--neon);">1 GC</div></div>
+        </div>
+      </div>
+      <div class="card mb10">
+        <div class="card-hd"><div class="card-title">🟨 TARJETAS <span class="ac">AMARILLAS</span></div></div>
+        <div class="p12">
+          <div class="pbar"><div class="pbar-top"><span>🇵🇾 Paraguay</span><span class="pbar-val" style="color:var(--gold);">3 🟨</span></div><div class="pbar-track"><div class="pbar-fill" style="width:100%;background:var(--gold);"></div></div></div>
+          <div class="pbar"><div class="pbar-top"><span>🇧🇦 Bosnia</span><span class="pbar-val" style="color:var(--gold);">2 🟨</span></div><div class="pbar-track"><div class="pbar-fill" style="width:67%;background:var(--gold);"></div></div></div>
+          <div class="pbar"><div class="pbar-top"><span>🇨🇿 Rep. Checa</span><span class="pbar-val" style="color:var(--gold);">2 🟨</span></div><div class="pbar-track"><div class="pbar-fill" style="width:67%;background:var(--gold);"></div></div></div>
+          <div class="pbar"><div class="pbar-top"><span>🇰🇷 Corea del Sur</span><span class="pbar-val" style="color:var(--gold);">2 🟨</span></div><div class="pbar-track"><div class="pbar-fill" style="width:67%;background:var(--gold);"></div></div></div>
+          <div class="pbar"><div class="pbar-top"><span>🇭🇹 Haití</span><span class="pbar-val" style="color:var(--gold);">2 🟨</span></div><div class="pbar-track"><div class="pbar-fill" style="width:67%;background:var(--gold);"></div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><div class="card-title">🟥 TARJETAS <span class="ac">ROJAS</span></div></div>
         <div class="p12">
           <div class="scorer"><div class="s-flag">🇿🇦</div><div class="s-info"><div class="s-name">S. Sithole</div><div class="s-team">Sudáfrica · Min 50' vs México</div></div><div style="font-size:16px;">🟥</div></div>
           <div class="scorer"><div class="s-flag">🇿🇦</div><div class="s-info"><div class="s-name">T. Zwane</div><div class="s-team">Sudáfrica · Min 84' vs México</div></div><div style="font-size:16px;">🟥</div></div>
           <div class="scorer"><div class="s-flag">🇲🇽</div><div class="s-info"><div class="s-name">C. Montes</div><div class="s-team">México · Min 90+1' vs Sudáfrica</div></div><div style="font-size:16px;">🟥</div></div>
         </div>
       </div>
-      <div class="card">
-        <div class="card-hd"><div class="card-title">📈 <span class="ac">DATOS GLOBALES</span></div></div>
-        <div class="p12">
-          <div class="g3">
-            <div style="text-align:center;padding:8px;background:rgba(255,215,0,0.04);border:1px solid rgba(255,215,0,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--gold);">22</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">Goles</div></div>
-            <div style="text-align:center;padding:8px;background:rgba(255,51,85,0.04);border:1px solid rgba(255,51,85,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--red);">3</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">🟥 Rojas</div></div>
-            <div style="text-align:center;padding:8px;background:rgba(0,255,136,0.04);border:1px solid rgba(0,255,136,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--green);">9</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">Partidos</div></div>
-          </div>
-        </div>
+    </div>
+  </div>
+  <div class="g2 mt10">
+    <div class="card">
+      <div class="card-hd"><div class="card-title">🗡️ MEJOR <span class="ac">ATAQUE</span></div></div>
+      <div class="p12">
+        <div class="pbar"><div class="pbar-top"><span>🇩🇪 Alemania</span><span class="pbar-val" style="color:var(--gold);">7 ⚽</span></div><div class="pbar-track"><div class="pbar-fill" style="width:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇺🇸 Estados Unidos</span><span class="pbar-val" style="color:var(--neon);">4 ⚽</span></div><div class="pbar-track"><div class="pbar-fill" style="width:57%;background:var(--neon);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇲🇽 México</span><span class="pbar-val" style="color:var(--blue);">2 ⚽</span></div><div class="pbar-track"><div class="pbar-fill" style="width:28%;background:var(--blue);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇰🇷 Corea del Sur</span><span class="pbar-val" style="color:var(--blue);">2 ⚽</span></div><div class="pbar-track"><div class="pbar-fill" style="width:28%;background:var(--blue);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇦🇺 Australia</span><span class="pbar-val" style="color:var(--green);">2 ⚽</span></div><div class="pbar-track"><div class="pbar-fill" style="width:28%;background:var(--green);"></div></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hd"><div class="card-title">🛡️ MEJOR <span class="ac">DEFENSA</span></div></div>
+      <div class="p12">
+        <div class="pbar"><div class="pbar-top"><span>🇲🇽 México</span><span class="pbar-val" style="color:var(--green);">0 GC</span></div><div class="pbar-track"><div class="pbar-fill" style="width:100%;background:var(--green);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇦🇺 Australia</span><span class="pbar-val" style="color:var(--green);">0 GC</span></div><div class="pbar-track"><div class="pbar-fill" style="width:100%;background:var(--green);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia</span><span class="pbar-val" style="color:var(--green);">0 GC</span></div><div class="pbar-track"><div class="pbar-fill" style="width:100%;background:var(--green);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇨🇼 Curazao</span><span class="pbar-val" style="color:var(--red);">7 GC</span></div><div class="pbar-track"><div class="pbar-fill" style="width:10%;background:var(--red);"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card mt10">
+    <div class="card-hd"><div class="card-title">📈 DATOS <span class="ac">GLOBALES</span></div></div>
+    <div class="p12">
+      <div class="g3">
+        <div style="text-align:center;padding:8px;background:rgba(255,215,0,0.04);border:1px solid rgba(255,215,0,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--gold);">22</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">Goles</div></div>
+        <div style="text-align:center;padding:8px;background:rgba(255,215,0,0.04);border:1px solid rgba(255,215,0,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--gold);">2.4</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">Promedio</div></div>
+        <div style="text-align:center;padding:8px;background:rgba(255,51,85,0.04);border:1px solid rgba(255,51,85,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--red);">3</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">🟥 Rojas</div></div>
+        <div style="text-align:center;padding:8px;background:rgba(255,165,0,0.04);border:1px solid rgba(255,165,0,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--gold2);">14</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">🟨 Amarillas</div></div>
+        <div style="text-align:center;padding:8px;background:rgba(0,255,136,0.04);border:1px solid rgba(0,255,136,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--green);">9</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">Partidos</div></div>
+        <div style="text-align:center;padding:8px;background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--neon);">3</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">Penales</div></div>
       </div>
     </div>
   </div>
@@ -577,49 +619,6 @@ main{max-width:1200px;margin:0 auto;padding:12px 12px 50px;}
   </div>
 
 
-<!-- REGLAS FIFA -->
-<div id="s-reglas" class="section">
-  <div class="pg-title">📋 REGLAS <span>FIFA 2026</span></div>
-  <div class="pg-sub">Todo lo que necesitas saber sobre el nuevo formato</div>
-  <div class="card mb10">
-    <div class="card-hd"><div class="card-title">🌍 FORMATO <span class="ac">NUEVO 48 EQUIPOS</span></div></div>
-    <div class="p12">
-      <div class="rule-item"><div class="ri">48</div><div><strong style="color:var(--white);">48 selecciones</strong> participan por primera vez. Antes eran 32.</div></div>
-      <div class="rule-item"><div class="ri">12</div><div><strong style="color:var(--white);">12 grupos</strong> de 4 equipos en la fase de grupos.</div></div>
-      <div class="rule-item"><div class="ri">104</div><div><strong style="color:var(--white);">104 partidos</strong> en total. El Mundial más grande de la historia.</div></div>
-      <div class="rule-item"><div class="ri">32</div><div><strong style="color:var(--white);">32 equipos</strong> avanzan a Dieciseisavos (ronda nueva que no existía).</div></div>
-      <div class="rule-item"><div class="ri">3</div><div><strong style="color:var(--white);">3 países anfitriones:</strong> Estados Unidos, México y Canadá.</div></div>
-    </div>
-  </div>
-  <div class="card mb10">
-    <div class="card-hd"><div class="card-title">📊 CRITERIOS DE <span class="ac">CLASIFICACIÓN</span></div></div>
-    <div class="p12">
-      <div class="rule-item"><div class="ri">1</div><div><strong style="color:var(--white);">Puntos</strong> — Victoria=3 · Empate=1 · Derrota=0</div></div>
-      <div class="rule-item"><div class="ri">2</div><div><strong style="color:var(--white);">Diferencia de goles</strong></div></div>
-      <div class="rule-item"><div class="ri">3</div><div><strong style="color:var(--white);">Goles a favor</strong></div></div>
-      <div class="rule-item"><div class="ri">4</div><div><strong style="color:var(--white);">Resultados entre equipos empatados</strong></div></div>
-      <div class="rule-item"><div class="ri">5</div><div><strong style="color:var(--white);">Menos tarjetas acumuladas</strong></div></div>
-      <div class="rule-item"><div class="ri">6</div><div><strong style="color:var(--white);">Sorteo</strong> si todo lo anterior está igual</div></div>
-    </div>
-  </div>
-  <div class="card mb10">
-    <div class="card-hd"><div class="card-title">🔴 <span class="ac">VAR</span> — ÁRBITRO DE VIDEO</div></div>
-    <div class="p12">
-      <div class="rule-item"><div class="ri">✅</div><div>Revisa <strong style="color:var(--white);">goles, penales, tarjetas rojas y errores de identidad.</strong></div></div>
-      <div class="rule-item"><div class="ri">❌</div><div>NO revisa amarillas, fueras de lugar sin gol, ni faltas menores.</div></div>
-      <div class="rule-item"><div class="ri">📺</div><div>Los equipos <strong style="color:var(--white);">NO pueden pedir revisiones.</strong> Solo el árbitro.</div></div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-hd"><div class="card-title">⏱️ TIEMPO EXTRA Y <span class="ac">PENALES</span></div></div>
-    <div class="p12">
-      <div class="rule-item"><div class="ri">90'</div><div>Partido normal + tiempo añadido del árbitro.</div></div>
-      <div class="rule-item"><div class="ri">+30</div><div>En eliminatorias si hay empate al 90': <strong style="color:var(--white);">30 minutos extra.</strong></div></div>
-      <div class="rule-item"><div class="ri">🥅</div><div>Si sigue empate: <strong style="color:var(--white);">tanda de penales.</strong> 5 cada uno, luego muerte súbita.</div></div>
-      <div class="rule-item"><div class="ri">⚠️</div><div>En fase de grupos <strong style="color:var(--red);">NO hay tiempo extra ni penales.</strong> Empate = 1 punto cada uno.</div></div>
-    </div>
-  </div>
-</div>
 
 </main>
 
@@ -810,34 +809,34 @@ function renderGroups(){
 
 // SCORERS
 const SCORERS=[
+  {r:1,f:'🇩🇪',n:'Kai Havertz',t:"Alemania · 88' (doblete)",g:2},
   {r:1,f:'🇺🇸',n:'Folarin Balogun',t:"EEUU · 31', 45+5'",g:2},
-  {r:2,f:'🇲🇽',n:'Julián Quiñones',t:"México · 8' — 1er GOL del Mundial",g:1},
-  {r:2,f:'🇲🇽',n:'Raúl Jiménez',t:"México · 66'",g:1},
-  {r:2,f:'🇰🇷',n:'Hwang In-beom',t:"Corea del Sur · 55'",g:1},
-  {r:2,f:'🇰🇷',n:'Oh Hyeon-gyu',t:"Corea del Sur · 78'",g:1},
-  {r:2,f:'🇧🇦',n:'Jovo Lukic',t:"Bosnia · 21'",g:1},
-  {r:2,f:'🇨🇦',n:'Cyle Larin',t:"Canadá · 79'",g:1},
-  {r:2,f:'🇨🇿',n:'L. Krejci',t:"Rep. Checa · 22'",g:1},
-  {r:2,f:'🇺🇸',n:'Giovanni Reyna',t:"EEUU · 90+8'",g:1},
-  {r:2,f:'🇵🇾',n:'M. Magalhães',t:"Paraguay · 73'",g:1},
-  {r:2,f:'🇧🇷',n:'Vinícius Jr.',t:"Brasil · 32'",g:1},
-  {r:2,f:'🇲🇦',n:'Ismael Saibari',t:"Marruecos · 21'",g:1},
-  {r:2,f:'🇨🇭',n:'Breel Embolo',t:"Suiza · 17'(pen)",g:1},
-  {r:2,f:'🇶🇦',n:'Boualem Khoukhi',t:"Qatar · 90+4'",g:1},
-  {r:2,f:'🇦🇺',n:'Nestory Irankunda',t:"Australia · 27'",g:1},
-  {r:2,f:'🇦🇺',n:'Connor Metcalfe',t:"Australia · 2T",g:1},
-  {r:2,f:'🇩🇪',n:'Kai Havertz',t:"Alemania · 88' (doblete)",g:2},
-  {r:2,f:'🇩🇪',n:'Felix Nmecha',t:"Alemania · 6'",g:1},
-  {r:2,f:'🇩🇪',n:'Jamal Musiala',t:"Alemania · 47'",g:1},
-  {r:2,f:'🇩🇪',n:'Nathaniel Brown',t:"Alemania · 68'",g:1},
-  {r:2,f:'🇩🇪',n:'Deniz Undav',t:"Alemania · 78'",g:1},
-  {r:2,f:'🇨🇼',n:'Livano Comenencia',t:"Curazao · 21' — 1er gol histórico",g:1},
+  {r:3,f:'🇲🇽',n:'Julián Quiñones',t:"México · 8' — 1er GOL del Mundial",g:1},
+  {r:3,f:'🇲🇽',n:'Raúl Jiménez',t:"México · 66'",g:1},
+  {r:3,f:'🇩🇪',n:'Felix Nmecha',t:"Alemania · 6'",g:1},
+  {r:3,f:'🇩🇪',n:'Jamal Musiala',t:"Alemania · 47'",g:1},
+  {r:3,f:'🇩🇪',n:'Nathaniel Brown',t:"Alemania · 68'",g:1},
+  {r:3,f:'🇩🇪',n:'Deniz Undav',t:"Alemania · 78'",g:1},
+  {r:3,f:'🇰🇷',n:'Hwang In-beom',t:"Corea del Sur · 55'",g:1},
+  {r:3,f:'🇰🇷',n:'Oh Hyeon-gyu',t:"Corea del Sur · 78'",g:1},
+  {r:3,f:'🇧🇷',n:'Vinícius Jr.',t:"Brasil · 32'",g:1},
+  {r:3,f:'🇲🇦',n:'Ismael Saibari',t:"Marruecos · 21'",g:1},
+  {r:3,f:'🇦🇺',n:'Nestory Irankunda',t:"Australia · 27'",g:1},
+  {r:3,f:'🇦🇺',n:'Connor Metcalfe',t:"Australia · 2T",g:1},
+  {r:3,f:'🇨🇦',n:'Cyle Larin',t:"Canadá · 79'",g:1},
+  {r:3,f:'🇺🇸',n:'Giovanni Reyna',t:"EEUU · 90+8'",g:1},
+  {r:3,f:'🇨🇼',n:'Livano Comenencia',t:"Curazao · 21' — 1er gol histórico",g:1},
+  {r:3,f:'🇧🇦',n:'Jovo Lukic',t:"Bosnia · 21'",g:1},
+  {r:3,f:'🇨🇿',n:'L. Krejci',t:"Rep. Checa · 22'",g:1},
+  {r:3,f:'🇵🇾',n:'M. Magalhães',t:"Paraguay · 73'",g:1},
+  {r:3,f:'🇨🇭',n:'Breel Embolo',t:"Suiza · 17'(pen)",g:1},
+  {r:3,f:'🇶🇦',n:'Boualem Khoukhi',t:"Qatar · 90+4'",g:1},
 ];
 
 function renderScorers(){
   let h='';
   SCORERS.forEach((s,i)=>{
-    const rc=i===0?'r1':i<=2?'r2':i===3?'r3':'';
+    const rc=s.r===1?'r1':s.r===2?'r2':s.r===3?'r3':'';
     const dots=Array(s.g).fill('<div class="g-dot"></div>').join('');
     h+=`<div class="scorer"><div class="s-rank ${rc}">${i+1}</div><div class="s-flag">${s.f}</div><div class="s-info"><div class="s-name">${s.n}</div><div class="s-team">${s.t}</div></div><div class="s-goals">${dots}<div class="g-num">${s.g}</div></div></div>`;
   });
