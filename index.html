@@ -371,6 +371,12 @@ main{max-width:1200px;margin:0 auto;padding:12px 12px 50px;}
 <div id="s-calendario" class="section">
   <div class="pg-title">📅 CALENDARIO <span>COMPLETO</span></div>
   <div class="pg-sub">Fase de grupos · 11 jun — 27 jun · Hora El Salvador</div>
+  <div style="margin-bottom:12px;position:relative;">
+    <input id="cal-search" type="text" placeholder="🔍 Buscar equipo o grupo... ej: México, Grupo C"
+      oninput="filterCal(this.value)"
+      style="width:100%;background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;color:var(--white);font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;outline:none;transition:border-color 0.2s;"
+      onfocus="this.style.borderColor='var(--neon)'" onblur="this.style.borderColor='var(--border2)'">
+  </div>
   <div class="card mb10">
     <div class="card-hd"><div class="card-title">📺 CANALES EN <span class="ac">EL SALVADOR</span></div></div>
     <div class="p12 g2">
@@ -393,6 +399,12 @@ main{max-width:1200px;margin:0 auto;padding:12px 12px 50px;}
 <div id="s-grupos" class="section">
   <div class="pg-title">📊 TABLA DE <span>POSICIONES</span></div>
   <div class="pg-sub">12 grupos · Actualizado al 13 junio · Día 3</div>
+  <div style="margin-bottom:12px;">
+    <input id="grp-search" type="text" placeholder="🔍 Buscar equipo... ej: Argentina, España, Brasil"
+      oninput="filterGroups(this.value)"
+      style="width:100%;background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;color:var(--white);font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;outline:none;transition:border-color 0.2s;"
+      onfocus="this.style.borderColor='var(--neon)'" onblur="this.style.borderColor='var(--border2)'">
+  </div>
   <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
     <div class="tag tag-green">🟢 1° y 2° clasifican</div>
     <div class="tag tag-blue">🔵 Mejor 3° posible</div>
@@ -847,6 +859,38 @@ function openMatch(id){
 }
 function closeModal(){document.getElementById('overlay').classList.remove('open');}
 function closeOverlay(e){if(e.target===document.getElementById('overlay'))closeModal();}
+
+// FILTER CALENDAR
+function filterCal(q) {
+  const term = q.toLowerCase().trim();
+  const days = document.querySelectorAll('#cal-list .dhdr, #cal-list .match');
+  let lastDhdr = null;
+  let dayHasMatch = false;
+
+  days.forEach(el => {
+    if (el.classList.contains('dhdr')) {
+      if (lastDhdr) lastDhdr.style.display = dayHasMatch ? '' : 'none';
+      lastDhdr = el;
+      dayHasMatch = false;
+    } else {
+      const text = el.textContent.toLowerCase();
+      const show = !term || text.includes(term);
+      el.style.display = show ? '' : 'none';
+      if (show) dayHasMatch = true;
+    }
+  });
+  if (lastDhdr) lastDhdr.style.display = dayHasMatch ? '' : 'none';
+}
+
+// FILTER GROUPS
+function filterGroups(q) {
+  const term = q.toLowerCase().trim();
+  const cards = document.querySelectorAll('#groups-wrap .card');
+  cards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = !term || text.includes(term) ? '' : 'none';
+  });
+}
 
 // INIT
 renderCalendar();
