@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Mundial 2026</title>
+<script data-goatcounter="https://mundial2026sv.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@700;900&family=Inter:wght@300;400;500;600&display=swap');
+:root{
+  --bg:#050A14;--card:#0C1220;--card2:#101828;--border:#1A2540;--border2:#243050;
+  --gold:#FFD700;--gold2:#FFA500;--neon:#00F5FF;--green:#00FF88;--red:#FF3355;
+  --blue:#4488FF;--purple:#8855FF;--white:#FFFFFF;--gray:#8899BB;--text:#C8D8F0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 20%,rgba(0,245,255,0.04) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(255,215,0,0.04) 0%,transparent 50%);pointer-events:none;z-index:0;}
+
+/* HEADER */
+.header{position:sticky;top:0;z-index:200;background:rgba(5,10,20,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.hdr-main{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;}
+.logo{display:flex;align-items:center;gap:8px;}
+.logo-ball{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;animation:glow 2s ease-in-out infinite;flex-shrink:0;}
+@keyframes glow{0%,100%{box-shadow:0 0 12px rgba(255,215,0,0.4);}50%{box-shadow:0 0 25px rgba(255,215,0,0.7);}}
+.logo-title{font-family:'Orbitron',monospace;font-size:14px;font-weight:900;background:linear-gradient(90deg,var(--gold),var(--neon));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px;}
+.logo-sub{font-size:8px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;}
+.clk{text-align:right;}
+.clk-time{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--neon);}
+.clk-tz{font-size:9px;color:var(--gold);font-weight:600;letter-spacing:1px;}
+
+/* TICKER */
+.ticker{background:linear-gradient(90deg,rgba(255,215,0,0.07),rgba(0,245,255,0.07));border-top:1px solid rgba(255,215,0,0.12);border-bottom:1px solid rgba(0,245,255,0.12);padding:5px 0;overflow:hidden;display:flex;align-items:center;}
+.tk-lbl{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;background:var(--gold);color:#000;padding:2px 8px;white-space:nowrap;flex-shrink:0;}
+.tk-scroll{display:flex;animation:scroll 60s linear infinite;white-space:nowrap;}
+.tk-scroll:hover{animation-play-state:paused;}
+@keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.ti{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:600;color:var(--text);padding:0 20px;}
+.ti .hl{color:var(--gold);}
+.ti .sc{color:var(--neon);font-weight:700;}
+
+/* NAV */
+.nav{display:flex;overflow-x:auto;padding:0 8px;background:rgba(8,13,26,0.9);-webkit-overflow-scrolling:touch;}
+.nav::-webkit-scrollbar{height:2px;}
+.nav-btn{padding:8px 12px;font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gray);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all 0.2s;white-space:nowrap;flex-shrink:0;}
+.nav-btn:hover{color:var(--white);}
+.nav-btn.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+main{max-width:1200px;margin:0 auto;padding:12px 12px 50px;}
+.section{display:none;}
+.section.active{display:block;}
+.pg-title{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;color:var(--white);letter-spacing:1px;margin-bottom:3px;}
+.pg-title span{background:linear-gradient(90deg,var(--gold),var(--neon));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.pg-sub{font-size:10px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;position:relative;margin-bottom:10px;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--neon),transparent);opacity:0.25;}
+.card-hd{padding:8px 12px;background:rgba(0,0,0,0.3);border-bottom:1px solid var(--border);}
+.card-title{font-family:'Rajdhani',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--white);}
+.card-title .ac{color:var(--neon);}
+.p12{padding:12px;}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+@media(max-width:600px){.g2,.g3{grid-template-columns:1fr;}}
+@media(min-width:601px) and (max-width:900px){.g3{grid-template-columns:1fr 1fr;}}
+
+/* MATCH CARD */
+.match{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:11px;margin-bottom:7px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;}
+.match:hover{border-color:var(--neon);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,245,255,0.08);}
+.match.done{border-left:3px solid var(--green);}
+.match.curso{border-left:3px solid var(--red);background:linear-gradient(90deg,rgba(255,51,85,0.04),var(--card));}
+.match.pending{border-left:3px solid var(--border2);}
+.match-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;flex-wrap:wrap;gap:4px;}
+.m-grp{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;color:var(--gold);background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);padding:2px 6px;border-radius:3px;}
+.m-info{font-size:9px;color:var(--gray);}
+.m-ch{font-size:9px;font-weight:700;color:var(--neon);background:rgba(0,245,255,0.07);border:1px solid rgba(0,245,255,0.18);padding:2px 6px;border-radius:3px;}
+.match-body{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;}
+.team{display:flex;align-items:center;gap:7px;}
+.team.away{flex-direction:row-reverse;}
+.flag{font-size:24px;line-height:1;flex-shrink:0;}
+.t-data{flex:1;min-width:0;}
+.t-name{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.team.away .t-data{text-align:right;}
+.t-sc{font-size:9px;color:var(--gray);margin-top:2px;line-height:1.3;}
+.team.away .t-sc{text-align:right;}
+.score-c{display:flex;flex-direction:column;align-items:center;gap:4px;}
+.scoreboard{display:flex;align-items:center;gap:5px;background:rgba(0,0,0,0.5);border:1px solid var(--border2);border-radius:7px;padding:6px 10px;}
+.match.curso .scoreboard{border-color:rgba(255,51,85,0.4);}
+.s-num{font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--white);min-width:20px;text-align:center;}
+.s-sep{color:var(--border2);font-size:14px;}
+.badge{font-family:'Rajdhani',sans-serif;font-size:8px;font-weight:700;letter-spacing:1px;padding:2px 7px;border-radius:3px;}
+.b-done{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.25);}
+.b-live{background:var(--red);color:#fff;}
+.b-time{background:rgba(68,136,255,0.12);color:var(--blue);border:1px solid rgba(68,136,255,0.3);}
+.b-curso{background:rgba(255,51,85,0.15);color:var(--red);border:1px solid rgba(255,51,85,0.4);}
+
+.dhdr{font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;color:var(--neon);text-transform:uppercase;padding:7px 10px 4px;border-left:3px solid var(--neon);background:rgba(0,245,255,0.03);margin:12px 0 5px;}
+
+/* STANDINGS */
+.standings{width:100%;border-collapse:collapse;}
+.standings th{font-family:'Rajdhani',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gray);padding:6px 7px;border-bottom:1px solid var(--border);text-align:center;}
+.standings th:nth-child(2){text-align:left;}
+.standings td{padding:6px 7px;border-bottom:1px solid rgba(26,37,64,0.4);font-size:11px;color:var(--text);text-align:center;}
+.standings td:nth-child(2){text-align:left;}
+.standings tr:hover td{background:rgba(0,245,255,0.02);}
+.pos{font-family:'Orbitron',monospace;font-size:12px;font-weight:900;color:var(--border2);}
+.pos.q1{color:var(--green);}
+.pos.q2{color:var(--neon);}
+.pos.q3{color:var(--blue);}
+.pts-c{font-family:'Orbitron',monospace;font-size:13px;font-weight:900;color:var(--gold);}
+.t-cell{font-weight:600;color:var(--white);font-size:11px;}
+
+.pbar{margin-bottom:9px;}
+.pbar-top{display:flex;justify-content:space-between;margin-bottom:3px;font-size:10px;color:var(--gray);}
+.pbar-val{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;}
+.pbar-track{background:rgba(255,255,255,0.05);border-radius:3px;height:6px;overflow:hidden;}
+.pbar-fill{height:100%;border-radius:3px;}
+
+.scorer{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(26,37,64,0.4);}
+.s-rank{font-family:'Orbitron',monospace;font-size:15px;font-weight:900;color:var(--border2);width:16px;text-align:center;flex-shrink:0;}
+.s-rank.r1{color:var(--gold);}
+.s-rank.r2{color:#C0C0C0;}
+.s-rank.r3{color:#CD7F32;}
+.s-flag{font-size:15px;flex-shrink:0;}
+.s-info{flex:1;min-width:0;}
+.s-name{font-weight:700;color:var(--white);font-size:12px;}
+.s-team{font-size:9px;color:var(--gray);}
+.s-goals{display:flex;align-items:center;gap:3px;flex-shrink:0;}
+.g-dot{width:8px;height:8px;background:var(--gold);border-radius:50%;}
+.g-num{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;color:var(--gold);}
+
+.award{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center;}
+.award-icon{font-size:28px;margin-bottom:5px;}
+.award-lbl{font-family:'Rajdhani',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;color:var(--gray);text-transform:uppercase;margin-bottom:2px;}
+.award-name{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;color:var(--white);}
+.award-detail{font-size:9px;color:var(--gray);}
+.award-stat{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;color:var(--gold);margin-top:4px;}
+
+.tag{display:inline-block;padding:2px 6px;border-radius:3px;font-size:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.tag-green{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.25);}
+.tag-neon{background:rgba(0,245,255,0.1);color:var(--neon);border:1px solid rgba(0,245,255,0.25);}
+.tag-gold{background:rgba(255,215,0,0.1);color:var(--gold);border:1px solid rgba(255,215,0,0.25);}
+.tag-red{background:rgba(255,51,85,0.1);color:var(--red);border:1px solid rgba(255,51,85,0.25);}
+.tag-blue{background:rgba(68,136,255,0.1);color:var(--blue);border:1px solid rgba(68,136,255,0.25);}
+
+.rule-item{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(26,37,64,0.3);font-size:11px;color:var(--text);line-height:1.5;}
+.rule-item .ri{color:var(--neon);font-weight:700;flex-shrink:0;width:20px;}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(10px);z-index:500;overflow-y:auto;padding:12px;-webkit-overflow-scrolling:touch;}
+.overlay.open{display:flex;align-items:flex-start;justify-content:center;}
+.modal{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:16px;max-width:640px;width:100%;margin-top:16px;position:relative;}
+.modal-close{position:absolute;top:10px;right:10px;background:var(--border);border:none;color:var(--white);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;}
+.modal-close:hover{background:var(--red);}
+.info-box{background:rgba(0,0,0,0.3);border-radius:6px;padding:9px;font-size:11px;color:var(--text);line-height:1.6;margin-bottom:10px;}
+.stat-line{display:flex;align-items:center;gap:6px;margin-bottom:6px;}
+.stat-v{font-family:'Orbitron',monospace;font-size:10px;color:var(--white);width:24px;text-align:center;flex-shrink:0;}
+.stat-lbl{font-size:8px;color:var(--gray);width:70px;text-align:right;flex-shrink:0;}
+.stat-lbl.r{text-align:left;}
+.stat-track{flex:1;height:4px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden;display:flex;}
+.bar-h{height:100%;border-radius:2px 0 0 2px;}
+.bar-a{height:100%;border-radius:0 2px 2px 0;margin-left:auto;}
+
+.mb10{margin-bottom:10px;}
+.mt10{margin-top:10px;}
+::-webkit-scrollbar{width:3px;height:3px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="hdr-main">
+    <div class="logo">
+      <div class="logo-ball">⚽</div>
+      <div>
+        <div class="logo-title">MUNDIAL 2026</div>
+        <div class="logo-sub">USA · México · Canadá</div>
+      </div>
+    </div>
+    <div class="clk">
+      <div class="clk-time" id="clock">--:--:--</div>
+      <div class="clk-tz" id="tz-name">--</div>
+    </div>
+  </div>
+  <div class="ticker">
+    <div class="tk-lbl">⚡</div>
+    <div style="overflow:hidden;flex:1;">
+      <div class="tk-scroll">
+        <span class="ti">🏅 <span class="hl">CR7 HISTÓRICO</span> · Portugal 5-0 Uzbekistán · Ronaldo 6',38' — 1° en anotar en 6 Mundiales distintos</span><span class="ti">✅ <span class="hl">COLOMBIA</span> <span class="sc">1-0</span> RD Congo · Muñoz 76' · Clasificada 1° Grupo K</span><span class="ti">✅ <span class="hl">CROACIA</span> <span class="sc">1-0</span> Panamá · Budimir 54' · Modric 200 partidos con Croacia</span><span class="ti">🤝 <span class="hl">INGLATERRA</span> <span class="sc">0-0</span> Ghana · Defensa ghanesa infranqueable · 4pts cada uno</span><span class="ti">🏆 <span class="hl">MESSI 18 GOLES RÉCORD</span> · Argentina 2-0 Austria · 38' y 90+5'</span>
+        <span class="ti">✅ <span class="hl">COREA DEL SUR</span> <span class="sc">2-1</span> Rep. Checa · Hwang 55' · Oh 78'</span>
+        <span class="ti">✅ <span class="hl">CANADÁ</span> <span class="sc">1-1</span> Bosnia · Larin 79' · Lukic 21'</span>
+        <span class="ti">✅ <span class="hl">EEUU</span> <span class="sc">4-1</span> Paraguay · Balogun 31',45+5' · Reyna 90+8'</span>
+        <span class="ti">✅ <span class="hl">QATAR</span> <span class="sc">1-1</span> Suiza · Khoukhi 90+4' · Embolo 17'(pen)</span>
+        <span class="ti">✅ <span class="hl">BRASIL</span> <span class="sc">1-1</span> Marruecos · Vinícius Jr 32' · Saibari 21'</span>
+        <span class="ti">✅ <span class="hl">ESCOCIA</span> <span class="sc">1-0</span> Haití · McGinn/Bellegarde OG</span>
+        <span class="ti">✅ <span class="hl">AUSTRALIA</span> <span class="sc">2-0</span> Turquía · Irankunda 27' · Metcalfe 2T</span>
+        <span class="ti">✅ <span class="hl">ALEMANIA</span> <span class="sc">7-1</span> Curazao · Havertz x2 · Musiala · Brown · Undav · Nmecha · Schlotterbeck</span><span class="ti">✅ <span class="hl">COSTA DE MARFIL</span> <span class="sc">1-0</span> Ecuador · Amad Diallo 90'</span><span class="ti">✅ <span class="hl">PAÍSES BAJOS</span> <span class="sc">2-2</span> Japón · Van Dijk 51' · Summerville 64' · Nakamura 57' · Kamada 88'</span><span class="ti">📺 <span class="hl">EL SALVADOR:</span> Tigo Sports (todos) · Canal 4 TCS (seleccionados)</span>
+        <span class="ti">🏆 Final: <span class="hl">19 Jul</span> · MetLife · Nueva Jersey</span>
+        <span class="ti">✅ <span class="hl">MÉXICO</span> <span class="sc">2-0</span> Sudáfrica · Quiñones 8' · Jiménez 66'</span>
+        <span class="ti">✅ <span class="hl">COREA DEL SUR</span> <span class="sc">2-1</span> Rep. Checa · Hwang 55' · Oh 78'</span>
+        <span class="ti">✅ <span class="hl">CANADÁ</span> <span class="sc">1-1</span> Bosnia · Larin 79' · Lukic 21'</span>
+        <span class="ti">✅ <span class="hl">EEUU</span> <span class="sc">4-1</span> Paraguay · Balogun 31',45+5' · Reyna 90+8'</span>
+        <span class="ti">✅ <span class="hl">QATAR</span> <span class="sc">1-1</span> Suiza · Khoukhi 90+4' · Embolo 17'(pen)</span>
+        <span class="ti">✅ <span class="hl">BRASIL</span> <span class="sc">1-1</span> Marruecos · Vinícius Jr 32' · Saibari 21'</span>
+        <span class="ti">✅ <span class="hl">ESCOCIA</span> <span class="sc">1-0</span> Haití · McGinn/Bellegarde OG</span>
+        <span class="ti">✅ <span class="hl">AUSTRALIA</span> <span class="sc">2-0</span> Turquía · Irankunda 27' · Metcalfe 2T</span>
+        <span class="ti">✅ <span class="hl">ALEMANIA</span> <span class="sc">7-1</span> Curazao · Havertz x2 · Musiala · Brown · Undav · Nmecha · Schlotterbeck</span><span class="ti">📺 <span class="hl">EL SALVADOR:</span> Tigo Sports (todos) · Canal 4 TCS (seleccionados)</span>
+        <span class="ti">🏆 Final: <span class="hl">19 Jul</span> · MetLife · Nueva Jersey</span>
+      </div>
+    </div>
+  </div>
+  <nav class="nav">
+    <button class="nav-btn active" onclick="tab('hoy',this)">🔴 HOY</button>
+    <button class="nav-btn" onclick="tab('resultados',this)">✅ RESULTADOS</button>
+    <button class="nav-btn" onclick="tab('calendario',this)">📅 CALENDARIO</button>
+    <button class="nav-btn" onclick="tab('grupos',this)">📊 GRUPOS</button>
+    <button class="nav-btn" onclick="tab('estadisticas',this)">🏆 ESTADÍSTICAS</button>
+    <button class="nav-btn" onclick="tab('camino',this)">🔮 CAMINO AL TÍTULO</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- HOY -->
+<div id="s-hoy" class="section active">
+  <div class="pg-title">MIÉ <span>24 JUNIO</span> · DÍA 14</div>
+  <div class="pg-sub">Grupos A y B · Jornada 3 · Hora El Salvador</div>
+
+  <div class="dhdr">📅 PARTIDOS DE HOY</div>
+
+  <div class="match pending">
+    <div class="match-top"><span class="m-grp">GRUPO B · J3</span><span class="m-info">📍 BC Place · Vancouver · 1:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇨🇭</div><div class="t-data"><div class="t-name">SUIZA</div><div class="t-sc">4pts · 2° del grupo</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num" style="color:var(--border2);">-</div><div class="s-sep">vs</div><div class="s-num" style="color:var(--border2);">-</div></div><span class="badge b-time">1:00 PM SV</span></div>
+      <div class="team away"><div class="flag">🇨🇦</div><div class="t-data"><div class="t-name">CANADÁ</div><div class="t-sc">4pts · 1° del grupo</div></div></div>
+    </div>
+  </div>
+
+  <div class="match pending">
+    <div class="match-top"><span class="m-grp">GRUPO C · J3</span><span class="m-info">📍 Allegiant Stadium · Las Vegas · 4:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇲🇦</div><div class="t-data"><div class="t-name">MARRUECOS</div><div class="t-sc">4pts · 1° del grupo</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num" style="color:var(--border2);">-</div><div class="s-sep">vs</div><div class="s-num" style="color:var(--border2);">-</div></div><span class="badge b-time">4:00 PM SV</span></div>
+      <div class="team away"><div class="flag">🇭🇹</div><div class="t-data"><div class="t-name">HAITÍ</div><div class="t-sc">0pts · eliminado</div></div></div>
+    </div>
+  </div>
+
+  <div class="match pending">
+    <div class="match-top"><span class="m-grp">GRUPO A · J3</span><span class="m-info">📍 Estadio Akron · Guadalajara · 7:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇿🇦</div><div class="t-data"><div class="t-name">SUDÁFRICA</div><div class="t-sc">1pt · necesita ganar</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num" style="color:var(--border2);">-</div><div class="s-sep">vs</div><div class="s-num" style="color:var(--border2);">-</div></div><span class="badge b-time">7:00 PM SV</span></div>
+      <div class="team away"><div class="flag">🇰🇷</div><div class="t-data"><div class="t-name">COREA DEL SUR</div><div class="t-sc">3pts · busca clasificar</div></div></div>
+    </div>
+  </div>
+
+  <div class="match pending">
+    <div class="match-top"><span class="m-grp">GRUPO A · J3</span><span class="m-info">📍 Estadio Azteca · Ciudad de México · 7:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇲🇽</div><div class="t-data"><div class="t-name">MÉXICO</div><div class="t-sc">6pts · ya clasificado · busca 1°</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num" style="color:var(--border2);">-</div><div class="s-sep">vs</div><div class="s-num" style="color:var(--border2);">-</div></div><span class="badge b-time">7:00 PM SV</span></div>
+      <div class="team away"><div class="flag">🇨🇿</div><div class="t-data"><div class="t-name">REP. CHECA</div><div class="t-sc">1pt · necesita ganar</div></div></div>
+    </div>
+  </div>
+
+  <div style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.15);border-radius:8px;padding:10px;margin-top:12px;font-size:10px;color:var(--gray);line-height:1.7;">
+    📌 <strong style="color:var(--white);">Ayer (Día 13):</strong> Portugal 5-0 Uzbekistán (CR7 doblete · récord 6 Mundiales) · Inglaterra 0-0 Ghana · Panamá 0-1 Croacia · Colombia 1-0 RD Congo<br>
+    <span style="color:var(--neon);">→ Ver todos en RESULTADOS</span>
+  </div>
+</div>
+
+<!-- RESULTADOS -->
+<div id="s-resultados" class="section">
+  <div class="pg-title">✅ <span>RESULTADOS</span></div>
+  <div class="pg-sub">Más reciente arriba · Se actualiza después de cada jornada</div>
+
+  <div class="dhdr">MAR 23 JUNIO · DÍA 13 · CR7 RÉCORD 6 MUNDIALES</div>
+  <div class="match done" onclick="openMatch('colcod')">
+    <div class="match-top"><span class="m-grp">GRUPO K · J2</span><span class="m-info">Estadio Guadalajara · 8:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇨🇴</div><div class="t-data"><div class="t-name">COLOMBIA</div><div class="t-sc">⚽ D. Muñoz 76' — CLASIFICADA 1° Grupo K</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇨🇩</div><div class="t-data"><div class="t-name">RD CONGO</div><div class="t-sc">Viva aún — juega vs Uzbekistán J3</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('pancro')">
+    <div class="match-top"><span class="m-grp">GRUPO L · J2</span><span class="m-info">BMO Field · Toronto · 5:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇵🇦</div><div class="t-data"><div class="t-name">PANAMÁ</div><div class="t-sc">0 goles en 2 partidos — ELIMINADA</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">0</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇭🇷</div><div class="t-data"><div class="t-name">CROACIA</div><div class="t-sc">⚽ Budimir 54' — Modric 200 partidos con Croacia</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('enggha')">
+    <div class="match-top"><span class="m-grp">GRUPO L · J2</span><span class="m-info">Gillette Stadium · Boston · 2:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div><div class="t-data"><div class="t-name">INGLATERRA</div><div class="t-sc">Bellingham 50 partidos con ENG — sin goles</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">0</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇬🇭</div><div class="t-data"><div class="t-name">GHANA</div><div class="t-sc">Gran actuación defensiva · 4pts</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('poruzb')">
+    <div class="match-top"><span class="m-grp">GRUPO K · J2</span><span class="m-info">NRG Stadium · Houston · 11:00 AM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇵🇹</div><div class="t-data"><div class="t-name">PORTUGAL</div><div class="t-sc">⚽ CR7 6',38' · Nuno Mendes 17' · OG Khusanov 60' · Leão 87'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">5</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇺🇿</div><div class="t-data"><div class="t-name">UZBEKISTÁN</div><div class="t-sc">CR7 1° en anotar en 6 Mundiales distintos</div></div></div>
+    </div>
+  </div>
+  <div class="dhdr">LUN 22 JUNIO · DÍA 12 ⭐ MESSI RÉCORD 18 GOLES</div>
+  <div class="match done" onclick="openMatch('algjo')">
+    <div class="match-top"><span class="m-grp">GRUPO J · J2</span><span class="m-info">Levi's Stadium · San Francisco · 9:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇯🇴</div><div class="t-data"><div class="t-name">JORDANIA</div><div class="t-sc">⚽ Olwan — ELIMINADA</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">2</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇩🇿</div><div class="t-data"><div class="t-name">ARGELIA</div><div class="t-sc">⚽ 2 goles — remontada · Mahrez decisivo</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('norsen')">
+    <div class="match-top"><span class="m-grp">GRUPO I · J2</span><span class="m-info">MetLife Stadium · NJ · 6:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇳🇴</div><div class="t-data"><div class="t-name">NORUEGA</div><div class="t-sc">⚽ Pedersen 43' · Haaland 48',58' — CLASIFICADA</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">3</div><div class="s-sep">-</div><div class="s-num">2</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇸🇳</div><div class="t-data"><div class="t-name">SENEGAL</div><div class="t-sc">⚽ 2 goles · Mané vivo pero insuficiente</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('frairq')">
+    <div class="match-top"><span class="m-grp">GRUPO I · J2</span><span class="m-info">Lincoln Financial · Filadelfia · 3:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇫🇷</div><div class="t-data"><div class="t-name">FRANCIA</div><div class="t-sc">⚽ Mbappé 14',55' · Dembélé 66' — CLASIFICADA</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">3</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇮🇶</div><div class="t-data"><div class="t-name">IRAK</div><div class="t-sc">Partido suspendido 45' por tormenta · reanudó 2h después</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('argaut')">
+    <div class="match-top"><span class="m-grp">GRUPO J · J2</span><span class="m-info">AT&T Stadium · Dallas · 11:00 AM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇦🇷</div><div class="t-data"><div class="t-name">ARGENTINA</div><div class="t-sc">⚽ Messi 38'(gol 17 récord) · 90+5'(gol 18 NUEVO RÉCORD)</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">2</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇦🇹</div><div class="t-data"><div class="t-name">AUSTRIA</div><div class="t-sc">Messi falló penal min 8 · luego hizo historia</div></div></div>
+    </div>
+  </div>
+  <div class="dhdr">DOM 21 JUNIO · DÍA 11</div>
+  <div class="match done" onclick="openMatch('egynzl')">
+    <div class="match-top"><span class="m-grp">GRUPO G · J2</span><span class="m-info">BC Place · Vancouver · 7:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇳🇿</div><div class="t-data"><div class="t-name">NUEVA ZELANDA</div><div class="t-sc">⚽ Surman — gol inicial</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">3</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇪🇬</div><div class="t-data"><div class="t-name">EGIPTO</div><div class="t-sc">⚽ Zico · Salah · Trezeguet — 1er victoria histórica</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('urucpv')">
+    <div class="match-top"><span class="m-grp">GRUPO H · J2</span><span class="m-info">Hard Rock Stadium · Miami · 4:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇺🇾</div><div class="t-data"><div class="t-name">URUGUAY</div><div class="t-sc">⚽ Araújo 44' · Canobbio — remontó 2-1</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">2</div><div class="s-sep">-</div><div class="s-num">2</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇨🇻</div><div class="t-data"><div class="t-name">CABO VERDE</div><div class="t-sc">⚽ K. Pina 21' · H. Varela 61' — histórico empate</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('belirn')">
+    <div class="match-top"><span class="m-grp">GRUPO G · J2</span><span class="m-info">SoFi Stadium · Los Ángeles · 1:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇧🇪</div><div class="t-data"><div class="t-name">BÉLGICA</div><div class="t-sc">Ngoy roja 66' · Taremi gol anulado VAR</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">0</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇮🇷</div><div class="t-data"><div class="t-name">IRÁN</div><div class="t-sc">Con 10 Bélgica no pudo romper el cero</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('espksa')">
+    <div class="match-top"><span class="m-grp">GRUPO H · J2</span><span class="m-info">Mercedes-Benz Stadium · Atlanta · 10:00 AM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇪🇸</div><div class="t-data"><div class="t-name">ESPAÑA</div><div class="t-sc">⚽ Yamal 10' · Oyarzabal 21',24' · OG Tambakti 49'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">4</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇸🇦</div><div class="t-data"><div class="t-name">ARABIA SAUDITA</div><div class="t-sc">Yamal 1er gol en Mundiales · España se redime</div></div></div>
+    </div>
+  </div>
+
+  <div class="dhdr">SÁB 20 JUNIO · DÍA 10</div>
+  <div class="match done" onclick="openMatch('tunjpn')">
+    <div class="match-top"><span class="m-grp">GRUPO F · J2</span><span class="m-info">BBVA Monterrey · 10:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇹🇳</div><div class="t-data"><div class="t-name">TÚNEZ</div><div class="t-sc">Sin anotaciones — partido 1000 del Mundial</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">0</div><div class="s-sep">-</div><div class="s-num">4</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇯🇵</div><div class="t-data"><div class="t-name">JAPÓN</div><div class="t-sc">⚽ Kamada 4' · Ueda 31',84' · Ito 69'</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('ecucrw')">
+    <div class="match-top"><span class="m-grp">GRUPO E · J2</span><span class="m-info">Arrowhead Stadium · Kansas City · 6:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇪🇨</div><div class="t-data"><div class="t-name">ECUADOR</div><div class="t-sc">Sin goles · 3 remates al palo</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">0</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇨🇼</div><div class="t-data"><div class="t-name">CURAZAO</div><div class="t-sc">🧱 Eloy Room 15 paradas — récord histórico</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('germci')">
+    <div class="match-top"><span class="m-grp">GRUPO E · J2</span><span class="m-info">BMO Field · Toronto · 2:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇩🇪</div><div class="t-data"><div class="t-name">ALEMANIA</div><div class="t-sc">⚽ Undav 68',90+3' — remontada agónica</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">2</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇨🇮</div><div class="t-data"><div class="t-name">COSTA DE MARFIL</div><div class="t-sc">⚽ Kessié 30' — Alemania CLASIFICADO</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('nedswe')">
+    <div class="match-top"><span class="m-grp">GRUPO F · J2</span><span class="m-info">NRG Stadium · Houston · 11:00 AM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇳🇱</div><div class="t-data"><div class="t-name">PAÍSES BAJOS</div><div class="t-sc">⚽ Brobbey 2 · Gakpo 2 · Summerville — GOLEADA</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">5</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇸🇪</div><div class="t-data"><div class="t-name">SUECIA</div><div class="t-sc">⚽ Elanga 58' — Suecia en apuros</div></div></div>
+    </div>
+  </div>
+
+  <div class="dhdr">VIE 19 JUNIO · DÍA 9</div>
+  <div class="match done" onclick="openMatch('turbra')">
+    <div class="match-top"><span class="m-grp">GRUPO D · J2</span><span class="m-info">Levi's Stadium · San Francisco · 10:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇵🇾</div><div class="t-data"><div class="t-name">PARAGUAY</div><div class="t-sc">⚽ Galarza 64" — GOL MÁS RÁPIDO del torneo</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇹🇷</div><div class="t-data"><div class="t-name">TURQUÍA</div><div class="t-sc">ELIMINADA — sin opciones</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('brhti')">
+    <div class="match-top"><span class="m-grp">GRUPO C · J2</span><span class="m-info">Lincoln Financial · Filadelfia · 6:30 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇧🇷</div><div class="t-data"><div class="t-name">BRASIL</div><div class="t-sc">⚽ Cunha 23',36' · Vinicius 45+3'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">3</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇭🇹</div><div class="t-data"><div class="t-name">HAITÍ</div><div class="t-sc">ELIMINADO — Raphinha lesionado</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('marsco')">
+    <div class="match-top"><span class="m-grp">GRUPO C · J2</span><span class="m-info">Gillette Stadium · Boston · 4:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇲🇦</div><div class="t-data"><div class="t-name">MARRUECOS</div><div class="t-sc">⚽ Saibari 2' — gol más rápido (antes de Galarza)</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div><div class="t-data"><div class="t-name">ESCOCIA</div><div class="t-sc">Escocia necesita ganar vs Brasil</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('usaaus')">
+    <div class="match-top"><span class="m-grp">GRUPO D · J2</span><span class="m-info">Lumen Field · Seattle · 1:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇺🇸</div><div class="t-data"><div class="t-name">ESTADOS UNIDOS</div><div class="t-sc">⚽ OG Burgess 11' · Freeman 43'(VAR) — CLASIFICADO</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">2</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇦🇺</div><div class="t-data"><div class="t-name">AUSTRALIA</div><div class="t-sc">Eliminada matemáticamente</div></div></div>
+    </div>
+  </div>
+
+  <div class="dhdr">JUE 18 JUNIO · DÍA 8 🇲🇽 1er CLASIFICADO</div>
+  <div class="match done" onclick="openMatch('mexkor')">
+    <div class="match-top"><span class="m-grp">GRUPO A · J2</span><span class="m-info">Estadio Akron · Guadalajara · 7:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇲🇽</div><div class="t-data"><div class="t-name">MÉXICO</div><div class="t-sc">⚽ Luis Romo 50' — Rangel atajada épica 87'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇰🇷</div><div class="t-data"><div class="t-name">COREA DEL SUR</div><div class="t-sc">🇲🇽 ¡1er CLASIFICADO del Mundial!</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('cansub')">
+    <div class="match-top"><span class="m-grp">GRUPO B · J2</span><span class="m-info">BC Place · Vancouver · 4:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇨🇦</div><div class="t-data"><div class="t-name">CANADÁ</div><div class="t-sc">⚽ Larin 16' · David 29',45+3',90+2' · Saliba 64' · OG 75'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">6</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇶🇦</div><div class="t-data"><div class="t-name">QATAR</div><div class="t-sc">Récord CONCACAF · 2 rojas Qatar · David hat-trick</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('suibos')">
+    <div class="match-top"><span class="m-grp">GRUPO B · J2</span><span class="m-info">SoFi Stadium · Los Ángeles · 1:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇨🇭</div><div class="t-data"><div class="t-name">SUIZA</div><div class="t-sc">⚽ Manzambi 74',90' · Vargas 84' · Xhaka pen 90+5'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">4</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇧🇦</div><div class="t-data"><div class="t-name">BOSNIA</div><div class="t-sc">⚽ Mahmic 90+3' · 1 roja Bosnia</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('czesa')">
+    <div class="match-top"><span class="m-grp">GRUPO A · J2</span><span class="m-info">Mercedes-Benz Stadium · Atlanta · 10:00 AM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇨🇿</div><div class="t-data"><div class="t-name">REP. CHECA</div><div class="t-sc">⚽ Gol min 1' — el más rápido del torneo</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇿🇦</div><div class="t-data"><div class="t-name">SUDÁFRICA</div><div class="t-sc">⚽ Mokoena pen 83'</div></div></div>
+    </div>
+  </div>
+  <div class="dhdr">MIÉ 17 JUNIO · DÍA 7</div>
+  <div class="match done" onclick="openMatch('col')">
+    <div class="match-top"><span class="m-grp">GRUPO K · J1</span><span class="m-info">Azteca · Ciudad de México · 8:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇺🇿</div><div class="t-data"><div class="t-name">UZBEKISTÁN</div><div class="t-sc">⚽ Fayzullaev 60'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">3</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇨🇴</div><div class="t-data"><div class="t-name">COLOMBIA</div><div class="t-sc">⚽ Muñoz 45+' · L. Díaz 65' · Campaz 90+'</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('gha')">
+    <div class="match-top"><span class="m-grp">GRUPO L · J1</span><span class="m-info">BMO Field · Toronto · 5:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇬🇭</div><div class="t-data"><div class="t-name">GHANA</div><div class="t-sc">⚽ Yirenkyi 90+4' — gol agónico</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇵🇦</div><div class="t-data"><div class="t-name">PANAMÁ</div><div class="t-sc">Sin anotaciones</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('eng')">
+    <div class="match-top"><span class="m-grp">GRUPO L · J1</span><span class="m-info">AT&T Stadium · Dallas · 2:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div><div class="t-data"><div class="t-name">INGLATERRA</div><div class="t-sc">⚽ Kane 10'(pen),42' · Rashford · Bellingham</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">4</div><div class="s-sep">-</div><div class="s-num">2</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇭🇷</div><div class="t-data"><div class="t-name">CROACIA</div><div class="t-sc">⚽ Baturina 36' · Musa 45+'</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('por')">
+    <div class="match-top"><span class="m-grp">GRUPO K · J1</span><span class="m-info">NRG Stadium · Houston · 11:00 AM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇵🇹</div><div class="t-data"><div class="t-name">PORTUGAL</div><div class="t-sc">⚽ João Neves 6' — Ronaldo sin disparar al arco</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇨🇩</div><div class="t-data"><div class="t-name">RD CONGO</div><div class="t-sc">⚽ Wissa 45+' — 1er gol histórico de Congo</div></div></div>
+    </div>
+  </div>
+
+  <div class="dhdr">MAR 16 JUNIO · DÍA 6</div>
+  <div class="match done" onclick="openMatch('aut')">
+    <div class="match-top"><span class="m-grp">GRUPO J · J1</span><span class="m-info">Levi's Stadium · San Francisco · 10:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇦🇹</div><div class="t-data"><div class="t-name">AUSTRIA</div><div class="t-sc">⚽ Schmid 20' · OG Al-Arab 76' · Arnautovic pen 90+12'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">3</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇯🇴</div><div class="t-data"><div class="t-name">JORDANIA</div><div class="t-sc">⚽ Olwan 50' — 1er gol histórico de Jordania</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('arg')">
+    <div class="match-top"><span class="m-grp">GRUPO J · J1</span><span class="m-info">Arrowhead Stadium · Kansas City · 7:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇦🇷</div><div class="t-data"><div class="t-name">ARGENTINA</div><div class="t-sc">⚽ Messi 16', 59', 75' — HAT-TRICK histórico</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">3</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇩🇿</div><div class="t-data"><div class="t-name">ARGELIA</div><div class="t-sc">Sin anotaciones · Messi igualó récord 16 goles</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('nor')">
+    <div class="match-top"><span class="m-grp">GRUPO I · J1</span><span class="m-info">Gillette Stadium · Boston · 4:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇮🇶</div><div class="t-data"><div class="t-name">IRAK</div><div class="t-sc">⚽ Hussein 39' — 1er gol de Irak en 40 años</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">4</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇳🇴</div><div class="t-data"><div class="t-name">NORUEGA</div><div class="t-sc">⚽ Haaland 29',43' · Østigård 76' · Thorstvedt 90+'</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('fra')">
+    <div class="match-top"><span class="m-grp">GRUPO I · J1</span><span class="m-info">MetLife Stadium · Nueva Jersey · 1:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇫🇷</div><div class="t-data"><div class="t-name">FRANCIA</div><div class="t-sc">⚽ Mbappé 66', 95' · Barcola 82'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">3</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇸🇳</div><div class="t-data"><div class="t-name">SENEGAL</div><div class="t-sc">⚽ I. Mbaye 94'</div></div></div>
+    </div>
+  </div>
+
+  <div class="dhdr">LUN 15 JUNIO · DÍA 5</div>
+  <div class="match done" onclick="openMatch('irn')">
+    <div class="match-top"><span class="m-grp">GRUPO G · J1</span><span class="m-info">SoFi Stadium · Los Ángeles · 7:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇮🇷</div><div class="t-data"><div class="t-name">IRÁN</div><div class="t-sc">⚽ Rezaeian 32' · Mohebi 64'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">2</div><div class="s-sep">-</div><div class="s-num">2</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇳🇿</div><div class="t-data"><div class="t-name">NUEVA ZELANDA</div><div class="t-sc">⚽ Just 7', 55' (doblete)</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('ksa')">
+    <div class="match-top"><span class="m-grp">GRUPO H · J1</span><span class="m-info">Hard Rock Stadium · Miami · 4:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇸🇦</div><div class="t-data"><div class="t-name">ARABIA SAUDITA</div><div class="t-sc">⚽ Al-Amri 40'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇺🇾</div><div class="t-data"><div class="t-name">URUGUAY</div><div class="t-sc">⚽ Araújo 80'</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('bel')">
+    <div class="match-top"><span class="m-grp">GRUPO G · J1</span><span class="m-info">Lumen Field · Seattle · 1:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇧🇪</div><div class="t-data"><div class="t-name">BÉLGICA</div><div class="t-sc">⚽ OG Hany 66'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇪🇬</div><div class="t-data"><div class="t-name">EGIPTO</div><div class="t-sc">⚽ Ashour</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('esp')">
+    <div class="match-top"><span class="m-grp">GRUPO H · J1</span><span class="m-info">Mercedes-Benz Stadium · Atlanta · 10:00 AM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇪🇸</div><div class="t-data"><div class="t-name">ESPAÑA</div><div class="t-sc">Sin goles · 800 pases · Yamal frenado</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">0</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇨🇻</div><div class="t-data"><div class="t-name">CABO VERDE</div><div class="t-sc">Vozinha figura · Gran sorpresa</div></div></div>
+    </div>
+  </div>
+
+  <div class="dhdr">DOM 14 JUNIO · DÍA 4</div>
+  <div class="match done" onclick="openMatch('civ')">
+    <div class="match-top"><span class="m-grp">GRUPO E · J1</span><span class="m-info">Lincoln Financial · Filadelfia · 5:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇨🇮</div><div class="t-data"><div class="t-name">COSTA DE MARFIL</div><div class="t-sc">⚽ Amad Diallo 90'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇪🇨</div><div class="t-data"><div class="t-name">ECUADOR</div><div class="t-sc">Sin anotaciones · 2 remates al palo</div></div></div>
+    </div>
+  </div>
+    <div class="match done" onclick="openMatch('ned')">
+    <div class="match-top"><span class="m-grp">GRUPO F · J1</span><span class="m-info">AT&T Stadium · Dallas · 2:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇳🇱</div><div class="t-data"><div class="t-name">PAÍSES BAJOS</div><div class="t-sc">⚽ Van Dijk 51' · Summerville 64'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">2</div><div class="s-sep">-</div><div class="s-num">2</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇯🇵</div><div class="t-data"><div class="t-name">JAPÓN</div><div class="t-sc">⚽ Nakamura 57' · Kamada 88'</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('ale')">
+    <div class="match-top"><span class="m-grp">GRUPO E · J1</span><span class="m-info">NRG Stadium · Houston · 11:00 AM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇩🇪</div><div class="t-data"><div class="t-name">ALEMANIA</div><div class="t-sc">⚽ Nmecha 6' · Schlotterbeck · Musiala 47' · Brown 68' · Undav 78' · Havertz 88'(x2)</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">7</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇨🇼</div><div class="t-data"><div class="t-name">CURAZAO</div><div class="t-sc">⚽ Comenencia 21'</div></div></div>
+    </div>
+  </div>
+
+  <div class="dhdr">SÁB 13 JUNIO · DÍA 3</div>
+  <div class="match done" onclick="openMatch('aus')">
+    <div class="match-top"><span class="m-grp">GRUPO D · J1</span><span class="m-info">BC Place · Vancouver · 10:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇦🇺</div><div class="t-data"><div class="t-name">AUSTRALIA</div><div class="t-sc">⚽ Irankunda 27' · ⚽ Metcalfe 2T</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">2</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇹🇷</div><div class="t-data"><div class="t-name">TURQUÍA</div><div class="t-sc">Sin anotaciones</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('hai')">
+    <div class="match-top"><span class="m-grp">GRUPO C · J1</span><span class="m-info">Gillette · Boston · 7:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇭🇹</div><div class="t-data"><div class="t-name">HAITÍ</div><div class="t-sc">Sin anotaciones</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">0</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div><div class="t-data"><div class="t-name">ESCOCIA</div><div class="t-sc">⚽ McGinn (autogol Bellegarde)</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('bra')">
+    <div class="match-top"><span class="m-grp">GRUPO C · J1</span><span class="m-info">MetLife · Nueva York/NJ · 4:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇧🇷</div><div class="t-data"><div class="t-name">BRASIL</div><div class="t-sc">⚽ Vinícius Jr. 32'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇲🇦</div><div class="t-data"><div class="t-name">MARRUECOS</div><div class="t-sc">⚽ Saibari 21'</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('qat')">
+    <div class="match-top"><span class="m-grp">GRUPO B · J1</span><span class="m-info">Levi's · San Francisco · 1:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇶🇦</div><div class="t-data"><div class="t-name">QATAR</div><div class="t-sc">⚽ Khoukhi 90+4'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇨🇭</div><div class="t-data"><div class="t-name">SUIZA</div><div class="t-sc">⚽ Embolo 17'(pen)</div></div></div>
+    </div>
+  </div>
+
+  <div class="dhdr">VIE 12 JUNIO · DÍA 2</div>
+  <div class="match done" onclick="openMatch('us')">
+    <div class="match-top"><span class="m-grp">GRUPO D · J1</span><span class="m-info">SoFi · Los Ángeles · 8:00 PM SV</span><span class="m-ch">📺 Tigo/Telemundo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇺🇸</div><div class="t-data"><div class="t-name">ESTADOS UNIDOS</div><div class="t-sc">⚽ OG 7' · Balogun 31',45+5' · Reyna 90+8'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">4</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇵🇾</div><div class="t-data"><div class="t-name">PARAGUAY</div><div class="t-sc">⚽ Magalhães 73'</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('can')">
+    <div class="match-top"><span class="m-grp">GRUPO B · J1</span><span class="m-info">BMO Field · Toronto · 2:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇨🇦</div><div class="t-data"><div class="t-name">CANADÁ</div><div class="t-sc">⚽ Larin 79'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">1</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇧🇦</div><div class="t-data"><div class="t-name">BOSNIA</div><div class="t-sc">⚽ Lukic 21'</div></div></div>
+    </div>
+  </div>
+
+  <div class="dhdr">JUE 11 JUNIO · DÍA 1</div>
+  <div class="match done" onclick="openMatch('kor')">
+    <div class="match-top"><span class="m-grp">GRUPO A · J1</span><span class="m-info">Akron · Guadalajara · 8:00 PM SV</span><span class="m-ch">📺 Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇰🇷</div><div class="t-data"><div class="t-name">COREA DEL SUR</div><div class="t-sc">⚽ Hwang 55' · Oh 78'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">2</div><div class="s-sep">-</div><div class="s-num">1</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇨🇿</div><div class="t-data"><div class="t-name">REP. CHECA</div><div class="t-sc">⚽ Krejci 22'</div></div></div>
+    </div>
+  </div>
+  <div class="match done" onclick="openMatch('mx')">
+    <div class="match-top"><span class="m-grp">GRUPO A · J1</span><span class="m-info">Estadio Azteca · CDMX · 1:00 PM SV</span><span class="m-ch">📺 Canal 4/Tigo</span></div>
+    <div class="match-body">
+      <div class="team"><div class="flag">🇲🇽</div><div class="t-data"><div class="t-name">MÉXICO</div><div class="t-sc">⚽ Quiñones 8' · Jiménez 66'</div></div></div>
+      <div class="score-c"><div class="scoreboard"><div class="s-num">2</div><div class="s-sep">-</div><div class="s-num">0</div></div><span class="badge b-done">FINAL</span></div>
+      <div class="team away"><div class="flag">🇿🇦</div><div class="t-data"><div class="t-name">SUDÁFRICA</div><div class="t-sc">🟥🟥 Sithole 50' · Zwane 84'</div></div></div>
+    </div>
+  </div>
+</div>
+<!-- CALENDARIO -->
+<div id="s-calendario" class="section">
+  <div class="pg-title">📅 CALENDARIO <span>COMPLETO</span></div>
+  <div class="pg-sub">Fase de grupos · 11 jun — 27 jun · Hora El Salvador</div>
+  <div style="margin-bottom:12px;position:relative;">
+    <input id="cal-search" type="text" placeholder="🔍 Buscar equipo o grupo... ej: México, Grupo C"
+      oninput="filterCal(this.value)"
+      style="width:100%;background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;color:var(--white);font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;outline:none;transition:border-color 0.2s;"
+      onfocus="this.style.borderColor='var(--neon)'" onblur="this.style.borderColor='var(--border2)'">
+  </div>
+  <div class="card mb10">
+    <div class="card-hd"><div class="card-title">📺 CANALES EN <span class="ac">EL SALVADOR</span></div></div>
+    <div class="p12 g2">
+      <div style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.18);border-radius:7px;padding:10px;">
+        <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;color:var(--neon);">📡 TIGO SPORTS</div>
+        <div style="font-size:10px;color:var(--gray);margin-top:2px;">Todos los 104 partidos</div>
+        <div class="tag tag-green" style="margin-top:5px;">COBERTURA TOTAL</div>
+      </div>
+      <div style="background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.18);border-radius:7px;padding:10px;">
+        <div style="font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;color:var(--gold);">📺 CANAL 4 TCS</div>
+        <div style="font-size:10px;color:var(--gray);margin-top:2px;">Partidos seleccionados · Gratis</div>
+        <div class="tag tag-gold" style="margin-top:5px;">SEÑAL ABIERTA</div>
+      </div>
+    </div>
+  </div>
+  <div id="cal-list"></div>
+</div>
+
+<!-- GRUPOS -->
+<div id="s-grupos" class="section">
+  <div class="pg-title">📊 TABLA DE <span>POSICIONES</span></div>
+  <div class="pg-sub">12 grupos · Actualizado al 13 junio · Día 3</div>
+  <div style="margin-bottom:12px;">
+    <input id="grp-search" type="text" placeholder="🔍 Buscar equipo... ej: Argentina, España, Brasil"
+      oninput="filterGroups(this.value)"
+      style="width:100%;background:var(--card);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;color:var(--white);font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;outline:none;transition:border-color 0.2s;"
+      onfocus="this.style.borderColor='var(--neon)'" onblur="this.style.borderColor='var(--border2)'">
+  </div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">
+    <div class="tag tag-green">🟢 1° y 2° clasifican</div>
+    <div class="tag tag-blue">🔵 Mejor 3° posible</div>
+    <div class="tag" style="background:rgba(136,153,187,0.1);color:var(--gray);border:1px solid var(--border);">⚫ En riesgo</div>
+  </div>
+  <div id="groups-wrap"></div>
+</div>
+
+<!-- ESTADÍSTICAS -->
+<div id="s-estadisticas" class="section">
+  <div class="pg-title">🏆 <span>ESTADÍSTICAS</span></div>
+  <div class="pg-sub">48 partidos terminados · Actualizado Día 13 · 23 junio · 🇦🇷 Messi 18 goles RÉCORD · CR7 1° en 6 Mundiales</div>
+  <div class="g3 mb10">
+    <div class="award"><div class="award-icon">👟</div><div class="award-lbl">Bota de Oro</div><div class="award-name">Lionel Messi</div><div class="award-detail">🇦🇷 Argentina · 5 goles · RÉCORD 18 mundiales</div><div class="award-stat">5 ⚽</div></div>
+    <div class="award"><div class="award-icon">🧤</div><div class="award-lbl">Mejor Portero</div><div class="award-name">Emiliano Dibu Martínez</div><div class="award-detail">🇦🇷 Argentina · 0 GC · 2PJ · Clasificado</div><div class="award-stat">0 GC 🧱</div></div>
+    <div class="award"><div class="award-icon">⭐</div><div class="award-lbl">Mejor Jugador</div><div class="award-name">Lionel Messi</div><div class="award-detail">🇦🇷 Argentina · MÁXIMO GOLEADOR DE MUNDIALES</div><div class="award-stat">18 🏆</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-hd"><div class="card-title">⚽ TOP <span class="ac">GOLEADORES</span></div></div>
+      <div class="p12" id="scorers-wrap"></div>
+    </div>
+    <div>
+      <div class="card mb10">
+        <div class="card-hd"><div class="card-title">🧤 PORTEROS <span class="ac">MENOS VENCIDOS</span></div></div>
+        <div class="p12">
+          <div class="scorer"><div class="s-rank r1">1</div><div class="s-flag">🇲🇽</div><div class="s-info"><div class="s-name">Guillermo Ochoa</div><div class="s-team">México · 1PJ · 0 GC</div></div><div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--green);">0 GC</div></div>
+          <div class="scorer"><div class="s-rank r1">1</div><div class="s-flag">🇦🇺</div><div class="s-info"><div class="s-name">Patrick Beach</div><div class="s-team">Australia · 1PJ · 0 GC · 3 paradas</div></div><div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--green);">0 GC</div></div>
+          <div class="scorer"><div class="s-rank r2">3</div><div class="s-flag">🇩🇪</div><div class="s-info"><div class="s-name">Manuel Neuer</div><div class="s-team">Alemania · 1PJ · 1 GC · 3 paradas</div></div><div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--neon);">1 GC</div></div>
+          <div class="scorer"><div class="s-rank r3">4</div><div class="s-flag">🇺🇸</div><div class="s-info"><div class="s-name">Matt Freese</div><div class="s-team">EEUU · 1PJ · 1 GC · 4 paradas</div></div><div style="font-family:'Orbitron',monospace;font-size:13px;color:var(--neon);">1 GC</div></div>
+        </div>
+      </div>
+      <div class="card mb10">
+        <div class="card-hd"><div class="card-title">🟨 TARJETAS <span class="ac">AMARILLAS</span></div></div>
+        <div class="p12">
+          <div class="pbar"><div class="pbar-top"><span>🇵🇾 Paraguay</span><span class="pbar-val" style="color:var(--gold);">3 🟨</span></div><div class="pbar-track"><div class="pbar-fill" style="width:100%;background:var(--gold);"></div></div></div>
+          <div class="pbar"><div class="pbar-top"><span>🇧🇦 Bosnia</span><span class="pbar-val" style="color:var(--gold);">2 🟨</span></div><div class="pbar-track"><div class="pbar-fill" style="width:67%;background:var(--gold);"></div></div></div>
+          <div class="pbar"><div class="pbar-top"><span>🇨🇿 Rep. Checa</span><span class="pbar-val" style="color:var(--gold);">2 🟨</span></div><div class="pbar-track"><div class="pbar-fill" style="width:67%;background:var(--gold);"></div></div></div>
+          <div class="pbar"><div class="pbar-top"><span>🇰🇷 Corea del Sur</span><span class="pbar-val" style="color:var(--gold);">2 🟨</span></div><div class="pbar-track"><div class="pbar-fill" style="width:67%;background:var(--gold);"></div></div></div>
+          <div class="pbar"><div class="pbar-top"><span>🇭🇹 Haití</span><span class="pbar-val" style="color:var(--gold);">2 🟨</span></div><div class="pbar-track"><div class="pbar-fill" style="width:67%;background:var(--gold);"></div></div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><div class="card-title">🟥 TARJETAS <span class="ac">ROJAS</span></div></div>
+        <div class="p12">
+          <div class="scorer"><div class="s-flag">🇿🇦</div><div class="s-info"><div class="s-name">S. Sithole</div><div class="s-team">Sudáfrica · Min 50' vs México</div></div><div style="font-size:16px;">🟥</div></div>
+          <div class="scorer"><div class="s-flag">🇿🇦</div><div class="s-info"><div class="s-name">T. Zwane</div><div class="s-team">Sudáfrica · Min 84' vs México</div></div><div style="font-size:16px;">🟥</div></div>
+          <div class="scorer"><div class="s-flag">🇲🇽</div><div class="s-info"><div class="s-name">C. Montes</div><div class="s-team">México · Min 90+1' vs Sudáfrica</div></div><div style="font-size:16px;">🟥</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="g2 mt10">
+    <div class="card">
+      <div class="card-hd"><div class="card-title">🗡️ MEJOR <span class="ac">ATAQUE</span></div></div>
+      <div class="p12">
+        <div class="pbar"><div class="pbar-top"><span>🇩🇪 Alemania</span><span class="pbar-val" style="color:var(--gold);">7 ⚽</span></div><div class="pbar-track"><div class="pbar-fill" style="width:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇺🇸 Estados Unidos</span><span class="pbar-val" style="color:var(--neon);">4 ⚽</span></div><div class="pbar-track"><div class="pbar-fill" style="width:57%;background:var(--neon);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇲🇽 México</span><span class="pbar-val" style="color:var(--blue);">2 ⚽</span></div><div class="pbar-track"><div class="pbar-fill" style="width:28%;background:var(--blue);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇰🇷 Corea del Sur</span><span class="pbar-val" style="color:var(--blue);">2 ⚽</span></div><div class="pbar-track"><div class="pbar-fill" style="width:28%;background:var(--blue);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇦🇺 Australia</span><span class="pbar-val" style="color:var(--green);">2 ⚽</span></div><div class="pbar-track"><div class="pbar-fill" style="width:28%;background:var(--green);"></div></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-hd"><div class="card-title">🛡️ MEJOR <span class="ac">DEFENSA</span></div></div>
+      <div class="p12">
+        <div class="pbar"><div class="pbar-top"><span>🇲🇽 México</span><span class="pbar-val" style="color:var(--green);">0 GC</span></div><div class="pbar-track"><div class="pbar-fill" style="width:100%;background:var(--green);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇦🇺 Australia</span><span class="pbar-val" style="color:var(--green);">0 GC</span></div><div class="pbar-track"><div class="pbar-fill" style="width:100%;background:var(--green);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia</span><span class="pbar-val" style="color:var(--green);">0 GC</span></div><div class="pbar-track"><div class="pbar-fill" style="width:100%;background:var(--green);"></div></div></div>
+        <div class="pbar"><div class="pbar-top"><span>🇨🇼 Curazao</span><span class="pbar-val" style="color:var(--red);">7 GC</span></div><div class="pbar-track"><div class="pbar-fill" style="width:10%;background:var(--red);"></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card mt10">
+    <div class="card-hd"><div class="card-title">📈 DATOS <span class="ac">GLOBALES</span></div></div>
+    <div class="p12">
+      <div class="g3">
+        <div style="text-align:center;padding:8px;background:rgba(255,215,0,0.04);border:1px solid rgba(255,215,0,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--gold);">141</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">Goles</div></div>
+        <div style="text-align:center;padding:8px;background:rgba(255,215,0,0.04);border:1px solid rgba(255,215,0,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--gold);">2.94</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">Promedio</div></div>
+        <div style="text-align:center;padding:8px;background:rgba(255,51,85,0.04);border:1px solid rgba(255,51,85,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--red);">12</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">🟥 Rojas</div></div>
+        <div style="text-align:center;padding:8px;background:rgba(255,165,0,0.04);border:1px solid rgba(255,165,0,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--gold2);">62</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">🟨 Amarillas</div></div>
+        <div style="text-align:center;padding:8px;background:rgba(0,255,136,0.04);border:1px solid rgba(0,255,136,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--green);">48</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">Partidos</div></div>
+        <div style="text-align:center;padding:8px;background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--neon);">3</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">Penales</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CAMINO AL TÍTULO -->
+<div id="s-camino" class="section">
+  <div class="pg-title">🔮 CAMINO AL <span>TÍTULO</span></div>
+  <div class="pg-sub">Bracket eliminatorio oficial FIFA · Se actualiza cuando clasifiquen los equipos</div>
+
+  <style>
+  .bk-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:10px;}
+  .bk{display:flex;gap:0;min-width:900px;}
+  .bk-col{display:flex;flex-direction:column;flex:1;}
+  .bk-col-title{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;color:var(--neon);text-transform:uppercase;text-align:center;padding:7px 3px;background:rgba(0,245,255,0.05);border-bottom:1px solid var(--border);border-right:1px solid var(--border);}
+  .bk-col-title.gold{color:var(--gold);background:rgba(255,215,0,0.05);}
+  .bk-slots{display:flex;flex-direction:column;justify-content:space-around;flex:1;padding:6px 3px;gap:4px;border-right:1px solid var(--border);}
+  .bk-game{background:var(--card2);border:1px solid var(--border);border-radius:5px;overflow:hidden;position:relative;}
+  .bk-game::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--neon),transparent);opacity:0.2;}
+  .bk-team{display:flex;justify-content:space-between;align-items:center;padding:4px 7px;font-size:9px;border-bottom:1px solid rgba(26,37,64,0.5);}
+  .bk-team:last-child{border-bottom:none;}
+  .bk-team.tbd{color:var(--border2);font-style:italic;font-size:8px;}
+  .bk-team.win{color:var(--gold);font-weight:700;}
+  .bk-score{font-family:'Orbitron',monospace;font-size:9px;font-weight:700;color:var(--neon);flex-shrink:0;}
+  .bk-date{font-size:7px;color:var(--border2);text-align:center;padding:2px;background:rgba(0,0,0,0.2);}
+  .bk-champion{background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(0,245,255,0.05));border:1px solid var(--gold);border-radius:8px;padding:12px;text-align:center;margin-top:8px;}
+  .bk-champion-icon{font-size:36px;margin-bottom:5px;}
+  .bk-champion-lbl{font-family:'Rajdhani',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;color:var(--gray);text-transform:uppercase;}
+  .bk-champion-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:900;color:var(--gold);margin-top:3px;}
+  </style>
+
+  <div class="card mb10">
+    <div class="card-hd"><div class="card-title">📋 CÓMO SE <span class="ac">CLASIFICA</span></div></div>
+    <div class="p12">
+      <div class="rule-item"><div class="ri">1°</div><div>Los <strong style="color:var(--white);">primeros de cada grupo</strong> (12 equipos) clasifican a Dieciseisavos.</div></div>
+      <div class="rule-item"><div class="ri">2°</div><div>Los <strong style="color:var(--white);">segundos de cada grupo</strong> (12 equipos) también clasifican.</div></div>
+      <div class="rule-item"><div class="ri">3°</div><div>Los <strong style="color:var(--white);">8 mejores terceros lugares</strong> de 12 grupos avanzan. Los 4 peores quedan eliminados.</div></div>
+      <div class="rule-item"><div class="ri">❌</div><div>Los <strong style="color:var(--red);">4° lugares</strong> de cada grupo quedan eliminados.</div></div>
+    </div>
+  </div>
+
+  <div class="card mb10">
+    <div class="card-hd"><div class="card-title">🏆 BRACKET <span class="ac">ELIMINATORIO</span> · ORGANIGRAMA OFICIAL</div></div>
+    <div class="p12">
+      <div class="bk-wrap">
+        <div class="bk">
+          <!-- DIECISEISAVOS -->
+          <div class="bk-col">
+            <div class="bk-col-title">16AVOS<br><span style="color:var(--gray);font-size:7px;">28 JUN - 3 JUL</span></div>
+            <div class="bk-slots">
+              <div class="bk-game"><div class="bk-date">P1 · 30 JUN</div><div class="bk-team tbd"><span>1° Grupo A</span></div><div class="bk-team tbd"><span>Mejor 3° C/E/F/H/I</span></div></div>
+              <div class="bk-game"><div class="bk-date">P2 · 28 JUN</div><div class="bk-team tbd"><span>1° Grupo B</span></div><div class="bk-team tbd"><span>2° Grupo F</span></div></div>
+              <div class="bk-game"><div class="bk-date">P3 · 1 JUL</div><div class="bk-team tbd"><span>1° Grupo C</span></div><div class="bk-team tbd"><span>2° Grupo D</span></div></div>
+              <div class="bk-game"><div class="bk-date">P4 · 29 JUN</div><div class="bk-team tbd"><span>1° Grupo D</span></div><div class="bk-team tbd"><span>Mejor 3° A/B/C/D</span></div></div>
+              <div class="bk-game"><div class="bk-date">P5 · 2 JUL</div><div class="bk-team tbd"><span>1° Grupo E</span></div><div class="bk-team tbd"><span>Mejor 3° A/B/C/D</span></div></div>
+              <div class="bk-game"><div class="bk-date">P6 · 28 JUN</div><div class="bk-team tbd"><span>1° Grupo F</span></div><div class="bk-team tbd"><span>2° Grupo E</span></div></div>
+              <div class="bk-game"><div class="bk-date">P7 · 3 JUL</div><div class="bk-team tbd"><span>1° Grupo G</span></div><div class="bk-team tbd"><span>2° Grupo H</span></div></div>
+              <div class="bk-game"><div class="bk-date">P8 · 29 JUN</div><div class="bk-team tbd"><span>1° Grupo H</span></div><div class="bk-team tbd"><span>2° Grupo G</span></div></div>
+              <div class="bk-game"><div class="bk-date">P9 · 30 JUN</div><div class="bk-team tbd"><span>1° Grupo I</span></div><div class="bk-team tbd"><span>2° Grupo J</span></div></div>
+              <div class="bk-game"><div class="bk-date">P10 · 1 JUL</div><div class="bk-team tbd"><span>1° Grupo J</span></div><div class="bk-team tbd"><span>2° Grupo I</span></div></div>
+              <div class="bk-game"><div class="bk-date">P11 · 2 JUL</div><div class="bk-team tbd"><span>1° Grupo K</span></div><div class="bk-team tbd"><span>2° Grupo L</span></div></div>
+              <div class="bk-game"><div class="bk-date">P12 · 3 JUL</div><div class="bk-team tbd"><span>1° Grupo L</span></div><div class="bk-team tbd"><span>2° Grupo K</span></div></div>
+              <div class="bk-game"><div class="bk-date">P13 · Mejor 3°</div><div class="bk-team tbd"><span>Mejor 3°</span></div><div class="bk-team tbd"><span>Mejor 3°</span></div></div>
+              <div class="bk-game"><div class="bk-date">P14 · Mejor 3°</div><div class="bk-team tbd"><span>Mejor 3°</span></div><div class="bk-team tbd"><span>Mejor 3°</span></div></div>
+              <div class="bk-game"><div class="bk-date">P15 · Mejor 3°</div><div class="bk-team tbd"><span>Mejor 3°</span></div><div class="bk-team tbd"><span>Mejor 3°</span></div></div>
+              <div class="bk-game"><div class="bk-date">P16 · Mejor 3°</div><div class="bk-team tbd"><span>Mejor 3°</span></div><div class="bk-team tbd"><span>Mejor 3°</span></div></div>
+            </div>
+          </div>
+          <!-- OCTAVOS -->
+          <div class="bk-col">
+            <div class="bk-col-title">OCTAVOS<br><span style="color:var(--gray);font-size:7px;">4-7 JUL</span></div>
+            <div class="bk-slots">
+              <div class="bk-game"><div class="bk-date">4-7 JUL</div><div class="bk-team tbd"><span>Gan. P1</span></div><div class="bk-team tbd"><span>Gan. P2</span></div></div>
+              <div class="bk-game"><div class="bk-date">4-7 JUL</div><div class="bk-team tbd"><span>Gan. P3</span></div><div class="bk-team tbd"><span>Gan. P4</span></div></div>
+              <div class="bk-game"><div class="bk-date">4-7 JUL</div><div class="bk-team tbd"><span>Gan. P5</span></div><div class="bk-team tbd"><span>Gan. P6</span></div></div>
+              <div class="bk-game"><div class="bk-date">4-7 JUL</div><div class="bk-team tbd"><span>Gan. P7</span></div><div class="bk-team tbd"><span>Gan. P8</span></div></div>
+              <div class="bk-game"><div class="bk-date">4-7 JUL</div><div class="bk-team tbd"><span>Gan. P9</span></div><div class="bk-team tbd"><span>Gan. P10</span></div></div>
+              <div class="bk-game"><div class="bk-date">4-7 JUL</div><div class="bk-team tbd"><span>Gan. P11</span></div><div class="bk-team tbd"><span>Gan. P12</span></div></div>
+              <div class="bk-game"><div class="bk-date">4-7 JUL</div><div class="bk-team tbd"><span>Gan. P13</span></div><div class="bk-team tbd"><span>Gan. P14</span></div></div>
+              <div class="bk-game"><div class="bk-date">4-7 JUL</div><div class="bk-team tbd"><span>Gan. P15</span></div><div class="bk-team tbd"><span>Gan. P16</span></div></div>
+            </div>
+          </div>
+          <!-- CUARTOS -->
+          <div class="bk-col">
+            <div class="bk-col-title">CUARTOS<br><span style="color:var(--gray);font-size:7px;">9-11 JUL</span></div>
+            <div class="bk-slots">
+              <div class="bk-game"><div class="bk-date">9-11 JUL</div><div class="bk-team tbd"><span>Por definir</span></div><div class="bk-team tbd"><span>Por definir</span></div></div>
+              <div class="bk-game"><div class="bk-date">9-11 JUL</div><div class="bk-team tbd"><span>Por definir</span></div><div class="bk-team tbd"><span>Por definir</span></div></div>
+              <div class="bk-game"><div class="bk-date">9-11 JUL</div><div class="bk-team tbd"><span>Por definir</span></div><div class="bk-team tbd"><span>Por definir</span></div></div>
+              <div class="bk-game"><div class="bk-date">9-11 JUL</div><div class="bk-team tbd"><span>Por definir</span></div><div class="bk-team tbd"><span>Por definir</span></div></div>
+            </div>
+          </div>
+          <!-- SEMIS -->
+          <div class="bk-col">
+            <div class="bk-col-title">SEMIS<br><span style="color:var(--gray);font-size:7px;">14-15 JUL</span></div>
+            <div class="bk-slots">
+              <div class="bk-game"><div class="bk-date">14 JUL</div><div class="bk-team tbd"><span>Por definir</span></div><div class="bk-team tbd"><span>Por definir</span></div></div>
+              <div class="bk-game"><div class="bk-date">15 JUL</div><div class="bk-team tbd"><span>Por definir</span></div><div class="bk-team tbd"><span>Por definir</span></div></div>
+            </div>
+          </div>
+          <!-- FINAL -->
+          <div class="bk-col">
+            <div class="bk-col-title gold">🏆 FINAL<br><span style="color:var(--gray);font-size:7px;">19 JUL · METLIFE NJ</span></div>
+            <div class="bk-slots" style="justify-content:center;">
+              <div class="bk-game" style="border-color:var(--gold);">
+                <div class="bk-date" style="background:rgba(255,215,0,0.1);color:var(--gold);">19 JULIO 2026</div>
+                <div class="bk-team tbd"><span>Por definir</span></div>
+                <div class="bk-team tbd"><span>Por definir</span></div>
+              </div>
+              <div class="bk-champion">
+                <div class="bk-champion-icon">🏆</div>
+                <div class="bk-champion-lbl">Campeón Mundial</div>
+                <div class="bk-champion-name">¿QUIÉN SERÁ?</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:9px;color:var(--gray);margin-top:8px;text-align:center;">👆 Desliza horizontalmente para ver el bracket completo · Los equipos se actualizan al terminar la fase de grupos</div>
+    </div>
+  </div>
+
+
+
+</main>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="closeOverlay(event)">
+  <div class="modal"><button class="modal-close" onclick="closeModal()">✕</button><div id="modal-body"></div></div>
+</div>
+
+<script>
+// TZ
+const TZ_MAP={'America/El_Salvador':'El Salvador','America/Guatemala':'Guatemala','America/Tegucigalpa':'Honduras','America/Managua':'Nicaragua','America/Costa_Rica':'Costa Rica','America/Mexico_City':'México','America/Bogota':'Colombia','America/Lima':'Perú','America/New_York':'Este USA','America/Chicago':'Centro USA','America/Los_Angeles':'Pacífico USA','America/Caracas':'Venezuela','America/Santiago':'Chile','America/Argentina/Buenos_Aires':'Argentina','Europe/Madrid':'España','Europe/London':'Reino Unido','America/Sao_Paulo':'Brasil'};
+const userTZ=Intl.DateTimeFormat().resolvedOptions().timeZone;
+const tzName=TZ_MAP[userTZ]||userTZ.split('/').pop().replace(/_/g,' ');
+document.getElementById('tz-name').textContent=tzName;
+setInterval(()=>{const n=new Date();document.getElementById('clock').textContent=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}:${String(n.getSeconds()).padStart(2,'0')}`;},1000);
+
+// TABS
+function tab(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+}
+
+// CALENDAR
+const CAL=[
+  {date:'JUE 11 JUNIO',matches:[
+    {g:'A',t1:'🇲🇽 México',t2:'🇿🇦 Sudáfrica',h:13,m:0,venue:'Azteca · CDMX',ch:'Canal 4/Tigo',sc:'2-0',st:'done'},
+    {g:'A',t1:'🇰🇷 Corea del Sur',t2:'🇨🇿 Rep. Checa',h:20,m:0,venue:'Akron · Guadalajara',ch:'Tigo',sc:'2-1',st:'done'},
+  ]},
+  {date:'VIE 12 JUNIO',matches:[
+    {g:'B',t1:'🇨🇦 Canadá',t2:'🇧🇦 Bosnia',h:14,m:0,venue:'BMO Field · Toronto',ch:'Tigo',sc:'1-1',st:'done'},
+    {g:'D',t1:'🇺🇸 Estados Unidos',t2:'🇵🇾 Paraguay',h:20,m:0,venue:'SoFi · Los Ángeles',ch:'Tigo/Telemundo',sc:'4-1',st:'done'},
+  ]},
+  {date:'SÁB 13 JUNIO',matches:[
+    {g:'B',t1:'🇶🇦 Qatar',t2:'🇨🇭 Suiza',h:13,m:0,venue:"Levi's · San Francisco",ch:'Canal 4/Tigo',sc:'1-1',st:'done'},
+    {g:'C',t1:'🇧🇷 Brasil',t2:'🇲🇦 Marruecos',h:16,m:0,venue:'MetLife · NJ',ch:'Tigo',sc:'1-1',st:'done'},
+    {g:'C',t1:'🇭🇹 Haití',t2:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',h:19,m:0,venue:'Gillette · Boston',ch:'Tigo',sc:'0-1',st:'done'},
+    {g:'D',t1:'🇦🇺 Australia',t2:'🇹🇷 Turquía',h:22,m:0,venue:'BC Place · Vancouver',ch:'Tigo',sc:'2-0',st:'done'},
+  ]},
+  {date:'DOM 14 JUNIO',matches:[
+    {g:'E',t1:'🇩🇪 Alemania',t2:'🇨🇼 Curazao',h:11,m:0,venue:'NRG · Houston',ch:'Tigo',sc:'7-1',st:'done'},
+    {g:'F',t1:'🇳🇱 Países Bajos',t2:'🇯🇵 Japón',h:14,m:0,venue:'AT&T · Dallas',ch:'Tigo',sc:'2-2',st:'done'},
+    {g:'E',t1:'🇨🇮 Costa de Marfil',t2:'🇪🇨 Ecuador',h:17,m:0,venue:'Lincoln Financial · Filadelfia',ch:'Tigo',sc:'1-0',st:'done'},
+    {g:'F',t1:'🇸🇪 Suecia',t2:'🇹🇳 Túnez',h:20,m:0,venue:'BBVA · Monterrey',ch:'Tigo',sc:'5-1',st:'done'},
+  ]},
+  {date:'LUN 15 JUNIO',matches:[
+    {g:'H',t1:'🇪🇸 España',t2:'🇨🇻 Cabo Verde',h:10,m:0,venue:'Mercedes-Benz · Atlanta',ch:'Canal 4/Tigo',sc:'0-0',st:'done'},
+    {g:'G',t1:'🇧🇪 Bélgica',t2:'🇪🇬 Egipto',h:13,m:0,venue:'Lumen · Seattle',ch:'Tigo',sc:'1-1',st:'done'},
+    {g:'H',t1:'🇸🇦 Arabia Saudita',t2:'🇺🇾 Uruguay',h:16,m:0,venue:'Hard Rock · Miami',ch:'Tigo',sc:'1-1',st:'done'},
+    {g:'G',t1:'🇮🇷 Irán',t2:'🇳🇿 Nueva Zelanda',h:19,m:0,venue:'SoFi · Los Ángeles',ch:'Tigo',sc:'2-2',st:'done'},
+  ]},
+  {date:'MAR 16 JUNIO',matches:[
+    {g:'I',t1:'🇫🇷 Francia',t2:'🇸🇳 Senegal',h:13,m:0,venue:'MetLife · NJ',ch:'Tigo',sc:'3-1',st:'done'},
+    {g:'I',t1:'🇮🇶 Irak',t2:'🇳🇴 Noruega',h:16,m:0,venue:'Gillette · Boston',ch:'Tigo',sc:'1-4',st:'done'},
+    {g:'J',t1:'🇦🇷 Argentina',t2:'🇩🇿 Argelia',h:19,m:0,venue:'Arrowhead · Kansas City',ch:'Canal 4/Tigo',sc:'3-0',st:'done'},
+    {g:'J',t1:'🇦🇹 Austria',t2:'🇯🇴 Jordania',h:22,m:0,venue:"Levi's · San Francisco",ch:'Tigo',sc:'3-1',st:'done'},
+  ]},
+  {date:'MIÉ 17 JUNIO',matches:[
+    {g:'K',t1:'🇵🇹 Portugal',t2:'🇨🇩 RD Congo',h:11,m:0,venue:'NRG · Houston',ch:'Tigo',sc:'1-1',st:'done'},
+    {g:'L',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇭🇷 Croacia',h:14,m:0,venue:'AT&T · Dallas',ch:'Tigo',sc:'4-2',st:'done'},
+    {g:'L',t1:'🇬🇭 Ghana',t2:'🇵🇦 Panamá',h:17,m:0,venue:'BMO Field · Toronto',ch:'Tigo',sc:'1-0',st:'done'},
+    {g:'K',t1:'🇺🇿 Uzbekistán',t2:'🇨🇴 Colombia',h:20,m:0,venue:'Azteca · CDMX',ch:'Tigo',sc:'1-3',st:'done'},
+  ]},
+  {date:'JUE 18 JUNIO — J2',matches:[
+    {g:'A',t1:'🇨🇿 Rep. Checa',t2:'🇿🇦 Sudáfrica',h:10,m:0,venue:'Mercedes-Benz · Atlanta',ch:'Tigo',sc:'1-1',st:'done'},
+    {g:'B',t1:'🇨🇭 Suiza',t2:'🇧🇦 Bosnia',h:13,m:0,venue:'SoFi · Los Ángeles',ch:'Tigo',sc:'4-1',st:'done'},
+    {g:'B',t1:'🇨🇦 Canadá',t2:'🇶🇦 Qatar',h:16,m:0,venue:'BC Place · Vancouver',ch:'Tigo',sc:'6-0',st:'done'},
+    {g:'A',t1:'🇲🇽 México',t2:'🇰🇷 Corea del Sur',h:19,m:0,venue:'Akron · Guadalajara',ch:'Canal 4/Tigo',sc:'1-0',st:'done'},
+  ]},
+  {date:'VIE 19 JUNIO',matches:[
+    {g:'D',t1:'🇺🇸 Estados Unidos',t2:'🇦🇺 Australia',h:13,m:0,venue:'Lumen · Seattle',ch:'Tigo',sc:'2-0',st:'done'},
+    {g:'C',t1:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',t2:'🇲🇦 Marruecos',h:16,m:0,venue:'Gillette · Boston',ch:'Tigo',sc:'0-1',st:'done'},
+    {g:'C',t1:'🇧🇷 Brasil',t2:'🇭🇹 Haití',h:18,m:30,venue:'Lincoln Financial · Filadelfia',ch:'Tigo',sc:'3-0',st:'done'},
+    {g:'D',t1:'🇹🇷 Turquía',t2:'🇵🇾 Paraguay',h:21,m:0,venue:"Levi's · San Francisco",ch:'Tigo',sc:'0-1',st:'done'},
+  ]},
+  {date:'SÁB 20 JUNIO',matches:[
+    {g:'F',t1:'🇳🇱 Países Bajos',t2:'🇸🇪 Suecia',h:11,m:0,venue:'NRG · Houston',ch:'Tigo',sc:'5-1',st:'done'},
+    {g:'E',t1:'🇩🇪 Alemania',t2:'🇨🇮 Costa de Marfil',h:14,m:0,venue:'BMO Field · Toronto',ch:'Tigo',sc:'2-1',st:'done'},
+    {g:'E',t1:'🇪🇨 Ecuador',t2:'🇨🇼 Curazao',h:18,m:0,venue:'Arrowhead · Kansas City',ch:'Tigo',sc:'0-0',st:'done'},
+    {g:'F',t1:'🇹🇳 Túnez',t2:'🇯🇵 Japón',h:22,m:0,venue:'BBVA · Monterrey',ch:'Tigo',sc:'0-4',st:'done'},
+  ]},
+  {date:'DOM 21 JUNIO',matches:[
+    {g:'H',t1:'🇪🇸 España',t2:'🇸🇦 Arabia Saudita',h:10,m:0,venue:'Mercedes-Benz · Atlanta',ch:'Canal 4/Tigo',sc:'4-0',st:'done'},
+    {g:'G',t1:'🇧🇪 Bélgica',t2:'🇮🇷 Irán',h:13,m:0,venue:'SoFi · Los Ángeles',ch:'Tigo',sc:'0-0',st:'done'},
+    {g:'H',t1:'🇺🇾 Uruguay',t2:'🇨🇻 Cabo Verde',h:16,m:0,venue:'Allegiant · Las Vegas',ch:'Tigo',sc:'2-2',st:'done'},
+    {g:'G',t1:'🇳🇿 Nueva Zelanda',t2:'🇪🇬 Egipto',h:19,m:0,venue:'Rose Bowl · Pasadena',ch:'Tigo',sc:'1-3',st:'done'},
+  ]},
+  {date:'LUN 22 JUNIO',matches:[
+    {g:'J',t1:'🇦🇷 Argentina',t2:'🇦🇹 Austria',h:11,m:0,venue:'AT&T Stadium · Dallas',ch:'Canal 4/Tigo',sc:'2-0',st:'done'},
+    {g:'I',t1:'🇫🇷 Francia',t2:'🇮🇶 Irak',h:15,m:0,venue:'Lincoln Financial · Filadelfia',ch:'Tigo',sc:'3-0',st:'done'},
+    {g:'I',t1:'🇳🇴 Noruega',t2:'🇸🇳 Senegal',h:18,m:0,venue:'MetLife · NJ',ch:'Tigo',sc:'3-2',st:'done'},
+    {g:'J',t1:'🇯🇴 Jordania',t2:'🇩🇿 Argelia',h:21,m:0,venue:"Levi's · San Francisco",ch:'Tigo',sc:'1-2',st:'done'},
+  ]},
+  {date:'MAR 23 JUNIO',matches:[
+    {g:'K',t1:'🇵🇹 Portugal',t2:'🇺🇿 Uzbekistán',h:11,m:0,venue:'NRG · Houston',ch:'Tigo',sc:'5-0',st:'done'},
+    {g:'L',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇬🇭 Ghana',h:14,m:0,venue:'Gillette · Boston',ch:'Tigo',sc:'0-0',st:'done'},
+    {g:'L',t1:'🇵🇦 Panamá',t2:'🇭🇷 Croacia',h:17,m:0,venue:'BMO Field · Toronto',ch:'Tigo',sc:'0-1',st:'done'},
+    {g:'K',t1:'🇨🇴 Colombia',t2:'🇨🇩 RD Congo',h:20,m:0,venue:'Estadio Guadalajara',ch:'Canal 4/Tigo',sc:'1-0',st:'done'},
+  ]},
+  {date:'MIÉ 24 JUNIO — J3',matches:[
+    {g:'A',t1:'🇨🇿 Rep. Checa',t2:'🇲🇽 México',h:19,m:0,venue:'Azteca · CDMX',ch:'Canal 4/Tigo',sc:'vs',st:'pend'},
+    {g:'A',t1:'🇿🇦 Sudáfrica',t2:'🇰🇷 Corea del Sur',h:19,m:0,venue:'BBVA · Monterrey',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'C',t1:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',t2:'🇧🇷 Brasil',h:16,m:0,venue:'Hard Rock · Miami',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'C',t1:'🇲🇦 Marruecos',t2:'🇭🇹 Haití',h:16,m:0,venue:'Mercedes-Benz · Atlanta',ch:'Tigo',sc:'vs',st:'pend'},
+  ]},
+  {date:'JUE 25 JUNIO',matches:[
+    {g:'B',t1:'🇨🇭 Suiza',t2:'🇨🇦 Canadá',h:13,m:0,venue:'BC Place · Vancouver',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'B',t1:'🇧🇦 Bosnia',t2:'🇶🇦 Qatar',h:13,m:0,venue:'Allegiant · Las Vegas',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'D',t1:'🇦🇺 Australia',t2:'🇵🇾 Paraguay',h:19,m:0,venue:'SoFi · Los Ángeles',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'D',t1:'🇺🇸 Estados Unidos',t2:'🇹🇷 Turquía',h:19,m:0,venue:'Lumen · Seattle',ch:'Tigo',sc:'vs',st:'pend'},
+  ]},
+  {date:'VIE 26 JUNIO',matches:[
+    {g:'E',t1:'🇩🇪 Alemania',t2:'🇪🇨 Ecuador',h:19,m:0,venue:'Arrowhead · Kansas City',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'E',t1:'🇨🇮 Costa de Marfil',t2:'🇨🇼 Curazao',h:19,m:0,venue:'NRG · Houston',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'F',t1:'🇯🇵 Japón',t2:'🇸🇪 Suecia',h:13,m:0,venue:'Rose Bowl · Pasadena',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'F',t1:'🇹🇳 Túnez',t2:'🇳🇱 Países Bajos',h:13,m:0,venue:'BBVA · Monterrey',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'I',t1:'🇫🇷 Francia',t2:'🇳🇴 Noruega',h:13,m:0,venue:'Gillette · Boston',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'I',t1:'🇸🇳 Senegal',t2:'🇮🇶 Irak',h:13,m:0,venue:'MetLife · NJ',ch:'Tigo',sc:'vs',st:'pend'},
+  ]},
+  {date:'SÁB 27 JUNIO',matches:[
+    {g:'G',t1:'🇧🇪 Bélgica',t2:'🇳🇿 Nueva Zelanda',h:13,m:0,venue:'Lumen · Seattle',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'G',t1:'🇪🇬 Egipto',t2:'🇮🇷 Irán',h:13,m:0,venue:'AT&T · Dallas',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'H',t1:'🇪🇸 España',t2:'🇺🇾 Uruguay',h:19,m:0,venue:'Hard Rock · Miami',ch:'Canal 4/Tigo',sc:'vs',st:'pend'},
+    {g:'H',t1:'🇨🇻 Cabo Verde',t2:'🇸🇦 Arabia Saudita',h:19,m:0,venue:'Rose Bowl · Pasadena',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'J',t1:'🇦🇷 Argentina',t2:'🇯🇴 Jordania',h:13,m:0,venue:'BMO Field · Toronto',ch:'Canal 4/Tigo',sc:'vs',st:'pend'},
+    {g:'J',t1:'🇩🇿 Argelia',t2:'🇦🇹 Austria',h:13,m:0,venue:'Allegiant · Las Vegas',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'K',t1:'🇵🇹 Portugal',t2:'🇨🇩 RD Congo',h:19,m:0,venue:'NRG · Houston',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'K',t1:'🇺🇿 Uzbekistán',t2:'🇨🇴 Colombia',h:19,m:0,venue:'SoFi · Los Ángeles',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'L',t1:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t2:'🇭🇷 Croacia',h:13,m:0,venue:'AT&T · Dallas',ch:'Tigo',sc:'vs',st:'pend'},
+    {g:'L',t1:'🇬🇭 Ghana',t2:'🇵🇦 Panamá',h:13,m:0,venue:'Azteca · CDMX',ch:'Tigo',sc:'vs',st:'pend'},
+  ]},
+];
+
+function renderCalendar(){
+  let h='';
+  CAL.forEach(day=>{
+    h+=`<div class="dhdr">${day.date}</div>`;
+    day.matches.forEach(m=>{
+      const t=`${String(m.h).padStart(2,'0')}:${String(m.m).padStart(2,'0')} SV`;
+      const cls=m.st==='done'?'done':m.st==='curso'?'curso':'pending';
+      let badge=m.st==='done'?`<span class="badge b-done">FINAL: ${m.sc}</span>`:m.st==='curso'?`<span class="badge b-curso">🔴 EN VIVO</span>`:`<span class="badge b-time">${t}</span>`;
+      h+=`<div class="match ${cls}" style="margin-bottom:6px;">
+        <div class="match-top"><span class="m-grp">GRP ${m.g}</span><span class="m-info">📍 ${m.venue} · ${t}</span><span class="m-ch">📺 ${m.ch}</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+          <div style="font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--white);">${m.t1}</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:3px;">
+            <div class="scoreboard" style="padding:4px 8px;"><div class="s-num" style="font-size:16px;">${m.sc.split('-')[0]}</div><div class="s-sep">-</div><div class="s-num" style="font-size:16px;">${m.sc.split('-')[1]||m.sc.split('s')[1]||'-'}</div></div>
+            ${badge}
+          </div>
+          <div style="font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--white);text-align:right;">${m.t2}</div>
+        </div>
+      </div>`;
+    });
+  });
+  document.getElementById('cal-list').innerHTML=h;
+}
+
+// GROUPS
+const GROUPS=[
+  {g:'A',teams:[{n:'🇲🇽 México',j:2,ga:2,e:0,p:0,gf:3,gc:0,pts:6,s:'q1'},{n:'🇰🇷 Corea del Sur',j:2,ga:1,e:0,p:1,gf:2,gc:2,pts:3,s:'q3'},{n:'🇨🇿 Rep. Checa',j:2,ga:0,e:1,p:1,gf:2,gc:3,pts:1,s:''},{n:'🇿🇦 Sudáfrica',j:2,ga:0,e:1,p:1,gf:1,gc:3,pts:1,s:''}]},
+  {g:'B',teams:[{n:'🇨🇦 Canadá',j:2,ga:2,e:1,p:0,gf:7,gc:1,pts:4,s:'q1'},{n:'🇨🇭 Suiza',j:2,ga:1,e:1,p:0,gf:5,gc:2,pts:4,s:'q2'},{n:'🇧🇦 Bosnia',j:2,ga:0,e:1,p:1,gf:2,gc:5,pts:1,s:''},{n:'🇶🇦 Qatar',j:2,ga:0,e:1,p:1,gf:1,gc:7,pts:1,s:''}]},
+  {g:'C',teams:[{n:'🇲🇦 Marruecos',j:2,ga:2,e:0,p:0,gf:2,gc:1,pts:4,s:'q1'},{n:'🇧🇷 Brasil',j:2,ga:1,e:1,p:0,gf:4,gc:1,pts:4,s:'q2'},{n:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',j:2,ga:1,e:0,p:1,gf:1,gc:1,pts:3,s:'q3'},{n:'🇭🇹 Haití',j:2,ga:0,e:0,p:2,gf:0,gc:4,pts:0,s:''}]},
+  {g:'D',teams:[{n:'🇺🇸 Estados Unidos',j:2,ga:2,e:0,p:0,gf:6,gc:1,pts:6,s:'q1'},{n:'🇵🇾 Paraguay',j:2,ga:1,e:0,p:1,gf:2,gc:4,pts:3,s:'q3'},{n:'🇦🇺 Australia',j:2,ga:1,e:0,p:1,gf:2,gc:2,pts:3,s:'q3'},{n:'🇹🇷 Turquía',j:2,ga:0,e:0,p:2,gf:0,gc:3,pts:0,s:''}]},
+  {g:'E',teams:[{n:'🇩🇪 Alemania',j:2,ga:2,e:0,p:0,gf:9,gc:2,pts:6,s:'q1'},{n:'🇨🇮 Costa de Marfil',j:2,ga:1,e:0,p:1,gf:2,gc:2,pts:3,s:'q3'},{n:'🇪🇨 Ecuador',j:2,ga:0,e:1,p:1,gf:0,gc:1,pts:1,s:''},{n:'🇨🇼 Curazao',j:2,ga:0,e:1,p:1,gf:1,gc:7,pts:1,s:''}]},
+  {g:'F',teams:[{n:'🇳🇱 Países Bajos',j:2,ga:1,e:1,p:0,gf:7,gc:3,pts:4,s:'q1'},{n:'🇯🇵 Japón',j:2,ga:1,e:1,p:0,gf:6,gc:2,pts:4,s:'q2'},{n:'🇸🇪 Suecia',j:2,ga:1,e:0,p:1,gf:6,gc:6,pts:3,s:'q3'},{n:'🇹🇳 Túnez',j:2,ga:0,e:0,p:2,gf:1,gc:9,pts:0,s:''}]},
+  {g:'G',teams:[{n:'🇪🇬 Egipto',j:2,ga:1,e:1,p:0,gf:4,gc:2,pts:4,s:'q1'},{n:'🇮🇷 Irán',j:2,ga:0,e:2,p:0,gf:2,gc:2,pts:2,s:'q3'},{n:'🇧🇪 Bélgica',j:2,ga:0,e:2,p:0,gf:1,gc:1,pts:2,s:'q3'},{n:'🇳🇿 Nueva Zelanda',j:2,ga:0,e:1,p:1,gf:3,gc:5,pts:1,s:''}]},
+  {g:'H',teams:[{n:'🇪🇸 España',j:2,ga:1,e:1,p:0,gf:4,gc:0,pts:4,s:'q1'},{n:'🇺🇾 Uruguay',j:2,ga:0,e:2,p:0,gf:3,gc:3,pts:2,s:'q3'},{n:'🇨🇻 Cabo Verde',j:2,ga:0,e:2,p:0,gf:2,gc:2,pts:2,s:'q3'},{n:'🇸🇦 Arabia Saudita',j:2,ga:0,e:1,p:1,gf:1,gc:5,pts:1,s:''}]},
+  {g:'I',teams:[{n:'🇫🇷 Francia',j:2,ga:2,e:0,p:0,gf:6,gc:1,pts:6,s:'q1'},{n:'🇳🇴 Noruega',j:2,ga:2,e:0,p:0,gf:7,gc:3,pts:6,s:'q2'},{n:'🇸🇳 Senegal',j:2,ga:0,e:0,p:2,gf:3,gc:6,pts:0,s:''},{n:'🇮🇶 Irak',j:2,ga:0,e:0,p:2,gf:1,gc:7,pts:0,s:''}]},
+  {g:'J',teams:[{n:'🇦🇷 Argentina',j:2,ga:2,e:0,p:0,gf:5,gc:0,pts:6,s:'q1'},{n:'🇦🇹 Austria',j:2,ga:1,e:0,p:1,gf:3,gc:3,pts:3,s:'q3'},{n:'🇩🇿 Argelia',j:2,ga:1,e:0,p:1,gf:2,gc:3,pts:3,s:'q3'},{n:'🇯🇴 Jordania',j:2,ga:0,e:0,p:2,gf:2,gc:6,pts:0,s:''}]},
+  {g:'K',teams:[{n:'🇨🇴 Colombia',j:2,ga:2,e:0,p:0,gf:4,gc:1,pts:6,s:'q1'},{n:'🇵🇹 Portugal',j:2,ga:1,e:1,p:0,gf:6,gc:1,pts:4,s:'q2'},{n:'🇨🇩 RD Congo',j:2,ga:0,e:1,p:1,gf:1,gc:2,pts:1,s:''},{n:'🇺🇿 Uzbekistán',j:2,ga:0,e:0,p:2,gf:1,gc:8,pts:0,s:''}]},
+  {g:'L',teams:[{n:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',j:2,ga:1,e:1,p:0,gf:4,gc:2,pts:4,s:'q3'},{n:'🇬🇭 Ghana',j:2,ga:1,e:1,p:0,gf:1,gc:0,pts:4,s:'q3'},{n:'🇭🇷 Croacia',j:2,ga:1,e:0,p:1,gf:3,gc:4,pts:3,s:'q3'},{n:'🇵🇦 Panamá',j:2,ga:0,e:0,p:2,gf:0,gc:2,pts:0,s:''}]},
+];
+
+function renderGroups(){
+  let h='<div class="g2">';
+  GROUPS.forEach(grp=>{
+    h+=`<div class="card mb10"><div class="card-hd"><div class="card-title">GRUPO <span class="ac">${grp.g}</span></div></div><div style="overflow-x:auto;"><table class="standings"><thead><tr><th>#</th><th>Equipo</th><th>J</th><th>G</th><th>E</th><th>P</th><th>GF</th><th>GC</th><th>Pts</th></tr></thead><tbody>`;
+    grp.teams.forEach((t,i)=>{
+      const pc=t.s==='q1'?'q1':t.s==='q2'?'q2':t.s==='q3'?'q3':'';
+      h+=`<tr><td><div class="pos ${pc}">${i+1}</div></td><td><span class="t-cell">${t.n}</span></td><td>${t.j}</td><td>${t.ga}</td><td>${t.e}</td><td>${t.p}</td><td>${t.gf}</td><td>${t.gc}</td><td><span class="pts-c">${t.pts}</span></td></tr>`;
+    });
+    h+=`</tbody></table></div></div>`;
+  });
+  h+='</div>';
+  document.getElementById('groups-wrap').innerHTML=h;
+}
+
+// SCORERS
+const SCORERS=[
+  {r:1,f:'🇦🇷',n:'Lionel Messi',t:"Argentina · 5 goles totales · 18 goles en Mundiales — RÉCORD HISTÓRICO ABSOLUTO",g:5},
+  {r:2,f:'🇫🇷',n:'Kylian Mbappé',t:"Francia · 4 goles · 14',55' vs Irak + doblete vs Senegal — 16 goles mundiales",g:4},
+  {r:2,f:'🇳🇴',n:'Erling Haaland',t:"Noruega · 4 goles · doblete vs Irak + doblete vs Senegal",g:4},
+  {r:2,f:'🇨🇦',n:'Jonathan David',t:"Canadá · 3 goles · hat-trick vs Qatar",g:3},
+  {r:3,f:'🇩🇪',n:'Kai Havertz',t:"Alemania · 88' (doblete vs Curazao)",g:2},
+  {r:3,f:'🇺🇸',n:'Folarin Balogun',t:"EEUU · 31', 45+5' vs Paraguay",g:2},
+  {r:3,f:'🇸🇪',n:'Yasin Ayari',t:"Suecia · 7', 90+5' vs Túnez",g:2},
+  {r:3,f:'🇳🇿',n:'Elijah Just',t:"Nueva Zelanda · 7', 55' vs Irán",g:2},
+  {r:3,f:'🇳🇱',n:'Cody Gakpo',t:"Países Bajos · 2 goles vs Suecia",g:2},
+  {r:3,f:'🇳🇱',n:'Brian Brobbey',t:"Países Bajos · 2 goles vs Suecia",g:2},
+  {r:3,f:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',n:'Harry Kane',t:"Inglaterra · pen+cabeza vs Croacia — récord inglés 10 goles mundiales",g:2},
+  {r:3,f:'🇨🇭',n:'Johan Manzambi',t:"Suiza · 74', 90' vs Bosnia — entró de cambio",g:2},
+  {r:3,f:'🇩🇪',n:'Deniz Undav',t:"Alemania · 68', 90+3' vs Costa de Marfil — remontada agónica",g:2},
+  {r:3,f:'🇪🇸',n:'Mikel Oyarzabal',t:"España · 21', 24' vs Arabia Saudita",g:2},
+  {r:3,f:'🇧🇷',n:'Matheus Cunha',t:"Brasil · 23', 36' vs Haití",g:2},
+  {r:3,f:'🇵🇹',n:'Nuno Mendes',t:"Portugal · 17' vs Uzbekistán — golazo de tiro libre",g:1},
+  {r:3,f:'🇭🇷',n:'Ante Budimir',t:"Croacia · 54' vs Panamá — cabezazo decisivo",g:1},
+  {r:3,f:'🇨🇴',n:'Daniel Muñoz',t:"Colombia · 76' vs RD Congo — asistencia Quintero",g:1},
+  {r:3,f:'🇯🇵',n:'Ayase Ueda',t:"Japón · 31', 84' vs Túnez",g:2},
+  {r:2,f:'🇵🇹',n:'Cristiano Ronaldo',t:"Portugal · 6', 38' vs Uzbekistán — 1° en anotar en 6 Mundiales distintos · 10 goles en Mundiales",g:2},
+  {r:2,f:'🇳🇱',n:'Cody Gakpo',t:"Países Bajos · 2 goles vs Suecia",g:2},
+  {r:2,f:'🇳🇱',n:'Brian Brobbey',t:"Países Bajos · 2 goles vs Suecia",g:2},
+  {r:2,f:'🇩🇪',n:'Deniz Undav',t:"Alemania · 68', 90+3' — remontada vs Costa Marfil",g:2},
+  {r:2,f:'🇪🇸',n:'Mikel Oyarzabal',t:"España · 21', 24' — doblete vs Arabia Saudita",g:2},
+  {r:3,f:'🇺🇸',n:'Alex Freeman',t:"EEUU · 43'(VAR) vs Australia",g:1},
+  {r:3,f:'🇲🇦',n:'Ismael Saibari',t:"Marruecos · 2' — 2do gol más rápido del torneo vs Escocia",g:1},
+  {r:3,f:'🇧🇷',n:'Vinícius Jr.',t:"Brasil · 45+3' vs Haití",g:1},
+  {r:3,f:'🇵🇾',n:'Matías Galarza',t:"Paraguay · 64 seg — GOL MÁS RÁPIDO del torneo vs Turquía",g:1},
+  {r:3,f:'🇳🇱',n:'C. Summerville',t:"Países Bajos · 88' vs Suecia · 2do gol en el torneo",g:1},
+  {r:3,f:'🇸🇪',n:'Anthony Elanga',t:"Suecia · 58' vs Países Bajos",g:1},
+  {r:3,f:'🇨🇮',n:'Franck Kessié',t:"Costa de Marfil · 30' vs Alemania",g:1},
+  {r:3,f:'🇯🇵',n:'Daichi Kamada',t:"Japón · 4' vs Túnez — partido 1000 de Mundiales",g:1},
+  {r:3,f:'🇯🇵',n:'Ayase Ueda',t:"Japón · 31', 84' vs Túnez",g:2},
+  {r:3,f:'🇯🇵',n:'Junya Ito',t:"Japón · 69' vs Túnez",g:1},
+  {r:3,f:'🇪🇸',n:'Lamine Yamal',t:"España · 10' vs Arabia Saudita — 1er gol en Mundiales",g:1},
+  {r:3,f:'🇨🇻',n:'Kevin Pina',t:"Cabo Verde · 21' vs Uruguay — libre potente",g:1},
+  {r:3,f:'🇺🇾',n:'Agustín Canobbio',t:"Uruguay · vs Cabo Verde",g:1},
+  {r:3,f:'🇨🇻',n:'Hélio Varela',t:"Cabo Verde · 61' vs Uruguay",g:1},
+  {r:3,f:'🇪🇬',n:'Mostafa Zico',t:"Egipto · vs Nueva Zelanda — empató",g:1},
+  {r:3,f:'🇪🇬',n:'Mohamed Salah',t:"Egipto · 2-1 vs Nueva Zelanda",g:1},
+  {r:3,f:'🇪🇬',n:'M. Trezeguet',t:"Egipto · 3-1 vs Nueva Zelanda",g:1},
+  {r:3,f:'🇳🇿',n:'Finn Surman',t:"Nueva Zelanda · gol inicial vs Egipto",g:1},
+  {r:3,f:'🇨🇦',n:'Cyle Larin',t:"Canadá · 16' vs Qatar",g:1},
+  {r:3,f:'🇨🇦',n:'Ismaël Saliba',t:"Canadá · 64' vs Qatar",g:1},
+  {r:3,f:'🇨🇭',n:'Rubén Vargas',t:"Suiza · 84' vs Bosnia",g:1},
+  {r:3,f:'🇨🇭',n:'Granit Xhaka',t:"Suiza · 90+5'(pen) vs Bosnia",g:1},
+  {r:3,f:'🇿🇦',n:'T. Mokoena',t:"Sudáfrica · 83'(pen) vs Rep. Checa",g:1},
+  {r:3,f:'🇧🇦',n:'Mahmic',t:"Bosnia · 90+3' vs Suiza — gol del honor",g:1},
+  {r:3,f:'🇲🇽',n:'Julián Quiñones',t:"México · 8' — 1er GOL del Mundial",g:1},
+  {r:3,f:'🇲🇽',n:'Raúl Jiménez',t:"México · 66'",g:1},
+  {r:3,f:'🇩🇪',n:'Felix Nmecha',t:"Alemania · 6'",g:1},
+  {r:3,f:'🇩🇪',n:'Jamal Musiala',t:"Alemania · 47'",g:1},
+  {r:3,f:'🇩🇪',n:'Nathaniel Brown',t:"Alemania · 68'",g:1},
+  {r:3,f:'🇩🇪',n:'Deniz Undav',t:"Alemania · 78'",g:1},
+  {r:3,f:'🇸🇪',n:'Alexander Isak',t:"Suecia · 30'",g:1},
+  {r:3,f:'🇸🇪',n:'Viktor Gyokeres',t:"Suecia · 60'",g:1},
+  {r:3,f:'🇸🇪',n:'Mattias Svanberg',t:"Suecia · 84' — 2° gol más rápido suplente en Mundiales",g:1},
+  {r:3,f:'🇰🇷',n:'Hwang In-beom',t:"Corea del Sur · 55'",g:1},
+  {r:3,f:'🇰🇷',n:'Oh Hyeon-gyu',t:"Corea del Sur · 78'",g:1},
+  {r:3,f:'🇧🇷',n:'Vinícius Jr.',t:"Brasil · 32'",g:1},
+  {r:3,f:'🇲🇦',n:'Ismael Saibari',t:"Marruecos · 21'",g:1},
+  {r:3,f:'🇦🇺',n:'Nestory Irankunda',t:"Australia · 27'",g:1},
+  {r:3,f:'🇦🇺',n:'Connor Metcalfe',t:"Australia · 2T",g:1},
+  {r:3,f:'🇨🇦',n:'Cyle Larin',t:"Canadá · 79'",g:1},
+  {r:3,f:'🇺🇸',n:'Giovanni Reyna',t:"EEUU · 90+8'",g:1},
+  {r:3,f:'🇨🇼',n:'Livano Comenencia',t:"Curazao · 21' — 1er gol histórico Curazao",g:1},
+  {r:3,f:'🇧🇦',n:'Jovo Lukic',t:"Bosnia · 21'",g:1},
+  {r:3,f:'🇨🇿',n:'L. Krejci',t:"Rep. Checa · 22'",g:1},
+  {r:3,f:'🇵🇾',n:'M. Magalhães',t:"Paraguay · 73'",g:1},
+  {r:3,f:'🇨🇭',n:'Breel Embolo',t:"Suiza · 17'(pen)",g:1},
+  {r:3,f:'🇶🇦',n:'Boualem Khoukhi',t:"Qatar · 90+4'",g:1},
+  {r:3,f:'🇳🇱',n:'Virgil van Dijk',t:"Países Bajos · 51'",g:1},
+  {r:3,f:'🇳🇱',n:'C. Summerville',t:"Países Bajos · 64'",g:1},
+  {r:3,f:'🇯🇵',n:'Keito Nakamura',t:"Japón · 57'",g:1},
+  {r:3,f:'🇯🇵',n:'Daichi Kamada',t:"Japón · 88'",g:1},
+  {r:3,f:'🇨🇮',n:'Amad Diallo',t:"Costa de Marfil · 90' — gol agónico",g:1},
+  {r:3,f:'🇹🇳',n:'Omar Rekik',t:"Túnez · 43'",g:1},
+  {r:3,f:'🇮🇷',n:'Ramin Rezaeian',t:"Irán · 32'",g:1},
+  {r:3,f:'🇮🇷',n:'Mohammad Mohebi',t:"Irán · 64'",g:1},
+  {r:3,f:'🇸🇦',n:'Al-Amri',t:"Arabia Saudita · 40'",g:1},
+  {r:3,f:'🇺🇾',n:'M. Araújo',t:"Uruguay · 80'",g:1},
+  {r:3,f:'🇪🇬',n:'Emam Ashour',t:"Egipto · vs Bélgica",g:1},
+  {r:3,f:'🇫🇷',n:'Bradley Barcola',t:"Francia · 82'",g:1},
+  {r:3,f:'🇸🇳',n:'Ibrahim Mbaye',t:"Senegal · 94'",g:1},
+  {r:3,f:'🇮🇶',n:'Aymen Hussein',t:"Irak · 39' — 1er gol Irak en 40 años",g:1},
+  {r:3,f:'🇳🇴',n:'Leo Østigård',t:"Noruega · 76'",g:1},
+  {r:3,f:'🇳🇴',n:'K. Thorstvedt',t:"Noruega · 90+'",g:1},
+  {r:3,f:'🇦🇹',n:'Romano Schmid',t:"Austria · 20'",g:1},
+  {r:3,f:'🇯🇴',n:'Ali Olwan',t:"Jordania · 50' — 1er gol histórico de Jordania",g:1},
+  {r:3,f:'🇦🇹',n:'Marko Arnautovic',t:"Austria · 90+12'(pen)",g:1},
+  {r:3,f:'🇵🇹',n:'João Neves',t:"Portugal · 6'",g:1},
+  {r:3,f:'🇨🇩',n:'Yoane Wissa',t:"RD Congo · 45+' — 1er gol histórico de Congo",g:1},
+  {r:3,f:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',n:'Marcus Rashford',t:"Inglaterra · vs Croacia",g:1},
+  {r:3,f:'🏴󠁧󠁢󠁥󠁮󠁧󠁿',n:'Jude Bellingham',t:"Inglaterra · vs Croacia",g:1},
+  {r:3,f:'🇭🇷',n:'Martin Baturina',t:"Croacia · 36'",g:1},
+  {r:3,f:'🇭🇷',n:'Petar Musa',t:"Croacia · 45+'",g:1},
+  {r:3,f:'🇬🇭',n:'C. Yirenkyi',t:"Ghana · 90+4' — gol agónico",g:1},
+  {r:3,f:'🇨🇴',n:'Daniel Muñoz',t:"Colombia · 45+' — golazo de primera",g:1},
+  {r:3,f:'🇨🇴',n:'Luis Díaz',t:"Colombia · 65'",g:1},
+  {r:3,f:'🇨🇴',n:'Jaminton Campaz',t:"Colombia · 90+'",g:1},
+  {r:3,f:'🇺🇿',n:'Fayzullaev',t:"Uzbekistán · 60'",g:1}
+];
+
+function renderScorers(){
+  let h='';
+  SCORERS.forEach((s,i)=>{
+    const rc=s.r===1?'r1':s.r===2?'r2':s.r===3?'r3':'';
+    const dots=Array(s.g).fill('<div class="g-dot"></div>').join('');
+    h+=`<div class="scorer"><div class="s-rank ${rc}">${i+1}</div><div class="s-flag">${s.f}</div><div class="s-info"><div class="s-name">${s.n}</div><div class="s-team">${s.t}</div></div><div class="s-goals">${dots}<div class="g-num">${s.g}</div></div></div>`;
+  });
+  document.getElementById('scorers-wrap').innerHTML=h;
+}
+
+// MODAL DATA
+const MD={
+  mx:{t:'🇲🇽 México 2-0 Sudáfrica 🇿🇦',sub:'Grupo A · J1 · 11 Jun · Azteca, CDMX',ch:'Canal 4/Tigo',res:'México ganó el partido inaugural. Quiñones anotó el primer gol del Mundial al min 8. Jiménez amplió al 66\'. Sudáfrica terminó con 9 hombres tras 2 rojas.',goles:[{m:"8'",j:'Julián Quiñones',eq:'🇲🇽 México',t:'Remate cruzado — 1er GOL del Mundial 2026'},{m:"66'",j:'Raúl Jiménez',eq:'🇲🇽 México',t:'Cabezazo de centro'}],rojas:['🇿🇦 S. Sithole — Min 50\' (falta último recurso)','🇿🇦 T. Zwane — Min 84\'','🇲🇽 C. Montes — Min 90+1\''],s:{posH:58,posA:42,tirH:14,tirA:5,arcoH:6,arcoA:1,corH:7,corA:2,falH:10,falA:14,tarH:1,tarA:2}},
+  kor:{t:'🇰🇷 Corea del Sur 2-1 Rep. Checa 🇨🇿',sub:'Grupo A · J1 · 11 Jun · Akron, Guadalajara',ch:'Tigo',res:'Remontada de Corea. Krejci abrió al 22\'. Hwang igualó al 55\' y Oh dio vuelta al 78\'.',goles:[{m:"22'",j:'L. Krejci',eq:'🇨🇿 Rep. Checa',t:'Disparo de larga distancia'},{m:"55'",j:'Hwang In-beom',eq:'🇰🇷 Corea del Sur',t:'Centro convertido'},{m:"78'",j:'Oh Hyeon-gyu',eq:'🇰🇷 Corea del Sur',t:'Pase de Hwang'}],rojas:[],s:{posH:44,posA:56,tirH:11,tirA:13,arcoH:4,arcoA:5,corH:4,corA:6,falH:12,falA:9,tarH:2,tarA:1}},
+  can:{t:'🇨🇦 Canadá 1-1 Bosnia 🇧🇦',sub:'Grupo B · J1 · 12 Jun · BMO Field, Toronto',ch:'Tigo',res:'Bosnia se adelantó con Lukic al 21\'. Canadá dominó y Larin igualó al 79\' ingresando desde el banco.',goles:[{m:"21'",j:'Jovo Lukic',eq:'🇧🇦 Bosnia',t:'Cabezazo de córner'},{m:"79'",j:'Cyle Larin',eq:'🇨🇦 Canadá',t:'Media volea — ingresó al 76\''}],rojas:[],s:{posH:57,posA:43,tirH:13,tirA:8,arcoH:4,arcoA:3,corH:6,corA:3,falH:11,falA:13,tarH:1,tarA:2}},
+  us:{t:'🇺🇸 EEUU 4-1 Paraguay 🇵🇾',sub:'Grupo D · J1 · 12 Jun · SoFi Stadium, Los Ángeles',ch:'Tigo/Telemundo',res:'Goleada de EEUU. Pulisic fue la gran figura. Balogun anotó doblete. Magalhães descontó. Reyna cerró el 4-1.',goles:[{m:"7'",j:'D. Bobadilla (OG)',eq:'🇵🇾 Paraguay',t:'Autogol en jugada Pulisic-McKennie'},{m:"31'",j:'Folarin Balogun',eq:'🇺🇸 EEUU',t:'Asistencia de Pulisic'},{m:"45+5'",j:'Folarin Balogun',eq:'🇺🇸 EEUU',t:'Doblete'},{m:"73'",j:'M. Magalhães',eq:'🇵🇾 Paraguay',t:'Asist. Julio Enciso'},{m:"90+8'",j:'Giovanni Reyna',eq:'🇺🇸 EEUU',t:'Remate con efecto'}],rojas:[],s:{posH:68,posA:32,tirH:16,tirA:6,arcoH:7,arcoA:2,corH:8,corA:1,falH:8,falA:16,tarH:0,tarA:3}},
+  qat:{t:'🇶🇦 Qatar 1-1 Suiza 🇨🇭',sub:'Grupo B · J1 · 13 Jun · Levi\'s Stadium, San Francisco',ch:'Canal 4/Tigo',res:'Qatar rescató un empate histórico al 90+4\'. Suiza dominó todo el partido y abrió al 17\' con penal de Embolo. Khoukhi igualó de cabeza en el descuento — primer punto de Qatar en un Mundial.',goles:[{m:"17'",j:'Breel Embolo',eq:'🇨🇭 Suiza',t:'Penal — primer penal del Mundial 2026'},{m:"90+4'",j:'Boualem Khoukhi',eq:'🇶🇦 Qatar',t:'Cabezazo en el descuento — histórico primer punto qatarí'}],rojas:[],s:{posH:32,posA:68,tirH:5,tirA:16,arcoH:2,arcoA:6,corH:2,corA:8,falH:14,falA:9,tarH:1,tarA:1}},
+  bra:{t:'🇧🇷 Brasil 1-1 Marruecos 🇲🇦',sub:'Grupo C · J1 · 13 Jun · MetLife, Nueva York/NJ',ch:'Tigo',res:'Partidazo. Marruecos abrió con Saibari al 21\' con golazo (pase de Brahim Díaz). Brasil igualó con Vinícius Jr. al 32\'. Alisson fue figura con una doble atajada al 90+8\'.',goles:[{m:"21'",j:'Ismael Saibari',eq:'🇲🇦 Marruecos',t:'Pase de Brahim Díaz — golazo'},{m:"32'",j:'Vinícius Jr.',eq:'🇧🇷 Brasil',t:'Empate del scratch'}],rojas:[],s:{posH:54,posA:46,tirH:14,tirA:10,arcoH:5,arcoA:4,corH:6,corA:4,falH:11,falA:13,tarH:2,tarA:2}},
+  hai:{t:'🇭🇹 Haití 0-1 Escocia 🏴󠁧󠁢󠁳󠁣󠁴󠁿',sub:'Grupo C · J1 · 13 Jun · Gillette Stadium, Boston',ch:'Tigo',res:'Partido en curso al momento de la última actualización. McGinn anotó para Escocia antes del descanso.',goles:[{m:"?'",j:'John McGinn',eq:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',t:'Gol en primer tiempo'}],rojas:[],s:null},
+  aus:{t:'🇦🇺 Australia 2-0 Turquía 🇹🇷',sub:'Grupo D · J1 · 13 Jun · BC Place, Vancouver',ch:'Tigo',res:'Gran sorpresa del día. Australia dominó tácticamente y aprovechó sus contragolpes. Irankunda abrió al 27\' con un golazo en transición rápida. Metcalfe amplió en el segundo tiempo. El portero Patrick Beach fue figura con varias atajadas. Turquía tuvo más posesión pero poca eficacia.',goles:[{m:"27'",j:'Nestory Irankunda',eq:'🇦🇺 Australia',t:'Golazo en contragolpe — transición rápida'},{m:'2T',j:'Connor Metcalfe',eq:'🇦🇺 Australia',t:'Amplía la ventaja en segundo tiempo'}],rojas:[],s:{posH:38,posA:62,tirH:9,tirA:18,arcoH:4,arcoA:3,corH:3,corA:8,falH:11,falA:12,tarH:1,tarA:2}},
+  hai:{t:'🇭🇹 Haití 0-1 Escocia 🏴󠁧󠁢󠁳󠁣󠁴󠁿',sub:'Grupo C · J1 · 13 Jun · Gillette Stadium, Boston',ch:'Tigo',res:'Escocia ganó su primer partido mundialista desde 1990. Haití sorprendió con una propuesta ofensiva y complicó a los escoceses. El gol fue un autogol de Bellegarde tras remate de McGinn. Final de infarto con Haití empujando en los últimos minutos.',goles:[{m:"1T",j:'McGinn / Autogol Bellegarde',eq:'🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escocia',t:'Remate de McGinn que desvía Bellegarde a su propio arco'}],rojas:[],s:{posH:45,posA:55,tirH:10,tirA:12,arcoH:3,arcoA:4,corH:4,corA:5,falH:13,falA:11,tarH:2,tarA:1}}
+,
+  ale:{t:'🇩🇪 Alemania 7-1 Curazao 🇨🇼',sub:'Grupo E · J1 · 14 Jun · NRG Stadium, Houston · 11:00 AM SV',ch:'Tigo',res:'Goleada histórica de Alemania. Curazao sorprendió al empatar 1-1 con gol de Comenencia al 21\' — primer gol de Curazao en un Mundial. Pero Alemania respondió con autoridad y se fue 3-1 al descanso. En el segundo tiempo fue una exhibición total. El marcador 7-1 recuerda al histórico 7-1 de Brasil 2014.',goles:[{m:"6'",j:'Felix Nmecha',eq:'🇩🇪 Alemania',t:'Derechazo tras pared con Wirtz'},{m:"21'",j:'Livano Comenencia',eq:'🇨🇼 Curazao',t:'HISTÓRICO — 1er gol de Curazao en un Mundial'},{m:"?'",j:'Nico Schlotterbeck',eq:'🇩🇪 Alemania',t:'Cabezazo de córner'},{m:"47'",j:'Jamal Musiala',eq:'🇩🇪 Alemania',t:'Remate cruzado — 4-1'},{m:"68'",j:'Nathaniel Brown',eq:'🇩🇪 Alemania',t:'Volea — 5-1'},{m:"78'",j:'Deniz Undav',eq:'🇩🇪 Alemania',t:'Remate con suspenso — 6-1'},{m:"88'",j:'Kai Havertz',eq:'🇩🇪 Alemania',t:'Doblete — pica sobre el portero — 7-1'}],rojas:[],s:{posH:68,posA:32,tirH:22,tirA:6,arcoH:9,arcoA:2,corH:9,corA:2,falH:8,falA:14,tarH:0,tarA:2}}
+,
+  ned:{t:'🇳🇱 Países Bajos 2-2 Japón 🇯🇵',sub:'Grupo F · J1 · 14 Jun · AT&T Stadium, Dallas · 2:00 PM SV',ch:'Tigo',res:'Partidazo. Primera mitad sin goles con Suzuki siendo figura. En el segundo tiempo todo cambió. Van Dijk abrió al 51 de cabeza. Nakamura empató al 57 con golazo. Summerville volvió a poner adelante a Holanda al 64. Japón nunca se rindió y Kamada igualó al 88 de cabeza. Empate dramático.',goles:[{m:"51'",j:'Virgil van Dijk',eq:'🇳🇱 Países Bajos',t:'Cabezazo en el área'},{m:"57'",j:'Keito Nakamura',eq:'🇯🇵 Japón',t:'Golazo raso al palo derecho'},{m:"64'",j:'C. Summerville',eq:'🇳🇱 Países Bajos',t:'Remate cruzado con zurda'},{m:"88'",j:'Daichi Kamada',eq:'🇯🇵 Japón',t:'Cabezazo agónico — empate dramático'}],rojas:[],s:{posH:58,posA:42,tirH:14,tirA:9,arcoH:5,arcoA:4,corH:7,corA:3,falH:10,falA:12,tarH:1,tarA:2}}
+,
+  civ:{t:'🇨🇮 Costa de Marfil 1-0 Ecuador 🇪🇨',sub:'Grupo E · J1 · 14 Jun · Lincoln Financial, Filadelfia · 5:00 PM SV',ch:'Tigo',res:'Partidazo intenso. Ecuador dominó y estrelló 2 remates en el palo. Costa de Marfil resistió con orden y Amad Diallo (Manchester United) apareció al 90\' con un disparo cruzado para dar el triunfo agónico a los Elefantes. Drama total.',goles:[{m:"90'",j:'Amad Diallo',eq:'🇨🇮 Costa de Marfil',t:'Disparo cruzado — gol agónico al último minuto'}],rojas:[],s:{posH:42,posA:58,tirH:8,tirA:16,arcoH:3,arcoA:5,corH:4,corA:7,falH:13,falA:11,tarH:1,tarA:2}},
+  sue:{t:'🇸🇪 Suecia 5-1 Túnez 🇹🇳',sub:'Grupo F · J1 · 14 Jun · BBVA, Monterrey · 8:00 PM SV',ch:'Tigo',res:'Goleada de Suecia en su regreso al Mundial tras 8 años. Ayari abrió al 7\' y no festejó por sus raíces tunecinas. Isak al 30\'. Rekik descontó de cabeza al 43\'. Gyokeres 3-1 al 60\'. Svanberg 4-1 al 84\' (2° gol más rápido suplente en Mundiales). Ayari cerró 5-1 al 90+5\'.',goles:[{m:"7'",j:'Yasin Ayari',eq:'🇸🇪 Suecia',t:'Golazo fuera del área — no festejó (raíces tunecinas)'},{m:"30'",j:'Alexander Isak',eq:'🇸🇪 Suecia',t:'Contragolpe letal'},{m:"43'",j:'Omar Rekik',eq:'🇹🇳 Túnez',t:'Cabezazo — asistencia de Mejbri'},{m:"60'",j:'Viktor Gyokeres',eq:'🇸🇪 Suecia',t:'3-1'},{m:"84'",j:'Mattias Svanberg',eq:'🇸🇪 Suecia',t:'2° gol más rápido suplente en Mundiales'},{m:"90+5'",j:'Yasin Ayari',eq:'🇸🇪 Suecia',t:'Doblete — derechazo desde 25m'}],rojas:[],s:{posH:55,posA:45,tirH:18,tirA:8,arcoH:7,arcoA:2,corH:6,corA:3,falH:9,falA:13,tarH:1,tarA:1}},
+  esp:{t:'🇪🇸 España 0-0 Cabo Verde 🇨🇻',sub:'Grupo H · J1 · 15 Jun · Mercedes-Benz, Atlanta · 10:00 AM SV',ch:'Canal 4/Tigo',res:'La gran sorpresa del torneo. España dominó con 800 pases vs 100 de Cabo Verde pero no pudo romper el cerrojo. Vozinha fue la figura con varias paradas clave. Yamal estuvo 30 minutos sin tocar el balón en un momento. Cabo Verde celebra su primer empate histórico en un Mundial.',goles:[],rojas:[],s:{posH:85,posA:15,tirH:22,tirA:3,arcoH:7,arcoA:1,corH:9,corA:1,falH:8,falA:14,tarH:1,tarA:2}},
+  bel:{t:'🇧🇪 Bélgica 1-1 Egipto 🇪🇬',sub:'Grupo G · J1 · 15 Jun · Lumen Field, Seattle · 1:00 PM SV',ch:'Tigo',res:'Egipto abrió el marcador con Ashour en la primera parte. Bélgica empató al 66\' con autogol de Mohamed Hany. Mo Salah estuvo muy activo pero sin anotar. De Bruyne intentó el tiro libre sin éxito. Empate justo.',goles:[{m:'1T',j:'Emam Ashour',eq:'🇪🇬 Egipto',t:'Abrió el marcador'},{m:"66'",j:'OG Mohamed Hany',eq:'🇧🇪 Bélgica',t:'Autogol que empató el partido'}],rojas:[],s:{posH:58,posA:42,tirH:14,tirA:9,arcoH:5,arcoA:4,corH:7,corA:4,falH:11,falA:13,tarH:2,tarA:2}},
+  ksa:{t:'🇸🇦 Arabia Saudita 1-1 Uruguay 🇺🇾',sub:'Grupo H · J1 · 15 Jun · Hard Rock Stadium, Miami · 4:00 PM SV',ch:'Tigo',res:'Uruguay fue sorprendido cuando Al-Amri aprovechó un error de Muslera al 40\'. La Celeste dominó el 2T y Araújo empató al 80\'. Bielsa muy molesto. Arabia Saudita celebró como si hubiera ganado el campeonato.',goles:[{m:"40'",j:'Al-Amri',eq:'🇸🇦 Arabia Saudita',t:'Rebote de Muslera — error del portero'},{m:"80'",j:'Maximiliano Araújo',eq:'🇺🇾 Uruguay',t:'Empate agónico en el 2T'}],rojas:[],s:{posH:38,posA:62,tirH:8,tirA:18,arcoH:3,arcoA:7,corH:3,corA:8,falH:14,falA:9,tarH:2,tarA:1}},
+  irn:{t:'🇮🇷 Irán 2-2 Nueva Zelanda 🇳🇿',sub:'Grupo G · J1 · 15 Jun · SoFi Stadium, Los Ángeles · 7:00 PM SV',ch:'Tigo',res:'Partido de infarto. Just abrió al 7\' para NZL. Rezaeian empató al 32\'. Just hizo su doblete al 55\'. Mohebi empató de cabeza al 64\'. Los últimos 30 minutos fueron de asedio iraní pero NZL aguantó. Los 4 equipos del Grupo G quedaron con 1 punto.',goles:[{m:"7'",j:'Elijah Just',eq:'🇳🇿 Nueva Zelanda',t:'Pared con Wood y definición fría'},{m:"32'",j:'Ramin Rezaeian',eq:'🇮🇷 Irán',t:'Tiro esquinado al fondo'},{m:"55'",j:'Elijah Just',eq:'🇳🇿 Nueva Zelanda',t:'Doblete — recibió de Wood y disparó'},{m:"64'",j:'Mohammad Mohebi',eq:'🇮🇷 Irán',t:'Cabezazo al centro del área — 2-2 definitivo'}],rojas:[],s:{posH:52,posA:48,tirH:16,tirA:11,arcoH:6,arcoA:4,corH:7,corA:4,falH:12,falA:11,tarH:2,tarA:1}},
+  fra:{t:'🇫🇷 Francia 3-1 Senegal 🇸🇳',sub:'Grupo I · J1 · 16 Jun · MetLife, Nueva Jersey · 1:00 PM SV',ch:'Canal 4/Tigo',res:'Mbappé rompió el cerrojo al 66\' tras un primer tiempo parejo. Barcola amplió al 82\'. Mbaye descontó al 94\' y puso drama. Mbappé apagó la remontada con golazo desde 30m al 95\'. Llegó a 14 goles mundiales, igualando a Gerd Müller.',goles:[{m:"66'",j:'Kylian Mbappé',eq:'🇫🇷 Francia',t:'Remate cruzado mano a mano — 13er gol mundialista'},{m:"82'",j:'Bradley Barcola',eq:'🇫🇷 Francia',t:'Definición sutil — debut mundialista'},{m:"94'",j:'Ibrahim Mbaye',eq:'🇸🇳 Senegal',t:'Golazo al primer palo — descontó'},{m:"95'",j:'Kylian Mbappé',eq:'🇫🇷 Francia',t:'Lanzamiento desde 30m al ángulo — 14 goles mundiales'}],rojas:[],s:{posH:55,posA:45,tirH:15,tirA:12,arcoH:5,arcoA:4,corH:6,corA:5,falH:10,falA:12,tarH:2,tarA:2}},
+  nor:{t:'🇮🇶 Irak 1-4 Noruega 🇳🇴',sub:'Grupo I · J1 · 16 Jun · Gillette Stadium, Boston · 4:00 PM SV',ch:'Tigo',res:'Debut mundialista de Haaland con doblete. Haaland abrió al 29\'. Irak empató al 39\' con Hussein (primer gol de Irak en 40 años). Haaland hizo el 2-1 al 43\' aprovechando error del portero. Østigård cabeceó el 3-1 al 76\' y Thorstvedt sentenció en el descuento.',goles:[{m:"29'",j:'Erling Haaland',eq:'🇳🇴 Noruega',t:'Debut mundialista — remate dentro del área'},{m:"39'",j:'Aymen Hussein',eq:'🇮🇶 Irak',t:'Cabezazo — 1er gol de Irak en un Mundial en 40 años'},{m:"43'",j:'Erling Haaland',eq:'🇳🇴 Noruega',t:'Doblete — aprovechó error del portero iraquí'},{m:"76'",j:'Leo Østigård',eq:'🇳🇴 Noruega',t:'Cabezazo tras corner de Ødegaard'},{m:"90+'",j:'K. Thorstvedt',eq:'🇳🇴 Noruega',t:'Sentenció el 4-1 en el descuento'}],rojas:[],s:{posH:42,posA:58,tirH:9,tirA:18,arcoH:3,arcoA:7,corH:3,corA:8,falH:14,falA:10,tarH:2,tarA:1}},
+  arg:{t:'🇦🇷 Argentina 3-0 Argelia 🇩🇿',sub:'Grupo J · J1 · 16 Jun · Arrowhead, Kansas City · 7:00 PM SV',ch:'Canal 4/Tigo',res:'Messi histórico. Hat-trick en su debut de 2026 para igualar el récord de 16 goles en Mundiales. Primero al 16\' con zurdazo que venció a Luca Zidane. Segundo al 59\' tras rebote. Tercero al 75\' con zurdazo esquinado. Argentina dominó de principio a fin.',goles:[{m:"16'",j:'Lionel Messi',eq:'🇦🇷 Argentina',t:'Zurdazo que venció a Luca Zidane'},{m:"59'",j:'Lionel Messi',eq:'🇦🇷 Argentina',t:'Rebote del portero Zidane'},{m:"75'",j:'Lionel Messi',eq:'🇦🇷 Argentina',t:'Hat-trick — igualó récord histórico de 16 goles mundiales'}],rojas:[],s:{posH:62,posA:38,tirH:18,tirA:6,arcoH:7,arcoA:1,corH:7,corA:2,falH:9,falA:13,tarH:1,tarA:2}},
+  aut:{t:'🇦🇹 Austria 3-1 Jordania 🇯🇴',sub:'Grupo J · J1 · 16 Jun · Levi\'s Stadium, San Francisco · 10:00 PM SV',ch:'Tigo',res:'Austria debutó en el Mundial tras 28 años. Schmid abrió 1-0 al 20\'. Jordania empató al 50\' con golazo de Olwan (1er gol histórico de Jordania en Mundiales). Austria recuperó la ventaja al 76\' con autogol de Al-Arab. Arnautovic convirtió penal al 90+12\' para el 3-1.',goles:[{m:"20'",j:'Romano Schmid',eq:'🇦🇹 Austria',t:'Disparo colocado al ángulo'},{m:"50'",j:'Ali Olwan',eq:'🇯🇴 Jordania',t:'Golazo individual — 1er gol histórico de Jordania'},{m:"76'",j:'OG Yazan Al-Arab',eq:'🇦🇹 Austria',t:'Autogol de espaldas en un corner'},{m:"90+12'",j:'Marko Arnautovic',eq:'🇦🇹 Austria',t:'Penal convertido tras revisión VAR'}],rojas:[],s:{posH:60,posA:40,tirH:16,tirA:8,arcoH:6,arcoA:3,corH:8,corA:3,falH:10,falA:13,tarH:3,tarA:2}},
+  por:{t:'🇵🇹 Portugal 1-1 RD Congo 🇨🇩',sub:'Grupo K · J1 · 17 Jun · NRG Stadium, Houston · 11:00 AM SV',ch:'Canal 4/Tigo',res:'Portugal no pudo ganar en su debut. João Neves adelantó a los lusos al minuto 6 con un cabezazo. RD Congo empató antes del descanso con Yoane Wissa — primer gol histórico de Congo en un Mundial. Cristiano Ronaldo no logró un solo disparo al arco en todo el partido. Gran decepción portuguesa.',goles:[{m:"6'",j:'João Neves',eq:'🇵🇹 Portugal',t:'Cabezazo al 1er palo — debut mundialista'},{m:"45+'",j:'Yoane Wissa',eq:'🇨🇩 RD Congo',t:'HISTÓRICO — 1er gol de RD Congo en un Mundial'}],rojas:[],s:{posH:64,posA:36,tirH:16,tirA:7,arcoH:5,arcoA:2,corH:7,corA:2,falH:9,falA:14,tarH:1,tarA:2}},
+  eng:{t:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra 4-2 Croacia 🇭🇷',sub:'Grupo L · J1 · 17 Jun · AT&T Stadium, Dallas · 2:00 PM SV',ch:'Canal 4/Tigo',res:'Partidazo con seis goles. Kane abrió de penal al 10\'. Baturina igualó al 36\'. Kane cabeceó el 2-1 al 42\'. Musa empató al 45+. Rashford y Bellingham sentenciaron en el 2T. Kane igualó el récord inglés de 10 goles mundiales de Gary Lineker.',goles:[{m:"10'",j:'Harry Kane',eq:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t:'Penal — Modric cometió la falta'},{m:"36'",j:'Martin Baturina',eq:'🇭🇷 Croacia',t:'Aprovechó pérdida en la salida inglesa'},{m:"42'",j:'Harry Kane',eq:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t:'Doblete — cabezazo tras corner'},{m:"45+'",j:'Petar Musa',eq:'🇭🇷 Croacia',t:'Empató antes del descanso'},{m:'2T',j:'Marcus Rashford',eq:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t:'Sentenció el 3-2'},{m:'2T',j:'Jude Bellingham',eq:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra',t:'Cerró el 4-2'}],rojas:[],s:{posH:56,posA:44,tirH:16,tirA:12,arcoH:6,arcoA:4,corH:8,corA:4,falH:10,falA:13,tarH:2,tarA:2}},
+  gha:{t:'🇬🇭 Ghana 1-0 Panamá 🇵🇦',sub:'Grupo L · J1 · 17 Jun · BMO Field, Toronto · 5:00 PM SV',ch:'Tigo',res:'Gol en el 90+4\' de Caleb Yirenkyi que rompió el empate en un partido muy disputado. Panamá reclamó un penal en la primera mitad que el árbitro no cobró. Ghana fue más efectivo en el contraataque y Yirenkyi apareció en el momento justo. Debut soñado para Ghana.',goles:[{m:"90+4'",j:'Caleb Yirenkyi',eq:'🇬🇭 Ghana',t:'Gol agónico — empujó en el área tras corner'}],rojas:[],s:{posH:48,posA:52,tirH:10,tirA:13,arcoH:3,arcoA:4,corH:5,corA:5,falH:12,falA:11,tarH:1,tarA:2}},
+  argaut:{t:'🇦🇷 Argentina 2-0 Austria 🇦🇹',sub:'Grupo J · J2 · 22 Jun · AT&T Stadium, Dallas · 11:00 AM SV',ch:'Canal 4/Tigo',res:'Messi hizo HISTORIA. Falló un penal al minuto 8 pero se vengó al 38\' con el gol 17 — récord absoluto superando a Klose. Al 90+5\' anotó el 2-0 para llegar a 18 goles mundiales — nuevo récord histórico. Dibu Martínez sin encajar. Argentina CLASIFICADA como líder del Grupo J con 6 puntos.',goles:[{m:"8'",j:'Penal fallado por Messi',eq:'🇦🇷 Argentina',t:'Messi esquinó el disparo — lo falló'},{m:"38'",j:'Lionel Messi',eq:'🇦🇷 Argentina',t:'GOL 17 MUNDIALES — NUEVO RÉCORD igualando a Klose'},{m:"90+5'",j:'Lionel Messi',eq:'🇦🇷 Argentina',t:'GOL 18 MUNDIALES — RÉCORD HISTÓRICO ABSOLUTO'}],rojas:[],s:{posH:52,posA:48,tirH:13,tirA:10,arcoH:5,arcoA:3,corH:6,corA:7,falH:10,falA:11,tarH:1,tarA:2}},
+  frairq:{t:'🇫🇷 Francia 3-0 Irak 🇮🇶',sub:'Grupo I · J2 · 22 Jun · Lincoln Financial, Filadelfia · 3:00 PM SV',ch:'Canal 4/Tigo',res:'Partido suspendido 2 horas por tormenta eléctrica al descanso. Mbappé abrió al 14\'. El segundo tiempo se reanudó después de una larga espera. Mbappé doblete al 55\' aprovechando un error del portero. Dembélé cerró el 3-0 al 66\'. Francia CLASIFICADA líder del Grupo I con 6 puntos.',goles:[{m:"14'",j:'Kylian Mbappé',eq:'🇫🇷 Francia',t:'Zurdazo — gol 15 en Mundiales'},{m:"55'",j:'Kylian Mbappé',eq:'🇫🇷 Francia',t:'Doblete — error del portero iraquí'},{m:"66'",j:'Ousmane Dembélé',eq:'🇫🇷 Francia',t:'Remate cruzado — 3-0 definitivo'}],rojas:[],s:{posH:60,posA:40,tirH:16,tirA:6,arcoH:6,arcoA:2,corH:7,corA:3,falH:9,falA:12,tarH:2,tarA:2}},
+  norsen:{t:'🇳🇴 Noruega 3-2 Senegal 🇸🇳',sub:'Grupo I · J2 · 22 Jun · MetLife Stadium, NJ · 6:00 PM SV',ch:'Canal 4/Tigo',res:'Haaland doblete y Noruega CLASIFICADA. Pedersen abrió 1-0 al 43\'. Haaland 2-0 al 48\' y 3-1 al 58\'. Senegal descontó dos veces pero no alcanzó. Haaland llega a 4 goles en el torneo. El festejo vikingo del remo de Noruega se volvió viral en todo el mundo.',goles:[{m:"43'",j:'M.H. Pedersen',eq:'🇳🇴 Noruega',t:'1-0 — sustituyó a un compañero lesionado y anotó'},{m:"48'",j:'Erling Haaland',eq:'🇳🇴 Noruega',t:'Contraataque fulminante — 2-0'},{m:"58'",j:'Erling Haaland',eq:'🇳🇴 Noruega',t:'Doblete — 3-1 · festejo vikingo viral'}],rojas:[],s:{posH:54,posA:46,tirH:15,tirA:13,arcoH:6,arcoA:5,corH:6,corA:5,falH:11,falA:11,tarH:2,tarA:2}},
+  algjo:{t:'🇯🇴 Jordania 1-2 Argelia 🇩🇿',sub:'Grupo J · J2 · 22 Jun · Levi\'s Stadium, San Francisco · 9:00 PM SV',ch:'Tigo',res:'Argelia remontó y Jordania quedó eliminada. Olwan adelantó a Jordania. Mahrez fue decisivo en la remontada argelina con asistencia y gol. Argelia termina con 3 puntos y depende de sí misma en la J3 para clasificar.',goles:[{m:'1T',j:'Ali Olwan',eq:'🇯🇴 Jordania',t:'Adelantó a Jordania'},{m:'2T',j:'Gol Argelia',eq:'🇩🇿 Argelia',t:'Empató Argelia'},{m:'2T',j:'Mahrez',eq:'🇩🇿 Argelia',t:'Remontada — Argelia gana 2-1'}],rojas:[],s:{posH:45,posA:55,tirH:10,tirA:14,arcoH:3,arcoA:5,corH:4,corA:6,falH:12,falA:10,tarH:2,tarA:2}},
+  poruzb:{t:'🇵🇹 Portugal 5-0 Uzbekistán 🇺🇿',sub:'Grupo K · J2 · 23 Jun · NRG Stadium, Houston · 11:00 AM SV',ch:'Canal 4/Tigo',res:'Portugal despertó con una goleada contundente. Cristiano Ronaldo se convirtió en el PRIMER jugador en anotar en SEIS Mundiales distintos. Abrió al 6\' con un cabezazo tras centro de Cancelo. Nuno Mendes golazo de tiro libre al 17\'. Ronaldo doblete al 38\'. OG de Khusanov al 60\'. Leão cerró el 5-0 al 87\'. Ronaldo llega a 10 goles en Mundiales, superando el récord portugués de Eusébio.',goles:[{m:"6'",j:'Cristiano Ronaldo',eq:'🇵🇹 Portugal',t:'Cabezazo — 1° en anotar en 6 Mundiales distintos'},{m:"17'",j:'Nuno Mendes',eq:'🇵🇹 Portugal',t:'Golazo de tiro libre — sorprendió a todos'},{m:"38'",j:'Cristiano Ronaldo',eq:'🇵🇹 Portugal',t:'Doblete — pase de Bernardo Silva'},{m:"60'",j:'OG A. Khusanov',eq:'🇺🇿 Uzbekistán',t:'Autogol tras córner — confusión en el área'},{m:"87'",j:'Rafael Leão',eq:'🇵🇹 Portugal',t:'Remate al ángulo — selló el 5-0'}],rojas:[],s:{posH:65,posA:35,tirH:19,tirA:4,arcoH:8,arcoA:1,corH:8,corA:2,falH:8,falA:13,tarH:1,tarA:2}},
+  enggha:{t:'🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra 0-0 Ghana 🇬🇭',sub:'Grupo L · J2 · 23 Jun · Gillette Stadium, Boston · 2:00 PM SV',ch:'Canal 4/Tigo',res:'Ghana frenó a una Inglaterra que no encontró el gol. Tuchel probó con Kane, Bellingham y luego Saka y Eze, pero la defensa ghanesa comandada por Queiroz fue impenetrable. Ghana tuvo ocasiones en contragolpe con Yirenkyi y Semenyo. Bellingham cumplió sus 50 partidos con Inglaterra. Ambos llegan con 4 puntos a la última jornada.',goles:[],rojas:[],s:{posH:62,posA:38,tirH:18,tirA:7,arcoH:6,arcoA:2,corH:9,corA:3,falH:10,falA:13,tarH:2,tarA:1}},
+  pancro:{t:'🇵🇦 Panamá 0-1 Croacia 🇭🇷',sub:'Grupo L · J2 · 23 Jun · BMO Field, Toronto · 5:00 PM SV',ch:'Tigo',res:'Croacia se recuperó con una victoria trabajada. Budimir cabeceó al 54\' tras diagonal de Stanišić. Panamá sin goles en 2 partidos queda eliminada. Luka Modric celebró sus 200 partidos con Croacia. Livakovic hizo una atajada clave en los minutos finales para mantener el 1-0.',goles:[{m:"54'",j:'Ante Budimir',eq:'🇭🇷 Croacia',t:'Cabezazo — diagonal de Stanišić · Modric 200 partidos'}],rojas:[],s:{posH:42,posA:58,tirH:9,tirA:14,arcoH:3,arcoA:5,corH:4,corA:7,falH:12,falA:10,tarH:2,tarA:1}},
+  colcod:{t:'🇨🇴 Colombia 1-0 RD Congo 🇨🇩',sub:'Grupo K · J2 · 23 Jun · Estadio Guadalajara · 8:00 PM SV',ch:'Canal 4/Tigo',res:'Colombia CLASIFICADA como líder del Grupo K. Daniel Muñoz al 76\' con asistencia de Juanfer Quintero. El estadio fue una marea amarilla de aficionados colombianos. Luis Díaz muy activo pero sin gol. RD Congo sigue vivo y depende de sí mismo ante Uzbekistán.',goles:[{m:"76'",j:'Daniel Muñoz',eq:'🇨🇴 Colombia',t:'Remate dentro del área — asistencia de Juanfer Quintero'}],rojas:[],s:{posH:55,posA:45,tirH:13,tirA:9,arcoH:5,arcoA:3,corH:6,corA:4,falH:11,falA:12,tarH:2,tarA:2}},
+  usaaus:{t:'🇺🇸 EEUU 2-0 Australia 🇦🇺',sub:'Grupo D · J2 · 19 Jun · Lumen Field, Seattle · 1:00 PM SV',ch:'Canal 4/Tigo',res:'EEUU CLASIFICADO como líder del Grupo D. Australia generó un autogol al 11\' con Burgess. Freeman amplió al 43\' tras revisión VAR. Partido controlado por los anfitriones. Australia eliminada matemáticamente.',goles:[{m:"11'",j:'OG Cameron Burgess',eq:'🇺🇸 EEUU',t:'Autogol — desafortunado para Australia'},{m:"43'",j:'Alex Freeman',eq:'🇺🇸 EEUU',t:'VAR confirmó el gol — 2-0 definitivo'}],rojas:[],s:{posH:54,posA:46,tirH:14,tirA:9,arcoH:5,arcoA:3,corH:6,corA:4,falH:10,falA:12,tarH:1,tarA:2}},
+  marsco:{t:'🇲🇦 Marruecos 1-0 Escocia 🏴󠁧󠁢󠁳󠁣󠁴󠁿',sub:'Grupo C · J2 · 19 Jun · Gillette Stadium, Boston · 4:00 PM SV',ch:'Tigo',res:'Saibari anotó al 2\' con asistencia de Brahim Díaz — uno de los goles más rápidos del torneo. Marruecos administró la ventaja con maestría. Escocia intentó el empate tarde. Donny Strathie, aficionado escocés fallecido en EEUU, fue homenajeado en el minuto 76.',goles:[{m:"2'",j:'Ismael Saibari',eq:'🇲🇦 Marruecos',t:'2do gol más rápido del torneo — asistencia Brahim Díaz'}],rojas:[],s:{posH:52,posA:48,tirH:12,tirA:11,arcoH:4,arcoA:3,corH:5,corA:6,falH:11,falA:12,tarH:2,tarA:2}},
+  brhti:{t:'🇧🇷 Brasil 3-0 Haití 🇭🇹',sub:'Grupo C · J2 · 19 Jun · Lincoln Financial, Filadelfia · 6:30 PM SV',ch:'Canal 4/Tigo',res:'Brasil goleó cómodamente. Matheus Cunha hizo doblete (23\' y 36\') y Vinicius cerró el 3-0 al 45+3\'. Primer triunfo de Brasil en el torneo. Haití eliminado matemáticamente. Raphinha salió lesionado — baja sensible.',goles:[{m:"23'",j:'Matheus Cunha',eq:'🇧🇷 Brasil',t:'Primer gol del partido'},{m:"36'",j:'Matheus Cunha',eq:'🇧🇷 Brasil',t:'Doblete — remate de derecha'},{m:"45+3'",j:'Vinícius Jr.',eq:'🇧🇷 Brasil',t:'3-0 antes del descanso'}],rojas:[],s:{posH:64,posA:36,tirH:18,tirA:5,arcoH:7,arcoA:1,corH:8,corA:2,falH:9,falA:13,tarH:1,tarA:2}},
+  turbra:{t:'🇵🇾 Paraguay 1-0 Turquía 🇹🇷',sub:'Grupo D · J2 · 19 Jun · Levi\'s Stadium, San Francisco · 10:00 PM SV',ch:'Tigo',res:'Galarza anotó a los 64 SEGUNDOS — el GOL MÁS RÁPIDO de la historia del torneo, superando a Saibari. Paraguay jugó con 10 hombres buena parte del partido pero aguantó. Turquía eliminada. Primera expulsión por Ley Vinicius-Prestianni.',goles:[{m:"64 SEG",j:'Matías Galarza',eq:'🇵🇾 Paraguay',t:'GOL MÁS RÁPIDO del torneo — 64 segundos'}],rojas:['🇵🇾 Jugador Paraguay — Ley Vinicius-Prestianni (1ª expulsión del torneo por esta regla)'],s:{posH:42,posA:58,tirH:8,tirA:16,arcoH:3,arcoA:5,corH:3,corA:7,falH:13,falA:10,tarH:3,tarA:2}},
+  nedswe:{t:'🇳🇱 Países Bajos 5-1 Suecia 🇸🇪',sub:'Grupo F · J2 · 20 Jun · NRG Stadium, Houston · 11:00 AM SV',ch:'Tigo',res:'Goleada contundente de Países Bajos. Brobbey doblete, Gakpo doblete y Summerville. Suecia descontó con Elanga al 58\'. Países Bajos líder del Grupo F. Suecia en apuros para clasificar. La Reina Máxima de Países Bajos presente en el estadio para ver a Curazao (partido simultáneo en Kansas City).',goles:[{m:'1T',j:'Brian Brobbey',eq:'🇳🇱 Países Bajos',t:'Primer doblete del partido'},{m:'1T',j:'Brian Brobbey',eq:'🇳🇱 Países Bajos',t:'Doblete Brobbey'},{m:"58'",j:'Anthony Elanga',eq:'🇸🇪 Suecia',t:'Descuento sueco'},{m:'2T',j:'Cody Gakpo',eq:'🇳🇱 Países Bajos',t:'3er gol Países Bajos'},{m:'2T',j:'Cody Gakpo',eq:'🇳🇱 Países Bajos',t:'Doblete Gakpo — 5to gol en Mundiales'},{m:"88'",j:'C. Summerville',eq:'🇳🇱 Países Bajos',t:'5-1 definitivo'}],rojas:[],s:{posH:58,posA:42,tirH:18,tirA:10,arcoH:7,arcoA:3,corH:8,corA:4,falH:9,falA:12,tarH:1,tarA:2}},
+  germci:{t:'🇩🇪 Alemania 2-1 Costa de Marfil 🇨🇮',sub:'Grupo E · J2 · 20 Jun · BMO Field, Toronto · 2:00 PM SV',ch:'Tigo',res:'Remontada agónica de Alemania. Kessié adelantó a Costa de Marfil al 30\'. Alemania sufrió todo el partido hasta que Undav entró de cambio y anotó al 68\' y al 90+3\' para la remontada. Alemania CLASIFICADA a 16avos como líder del Grupo E.',goles:[{m:"30'",j:'Franck Kessié',eq:'🇨🇮 Costa de Marfil',t:'Sorprendió a Alemania'},{m:"68'",j:'Deniz Undav',eq:'🇩🇪 Alemania',t:'Entró de cambio y empató'},{m:"90+3'",j:'Deniz Undav',eq:'🇩🇪 Alemania',t:'Doblete agónico — Alemania CLASIFICADA'}],rojas:[],s:{posH:55,posA:45,tirH:15,tirA:10,arcoH:5,arcoA:3,corH:6,corA:4,falH:10,falA:12,tarH:2,tarA:2}},
+  ecucrw:{t:'🇪🇨 Ecuador 0-0 Curazao 🇨🇼',sub:'Grupo E · J2 · 20 Jun · Arrowhead, Kansas City · 6:00 PM SV',ch:'Tigo',res:'HISTORIA para Curazao — su primer punto en un Mundial. Eloy Room fue la figura con 15 paradas, un récord histórico en Copas del Mundo. Ecuador estrelló 3 remates al poste. Ecuador se complica enormemente para clasificar. La Reina Máxima de Países Bajos estuvo en el estadio apoyando a Curazao.',goles:[],rojas:[],s:{posH:62,posA:38,tirH:20,tirA:6,arcoH:7,arcoA:1,corH:9,corA:2,falH:9,falA:14,tarH:2,tarA:1}},
+  tunjpn:{t:'🇹🇳 Túnez 0-4 Japón 🇯🇵',sub:'Grupo F · J2 · 20 Jun · BBVA Monterrey · 10:00 PM SV',ch:'Tigo',res:'Partido histórico: el encuentro número 1000 en la historia de los Mundiales. Japón dominó de principio a fin. Kamada 4\', Ueda doblete (31\' y 84\'), Ito 69\'. Japón empata con Países Bajos en puntos. Túnez eliminada con dos derrotas.',goles:[{m:"4'",j:'Daichi Kamada',eq:'🇯🇵 Japón',t:'Abrió el partido 1000 de Mundiales'},{m:"31'",j:'Ayase Ueda',eq:'🇯🇵 Japón',t:'2-0'},{m:"69'",j:'Junya Ito',eq:'🇯🇵 Japón',t:'3-0 — Túnez sin respuesta'},{m:"84'",j:'Ayase Ueda',eq:'🇯🇵 Japón',t:'Doblete Ueda — 4-0 definitivo'}],rojas:[],s:{posH:38,posA:62,tirH:4,tirA:17,arcoH:1,arcoA:8,corH:2,corA:7,falH:12,falA:8,tarH:2,tarA:1}},
+  espksa:{t:'🇪🇸 España 4-0 Arabia Saudita 🇸🇦',sub:'Grupo H · J2 · 21 Jun · Mercedes-Benz, Atlanta · 10:00 AM SV',ch:'Canal 4/Tigo',res:'España se redimió de su debut con una goleada. Yamal abrió al 10\' — su primer gol en un Mundial. Oyarzabal doblete (21\' y 24\'). OG Tambakti al 49\' cerró el 4-0. Yamal jugó solo 45 minutos pero dominó. España lidera el Grupo H con 4 puntos.',goles:[{m:"10'",j:'Lamine Yamal',eq:'🇪🇸 España',t:'1er gol de Yamal en un Mundial — 18 años'},{m:"21'",j:'Mikel Oyarzabal',eq:'🇪🇸 España',t:'Doblete al 21\''},{m:"24'",j:'Mikel Oyarzabal',eq:'🇪🇸 España',t:'Hat-trick fallido — gran actuación'},{m:"49'",j:'OG H. Al Tambakti',eq:'🇪🇸 España',t:'Autogol que cerró el 4-0'}],rojas:[],s:{posH:68,posA:32,tirH:19,tirA:5,arcoH:7,arcoA:1,corH:8,corA:2,falH:8,falA:13,tarH:1,tarA:3}},
+  belirn:{t:'🇧🇪 Bélgica 0-0 Irán 🇮🇷',sub:'Grupo G · J2 · 21 Jun · SoFi Stadium, Los Ángeles · 1:00 PM SV',ch:'Tigo',res:'Empate sin goles. Bélgica tuvo un gol anulado por VAR. Al 66\' Ngoy fue expulsado (roja directa) y dejó a Bélgica con 10. Irán no pudo aprovechar la ventaja numérica. Taremi tuvo gol anulado por fuera de juego. Bélgica en apuros para clasificar.',goles:[],rojas:['🇧🇪 Nathan Ngoy 66\' — roja directa falta sobre Taremi'],s:{posH:55,posA:45,tirH:12,tirA:10,arcoH:4,arcoA:3,corH:6,corA:4,falH:11,falA:12,tarH:3,tarA:2}},
+  urucpv:{t:'🇺🇾 Uruguay 2-2 Cabo Verde 🇨🇻',sub:'Grupo H · J2 · 21 Jun · Hard Rock, Miami · 4:00 PM SV',ch:'Tigo',res:'HISTÓRICO para Cabo Verde — primer empate y primer punto en Mundiales. Pina abrió 1-0 al 21\' (libre al palo). Araújo empató al 44\'. Canobbio dio la vuelta al 2-1. Varela empató para Cabo Verde al 61\'. Uruguay desaprovechó su ventaja. Grupo H completamente abierto.',goles:[{m:"21'",j:'Kevin Pina',eq:'🇨🇻 Cabo Verde',t:'Libre al palo — 1er gol Copa del Mundo de Cabo Verde'},{m:"44'",j:'Maximiliano Araújo',eq:'🇺🇾 Uruguay',t:'Empate para Uruguay'},{m:'2T',j:'Agustín Canobbio',eq:'🇺🇾 Uruguay',t:'Dio la vuelta al marcador — 2-1'},{m:"61'",j:'Hélio Varela',eq:'🇨🇻 Cabo Verde',t:'Empate histórico — 2-2 definitivo'}],rojas:[],s:{posH:54,posA:46,tirH:13,tirA:12,arcoH:5,arcoA:4,corH:6,corA:5,falH:12,falA:11,tarH:2,tarA:2}},
+  egynzl:{t:'🇪🇬 Egipto 3-1 Nueva Zelanda 🇳🇿',sub:'Grupo G · J2 · 21 Jun · Rose Bowl, Pasadena · 7:00 PM SV',ch:'Tigo',res:'HISTÓRICO para Egipto — primera victoria en la historia del Mundial. Surman adelantó a NZL con un gol tempranero. Egipto reaccionó en el 2T con Zico, Salah y Trezeguet. Mo Salah decisivo con el 2-1. Egipto lidera el Grupo G con 4 puntos.',goles:[{m:'1T',j:'Finn Surman',eq:'🇳🇿 Nueva Zelanda',t:'Adelantó a NZL'},{m:'2T',j:'Mostafa Zico',eq:'🇪🇬 Egipto',t:'Empató para Egipto'},{m:'2T',j:'Mohamed Salah',eq:'🇪🇬 Egipto',t:'2-1 — Salah decisivo'},{m:"82'",j:'M. Trezeguet',eq:'🇪🇬 Egipto',t:'3-1 — primera victoria histórica de Egipto'}],rojas:[],s:{posH:46,posA:54,tirH:14,tirA:13,arcoH:5,arcoA:5,corH:5,corA:6,falH:11,falA:11,tarH:2,tarA:2}},
+  mexkor:{t:'🇲🇽 México 1-0 Corea del Sur 🇰🇷',sub:'Grupo A · J2 · 18 Jun · Estadio Akron, Guadalajara · 7:00 PM SV',ch:'Canal 4/Tigo',res:'México se convirtió en el PRIMER CLASIFICADO del Mundial 2026. Luis Romo anotó al 50\' aprovechando un error garrafal del portero Kim Seung-gyu, quien se chocó con un compañero y dejó el balón suelto. Raúl Rangel fue el héroe al atajar en la línea el empate coreano al 87\'. Montes sancionado en J1 no jugó. México lidera el Grupo A con 6 puntos.',goles:[{m:"50'",j:'Luis Romo',eq:'🇲🇽 México',t:'Error del portero Kim Seung-gyu — balón suelto en el área'}],rojas:[],s:{posH:38,posA:62,tirH:9,tirA:17,arcoH:3,arcoA:6,corH:4,corA:8,falH:12,falA:10,tarH:1,tarA:2}},
+  cansub:{t:'🇨🇦 Canadá 6-0 Qatar 🇶🇦',sub:'Grupo B · J2 · 18 Jun · BC Place, Vancouver · 4:00 PM SV',ch:'Tigo',res:'Goleada histórica de Canadá — mayor victoria de CONCACAF en Mundiales. Jonathan David completó hat-trick. Cyle Larin abrió al 16\'. Qatar quedó con 9 jugadores (2 rojas: Homam Ahmed 1T y Assim Madibo 2T). Madibo dejó gravemente lesionado a Ismaël Koné que salió en camilla.',goles:[{m:"16'",j:'Cyle Larin',eq:'🇨🇦 Canadá',t:'Abrió el marcador'},{m:"29'",j:'Jonathan David',eq:'🇨🇦 Canadá',t:'Primer gol del hat-trick'},{m:"45+3'",j:'Jonathan David',eq:'🇨🇦 Canadá',t:'Doblete antes del descanso'},{m:"64'",j:'Ismaël Saliba',eq:'🇨🇦 Canadá',t:'5-0'},{m:"75'",j:'OG Almanai',eq:'🇶🇦 Qatar',t:'Autogol'},{m:"90+2'",j:'Jonathan David',eq:'🇨🇦 Canadá',t:'Hat-trick — sellando el histórico 6-0'}],rojas:['🇶🇦 Homam Ahmed — 1T (VAR convirtió amarilla en roja)','🇶🇦 Assim Madibo — 2T (lesionó gravemente a Koné)'],s:{posH:58,posA:42,tirH:20,tirA:5,arcoH:8,arcoA:1,corH:9,corA:2,falH:8,falA:15,tarH:1,tarA:4}},
+  suibos:{t:'🇨🇭 Suiza 4-1 Bosnia 🇧🇦',sub:'Grupo B · J2 · 18 Jun · SoFi Stadium, Los Ángeles · 1:00 PM SV',ch:'Tigo',res:'Suiza dominó pero no abrió el marcador hasta el final del 2T. Manzambi entró de cambio y anotó al 74\'. Vargas amplió al 84\'. Manzambi completó su doblete al 90\'. Xhaka anotó penal al 90+5\'. Bosnia descontó con Mahmic al 90+3\'. Un jugador de Bosnia vio la roja.',goles:[{m:"74'",j:'Johan Manzambi',eq:'🇨🇭 Suiza',t:'Entró de cambio y anotó — MVP del partido'},{m:"84'",j:'Rubén Vargas',eq:'🇨🇭 Suiza',t:'Derechazo al segundo palo'},{m:"90+'",j:'Johan Manzambi',eq:'🇨🇭 Suiza',t:'Doblete — premio al suplente'},{m:"90+3'",j:'Mahmic',eq:'🇧🇦 Bosnia',t:'Gol del descuento para Bosnia'},{m:"90+5'",j:'Granit Xhaka',eq:'🇨🇭 Suiza',t:'Penal que cerró el 4-1'}],rojas:['🇧🇦 Jugador Bosnia — 2T (VAR)'],s:{posH:60,posA:40,tirH:15,tirA:9,arcoH:6,arcoA:3,corH:7,corA:4,falH:9,falA:13,tarH:2,tarA:3}},
+  czesa:{t:'🇨🇿 Rep. Checa 1-1 Sudáfrica 🇿🇦',sub:'Grupo A · J2 · 18 Jun · Mercedes-Benz Stadium, Atlanta · 10:00 AM SV',ch:'Canal 4/Tigo',res:'El gol checo al minuto 1 fue el más rápido del torneo. Sudáfrica resistió y Mokoena convirtió un penal al 83\' para igualar tras una mano de Krejci. Chequia y Sudáfrica quedan con 1 punto cada uno y necesitan ganar en la J3 para clasificar.',goles:[{m:"1'",j:'Gol Rep. Checa',eq:'🇨🇿 Rep. Checa',t:'El más rápido del torneo — minuto 1'},{m:"83'",j:'T. Mokoena',eq:'🇿🇦 Sudáfrica',t:'Penal tras mano de Krejci en el área'}],rojas:[],s:{posH:50,posA:50,tirH:13,tirA:11,arcoH:5,arcoA:4,corH:6,corA:5,falH:11,falA:13,tarH:2,tarA:3}},
+  col:{t:'🇺🇿 Uzbekistán 1-3 Colombia 🇨🇴',sub:'Grupo K · J1 · 17 Jun · Estadio Azteca, CDMX · 8:00 PM SV',ch:'Canal 4/Tigo',res:'Colombia goleó 3-1 en el Azteca ante una afición mayoritariamente cafetera. Muñoz anotó un golazo de primera al 45+. Fayzullaev igualó al 60\'. Luis Díaz apareció al 65\' para el 2-1. Campaz sentenció en el 90+. Uzbekistán hizo partido pero Colombia fue superior.',goles:[{m:"45+'",j:'Daniel Muñoz',eq:'🇨🇴 Colombia',t:'Golazo de primera — remate tras centro'},{m:"60'",j:'Fayzullaev',eq:'🇺🇿 Uzbekistán',t:'Empató para Uzbekistán'},{m:"65'",j:'Luis Díaz',eq:'🇨🇴 Colombia',t:'2-1 — zurda potente'},{m:"90+'",j:'Jaminton Campaz',eq:'🇨🇴 Colombia',t:'Sentenció el 3-1 en el descuento'}],rojas:[],s:{posH:40,posA:60,tirH:10,tirA:16,arcoH:3,arcoA:6,corH:3,corA:7,falH:14,falA:11,tarH:2,tarA:2}}
+};
+
+function openMatch(id){
+  const d=MD[id];if(!d)return;
+  const golesH=d.goles.map(g=>`<div style="display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid var(--border);"><div style="font-family:'Orbitron',monospace;font-size:11px;color:var(--gold);width:34px;flex-shrink:0;">${g.m}</div><div style="font-size:14px;">⚽</div><div><div style="font-weight:600;color:var(--white);font-size:11px;">${g.j}</div><div style="font-size:9px;color:var(--gray);">${g.eq} · ${g.t}</div></div></div>`).join('');
+  const rojasH=d.rojas&&d.rojas.length?`<div style="margin-top:10px;"><div style="font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:2px;margin-bottom:5px;">🟥 TARJETAS ROJAS</div>${d.rojas.map(r=>`<div style="font-size:10px;color:var(--text);padding:3px 0;border-bottom:1px solid var(--border);">${r}</div>`).join('')}</div>`:'';
+  function sb(lbl,h,a,c='var(--blue)'){const t=h+a||1;const p=Math.round(h/t*100);return`<div class="stat-line"><div class="stat-v">${h}</div><div class="stat-lbl">${lbl}</div><div class="stat-track"><div class="bar-h" style="width:${p}%;background:${c};"></div><div class="bar-a" style="width:${100-p}%;background:var(--red);"></div></div><div class="stat-lbl r">${lbl}</div><div class="stat-v">${a}</div></div>`;}
+  const statsH=d.s?`<div style="font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;color:var(--neon);text-transform:uppercase;letter-spacing:2px;margin:10px 0 6px;">📊 ESTADÍSTICAS</div><div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:9px;color:var(--gray);"><span>LOCAL</span><span>VISITANTE</span></div>${sb('Posesión %',d.s.posH,d.s.posA,'var(--neon)')}${sb('Tiros',d.s.tirH,d.s.tirA,'var(--blue)')}${sb('Al arco',d.s.arcoH,d.s.arcoA,'var(--green)')}${sb('Corners',d.s.corH,d.s.corA,'var(--purple)')}${sb('Faltas',d.s.falH,d.s.falA,'var(--gold)')}${sb('Amarillas',d.s.tarH,d.s.tarA,'var(--red)')}`:'';
+  document.getElementById('modal-body').innerHTML=`
+    <div style="font-family:'Orbitron',monospace;font-size:13px;font-weight:900;color:var(--white);margin-bottom:2px;">${d.t}</div>
+    <div style="font-size:9px;color:var(--gray);margin-bottom:2px;">${d.sub}</div>
+    <div style="font-size:9px;color:var(--neon);margin-bottom:8px;">📺 ${d.ch}</div>
+    <div class="info-box">${d.res}</div>
+    <div style="font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:700;color:var(--neon);text-transform:uppercase;letter-spacing:2px;margin-bottom:5px;">⚽ GOLES</div>
+    ${golesH}${rojasH}${statsH}`;
+  document.getElementById('overlay').classList.add('open');
+}
+function closeModal(){document.getElementById('overlay').classList.remove('open');}
+function closeOverlay(e){if(e.target===document.getElementById('overlay'))closeModal();}
+
+// FILTER CALENDAR
+function filterCal(q) {
+  const term = q.toLowerCase().trim();
+  const days = document.querySelectorAll('#cal-list .dhdr, #cal-list .match');
+  let lastDhdr = null;
+  let dayHasMatch = false;
+
+  days.forEach(el => {
+    if (el.classList.contains('dhdr')) {
+      if (lastDhdr) lastDhdr.style.display = dayHasMatch ? '' : 'none';
+      lastDhdr = el;
+      dayHasMatch = false;
+    } else {
+      const text = el.textContent.toLowerCase();
+      const show = !term || text.includes(term);
+      el.style.display = show ? '' : 'none';
+      if (show) dayHasMatch = true;
+    }
+  });
+  if (lastDhdr) lastDhdr.style.display = dayHasMatch ? '' : 'none';
+}
+
+// FILTER GROUPS
+function filterGroups(q) {
+  const term = q.toLowerCase().trim();
+  const cards = document.querySelectorAll('#groups-wrap .card');
+  cards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = !term || text.includes(term) ? '' : 'none';
+  });
+}
+
+// INIT
+renderCalendar();
+renderGroups();
+renderScorers();
+</script>
+</body>
+</html>
