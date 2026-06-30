@@ -212,12 +212,12 @@ main{max-width:1200px;margin:0 auto;padding:12px 12px 50px;}
   </div>
   <nav class="nav">
     <button class="nav-btn active" onclick="tab('hoy',this)">🔴 HOY</button>
+    <button class="nav-btn" onclick="tab('camino',this)">🔮 CAMINO AL TÍTULO</button>
     <button class="nav-btn" onclick="tab('resultados',this)">✅ RESULTADOS</button>
     <button class="nav-btn" onclick="tab('calendario',this)">📅 CALENDARIO</button>
     <button class="nav-btn" onclick="tab('grupos',this)">📊 GRUPOS</button>
     <button class="nav-btn" onclick="tab('estadisticas',this)">🏆 ESTADÍSTICAS</button>
     <button class="nav-btn" onclick="tab('eliminadas',this)">❌ ELIMINADAS</button>
-    <button class="nav-btn" onclick="tab('camino',this)">🔮 CAMINO AL TÍTULO</button>
   </nav>
 </header>
 
@@ -1017,6 +1017,333 @@ main{max-width:1200px;margin:0 auto;padding:12px 12px 50px;}
         <div style="text-align:center;padding:8px;background:rgba(0,245,255,0.04);border:1px solid rgba(0,245,255,0.12);border-radius:7px;"><div style="font-family:'Orbitron',monospace;font-size:22px;font-weight:900;color:var(--neon);">3</div><div style="font-size:9px;color:var(--gray);margin-top:2px;">Penales</div></div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- ELIMINADAS -->
+<div id="s-eliminadas" class="section">
+  <div class="pg-title">❌ <span>ELIMINADAS</span></div>
+  <div class="pg-sub">16 selecciones fuera del Mundial 2026</div>
+
+  <style>
+    .elim-grid{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+    .elim-card{background:#0d1520;border:1px solid #1e2d45;border-radius:10px;padding:11px 13px;display:flex;align-items:center;gap:12px;position:relative;}
+    .elim-num{font-family:'Orbitron',monospace;font-size:18px;font-weight:900;color:#1e3a5f;min-width:28px;}
+    .elim-flag{font-size:26px;line-height:1;}
+    .elim-info{flex:1;}
+    .elim-name{font-size:13px;font-weight:700;color:#f1f5f9;margin-bottom:2px;}
+    .elim-reason{font-size:10px;color:#64748b;line-height:1.5;}
+    .elim-pts{font-size:11px;font-weight:700;color:#ff3355;background:rgba(255,51,85,0.12);padding:3px 9px;border-radius:20px;white-space:nowrap;}
+    .elim-group{font-size:9px;color:#0ea5e9;font-weight:600;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px;}
+  </style>
+
+  <div class="dhdr">ELIMINADOS EN FASE DE GRUPOS</div>
+  <div class="elim-grid">
+    <div class="elim-card"><div class="elim-num">1</div><div class="elim-flag">🇶🇦</div><div class="elim-info"><div class="elim-group">Grupo B</div><div class="elim-name">Qatar</div><div class="elim-reason">1pt · 0V-1E-2D · GF2 GC10 · Anfitrión eliminado · 6-0 vs Canadá</div></div><div class="elim-pts">1 pt</div></div>
+    <div class="elim-card"><div class="elim-num">2</div><div class="elim-flag">🇭🇹</div><div class="elim-info"><div class="elim-group">Grupo C</div><div class="elim-name">Haití</div><div class="elim-reason">0pts · 0V-0E-3D · GF2 GC8 · 1er Mundial en 52 años · valiente debut</div></div><div class="elim-pts">0 pts</div></div>
+    <div class="elim-card"><div class="elim-num">3</div><div class="elim-flag">🇹🇷</div><div class="elim-info"><div class="elim-group">Grupo D</div><div class="elim-name">Turquía</div><div class="elim-reason">3pts · venció 3-2 a EEUU pero llegó sin opciones · 0V-0E-2D en J1-J2</div></div><div class="elim-pts">3 pts</div></div>
+    <div class="elim-card"><div class="elim-num">4</div><div class="elim-flag">🇨🇼</div><div class="elim-info"><div class="elim-group">Grupo E</div><div class="elim-name">Curazao</div><div class="elim-reason">1pt · Room 15+ paradas vs Ecuador — récord histórico · 1er punto</div></div><div class="elim-pts">1 pt</div></div>
+    <div class="elim-card"><div class="elim-num">5</div><div class="elim-flag">🇹🇳</div><div class="elim-info"><div class="elim-group">Grupo F</div><div class="elim-name">Túnez</div><div class="elim-reason">0pts · 0V-0E-3D · GF2 GC13 · 0-4 vs Japón y 1-5 vs Suecia</div></div><div class="elim-pts">0 pts</div></div>
+    <div class="elim-card"><div class="elim-num">6</div><div class="elim-flag">🇳🇿</div><div class="elim-info"><div class="elim-group">Grupo G</div><div class="elim-name">Nueva Zelanda</div><div class="elim-reason">1pt · Elijah Just doblete vs Irán · 1-5 vs Bélgica en J3</div></div><div class="elim-pts">1 pt</div></div>
+    <div class="elim-card"><div class="elim-num">7</div><div class="elim-flag">🇸🇦</div><div class="elim-info"><div class="elim-group">Grupo H</div><div class="elim-name">Arabia Saudita</div><div class="elim-reason">2pts · 0V-1E-2D · 0-4 vs España en J2 · no alcanzó</div></div><div class="elim-pts">2 pts</div></div>
+    <div class="elim-card"><div class="elim-num">8</div><div class="elim-flag">🇺🇾</div><div class="elim-info"><div class="elim-group">Grupo H</div><div class="elim-name">Uruguay</div><div class="elim-reason">2pts · Araújo y Canobbio anotaron pero insuficiente · 0-1 vs España J3</div></div><div class="elim-pts">2 pts</div></div>
+    <div class="elim-card"><div class="elim-num">9</div><div class="elim-flag">🇮🇶</div><div class="elim-info"><div class="elim-group">Grupo I</div><div class="elim-name">Irak</div><div class="elim-reason">0pts · Hussein gol histórico en 40 años pero 0V-0E-3D · 0-5 vs Senegal</div></div><div class="elim-pts">0 pts</div></div>
+    <div class="elim-card"><div class="elim-num">10</div><div class="elim-flag">🇯🇴</div><div class="elim-info"><div class="elim-group">Grupo J</div><div class="elim-name">Jordania</div><div class="elim-reason">0pts · 1er Mundial histórico · Al Rashdan 1er gol de Jordania en Mundiales</div></div><div class="elim-pts">0 pts</div></div>
+    <div class="elim-card"><div class="elim-num">11</div><div class="elim-flag">🇺🇿</div><div class="elim-info"><div class="elim-group">Grupo K</div><div class="elim-name">Uzbekistán</div><div class="elim-reason">0pts · 0V-0E-3D · GF1 GC8 · goleados 5-0 por Portugal J2</div></div><div class="elim-pts">0 pts</div></div>
+    <div class="elim-card"><div class="elim-num">12</div><div class="elim-flag">🇵🇦</div><div class="elim-info"><div class="elim-group">Grupo L</div><div class="elim-name">Panamá</div><div class="elim-reason">0pts · 0 goles en 3 partidos · 0-2 vs Ghana, 0-1 vs Croacia, 0-2 vs Inglaterra</div></div><div class="elim-pts">0 pts</div></div>
+    <div class="elim-card"><div class="elim-num">13</div><div class="elim-flag">🇨🇿</div><div class="elim-info"><div class="elim-group">Grupo A</div><div class="elim-name">Rep. Checa</div><div class="elim-reason">1pt · 0V-1E-2D · 0-3 vs México en J3 · sin margen de error</div></div><div class="elim-pts">1 pt</div></div>
+  </div>
+
+  <div class="dhdr">ELIMINADOS COMO MEJORES TERCEROS (no pasaron el corte)</div>
+  <div class="elim-grid">
+    <div class="elim-card"><div class="elim-num">14</div><div class="elim-flag">🇮🇷</div><div class="elim-info"><div class="elim-group">Grupo G — 3°</div><div class="elim-name">Irán</div><div class="elim-reason">2pts · empató 2-2 vs NZL y 0-0 vs Bélgica · no fue suficiente como mejor 3°</div></div><div class="elim-pts">2 pts</div></div>
+    <div class="elim-card"><div class="elim-num">15</div><div class="elim-flag">🇰🇷</div><div class="elim-info"><div class="elim-group">Grupo A — 3°</div><div class="elim-name">Corea del Sur</div><div class="elim-reason">3pts · derrotó a Rep. Checa en J1 pero 0-1 vs Sudáfrica J3 no alcanzó</div></div><div class="elim-pts">3 pts</div></div>
+    <div class="elim-card"><div class="elim-num">16</div><div class="elim-flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div><div class="elim-info"><div class="elim-group">Grupo C — 3°</div><div class="elim-name">Escocia</div><div class="elim-reason">3pts · Hampden nunca soñó tan lejos · 0-3 vs Brasil J3 fue demasiado</div></div><div class="elim-pts">3 pts</div></div>
+  </div>
+
+  <div class="dhdr">ELIMINADAS EN 16AVOS DE FINAL</div>
+  <div class="elim-grid">
+    <div class="elim-card"><div class="elim-num">17</div><div class="elim-flag">🇿🇦</div><div class="elim-info"><div class="elim-group">16avos P1 · 28 jun</div><div class="elim-name">Sudáfrica</div><div class="elim-reason">0-1 vs Canadá · Eustáquio anotó al 90+2' · llegó lejos para un debut histórico</div></div><div class="elim-pts">0-1</div></div>
+    <div class="elim-card"><div class="elim-num">18</div><div class="elim-flag">🇩🇪</div><div class="elim-info"><div class="elim-group">16avos P2 · 29 jun</div><div class="elim-name">Alemania</div><div class="elim-reason">1-1 (3-4 pen) vs Paraguay · 1ª vez en la historia que pierde en penales en un Mundial</div></div><div class="elim-pts">1-1 (P)</div></div>
+    <div class="elim-card"><div class="elim-num">19</div><div class="elim-flag">🇳🇱</div><div class="elim-info"><div class="elim-group">16avos P3 · 29 jun</div><div class="elim-name">Países Bajos</div><div class="elim-reason">1-1 (pen) vs Marruecos · Gakpo adelantó pero Diop empató al 90+1'</div></div><div class="elim-pts">1-1 (P)</div></div>
+    <div class="elim-card"><div class="elim-num">20</div><div class="elim-flag">🇯🇵</div><div class="elim-info"><div class="elim-group">16avos P4 · 29 jun</div><div class="elim-name">Japón</div><div class="elim-reason">1-2 vs Brasil · se adelantó al 29' pero Brasil remontó con gol al 95'</div></div><div class="elim-pts">1-2</div></div>
+  </div>
+
+  <div style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.15);border-radius:8px;padding:10px;margin-top:4px;font-size:10px;color:var(--gray);line-height:1.8;">
+    ✅ <strong style="color:var(--white);">32 equipos clasificados a 16avos:</strong> México · Sudáfrica · Suiza · Canadá · Brasil · Marruecos · EEUU · Australia · Alemania · Costa de Marfil · Países Bajos · Japón · Francia · Noruega · Bélgica · Egipto · España · Cabo Verde · Argentina · Austria · Colombia · Portugal · Inglaterra · Croacia + RD Congo · Suecia · Ghana · Ecuador · Bosnia · Argelia · Paraguay · Senegal
+  </div>
+</div>
+
+
+<!-- CAMINO AL TÍTULO -->
+<div id="s-camino" class="section">
+  <div class="pg-title">🔮 CAMINO AL <span>TÍTULO</span></div>
+  <div class="pg-sub">Llaves oficiales FIFA verificadas · Se actualiza con cada resultado</div>
+
+  <style>
+  .ko-wrap{display:flex;flex-direction:column;gap:10px;}
+  .ko-match{background:linear-gradient(145deg,#0d1520,#0a0f18);border:1px solid #1e2d45;border-radius:12px;overflow:hidden;position:relative;}
+  .ko-match.done{border-color:rgba(0,245,255,0.3);}
+  .ko-hd{display:flex;justify-content:space-between;align-items:center;padding:7px 12px;background:rgba(0,245,255,0.04);border-bottom:1px solid #1e2d45;font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:0.5px;}
+  .ko-hd .ko-num{color:var(--gold);font-weight:700;font-family:'Orbitron',monospace;}
+  .ko-hd .ko-status{padding:2px 8px;border-radius:10px;font-weight:700;}
+  .ko-hd .ko-status.live{background:rgba(255,51,85,0.15);color:#ff3355;}
+  .ko-hd .ko-status.done{background:rgba(0,245,255,0.15);color:var(--neon);}
+  .ko-hd .ko-status.pend{background:rgba(255,165,0,0.12);color:#f5a524;}
+  .ko-body{display:flex;align-items:center;padding:10px 14px;gap:10px;}
+  .ko-team{flex:1;display:flex;align-items:center;gap:8px;}
+  .ko-team.right{flex-direction:row-reverse;text-align:right;}
+  .ko-flag{font-size:24px;line-height:1;}
+  .ko-name{font-size:12px;font-weight:700;color:#cbd5e1;}
+  .ko-name.winner{color:#f1f5f9;font-weight:900;}
+  .ko-vs{font-family:'Orbitron',monospace;font-size:13px;font-weight:900;color:#475569;padding:0 6px;min-width:48px;text-align:center;}
+  .ko-vs.scored{color:var(--gold);font-size:15px;}
+  .pending-vs{background:rgba(255,255,255,0.03);border:1px dashed #2a3a55;border-radius:10px;padding:6px 14px;text-align:center;font-size:9px;color:#64748b;margin:0 10px 10px;}
+  .ko-round-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:900;color:var(--gold);text-transform:uppercase;letter-spacing:2px;margin:18px 0 10px;display:flex;align-items:center;gap:8px;}
+  .ko-round-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
+  .ko-pair-card{background:#0d1520;border:1px solid #1e2d45;border-radius:12px;padding:10px 14px;font-size:10px;color:#64748b;display:flex;justify-content:space-between;align-items:center;gap:8px;}
+  .ko-pair-team{font-weight:700;color:#94a3b8;}
+  </style>
+
+  <div class="card mb10">
+    <div class="card-hd"><div class="card-title">📋 CÓMO SE <span class="ac">CLASIFICA</span></div></div>
+    <div class="p12">
+      <div class="rule-item"><div class="ri">1°</div><div>Los <strong style="color:var(--white);">primeros de cada grupo</strong> (12 equipos) clasifican a Dieciseisavos.</div></div>
+      <div class="rule-item"><div class="ri">2°</div><div>Los <strong style="color:var(--white);">segundos de cada grupo</strong> (12 equipos) también clasifican.</div></div>
+      <div class="rule-item"><div class="ri">3°</div><div>Los <strong style="color:var(--white);">8 mejores terceros lugares</strong> de 12 grupos avanzan.</div></div>
+      <div class="rule-item"><div class="ri">❌</div><div>Los <strong style="color:var(--red);">4° lugares</strong> de cada grupo quedan eliminados.</div></div>
+    </div>
+  </div>
+
+  <div class="ko-round-title">⚔️ 16AVOS DE FINAL · 28 JUN - 3 JUL</div>
+  <div class="ko-wrap">
+
+    <div class="ko-match done">
+      <div class="ko-hd"><span class="ko-num">P1</span><span>28 jun · Los Ángeles</span><span class="ko-status done">FINAL</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇿🇦</div><div class="ko-name">Sudáfrica</div></div>
+        <div class="ko-vs scored">0-1</div>
+        <div class="ko-team right"><div class="ko-flag">🇨🇦</div><div class="ko-name winner">Canadá</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match done">
+      <div class="ko-hd"><span class="ko-num">P2</span><span>29 jun · Boston</span><span class="ko-status done">PENALES</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇩🇪</div><div class="ko-name">Alemania</div></div>
+        <div class="ko-vs scored">1-1<br><span style="font-size:8px;color:#64748b;">(3-4 p)</span></div>
+        <div class="ko-team right"><div class="ko-flag">🇵🇾</div><div class="ko-name winner">Paraguay</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match done">
+      <div class="ko-hd"><span class="ko-num">P3</span><span>29 jun · Monterrey</span><span class="ko-status done">PENALES</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇳🇱</div><div class="ko-name">Países Bajos</div></div>
+        <div class="ko-vs scored">1-1<br><span style="font-size:8px;color:#64748b;">(pen)</span></div>
+        <div class="ko-team right"><div class="ko-flag">🇲🇦</div><div class="ko-name winner">Marruecos</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match done">
+      <div class="ko-hd"><span class="ko-num">P4</span><span>29 jun · Houston</span><span class="ko-status done">FINAL</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇧🇷</div><div class="ko-name winner">Brasil</div></div>
+        <div class="ko-vs scored">2-1</div>
+        <div class="ko-team right"><div class="ko-flag">🇯🇵</div><div class="ko-name">Japón</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P5</span><span>30 jun · Dallas</span><span class="ko-status pend">11:00 AM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇨🇮</div><div class="ko-name">Costa de Marfil</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇳🇴</div><div class="ko-name">Noruega</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P6</span><span>30 jun · Nueva Jersey</span><span class="ko-status pend">3:00 PM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇫🇷</div><div class="ko-name">Francia</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇸🇪</div><div class="ko-name">Suecia</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P7</span><span>30 jun · Ciudad de México</span><span class="ko-status pend">7:00 PM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇲🇽</div><div class="ko-name">México</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇪🇨</div><div class="ko-name">Ecuador</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P8</span><span>1 jul · Atlanta</span><span class="ko-status pend">10:00 AM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div><div class="ko-name">Inglaterra</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇨🇩</div><div class="ko-name">RD Congo</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P9</span><span>1 jul · Seattle</span><span class="ko-status pend">2:00 PM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇧🇪</div><div class="ko-name">Bélgica</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇸🇳</div><div class="ko-name">Senegal</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P10</span><span>1 jul · San Francisco</span><span class="ko-status pend">6:00 PM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇺🇸</div><div class="ko-name">Estados Unidos</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇧🇦</div><div class="ko-name">Bosnia</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P11</span><span>2 jul · Los Ángeles</span><span class="ko-status pend">1:00 PM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇪🇸</div><div class="ko-name">España</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇦🇹</div><div class="ko-name">Austria</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P12</span><span>2 jul · Toronto</span><span class="ko-status pend">5:00 PM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇵🇹</div><div class="ko-name">Portugal</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇭🇷</div><div class="ko-name">Croacia</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P13</span><span>2 jul · Vancouver</span><span class="ko-status pend">9:00 PM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇨🇭</div><div class="ko-name">Suiza</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇩🇿</div><div class="ko-name">Argelia</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P14</span><span>3 jul · Miami</span><span class="ko-status pend">4:00 PM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇦🇷</div><div class="ko-name">Argentina</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇨🇻</div><div class="ko-name">Cabo Verde</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P15</span><span>3 jul · Dallas</span><span class="ko-status pend">12:00 PM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇦🇺</div><div class="ko-name">Australia</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇪🇬</div><div class="ko-name">Egipto</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">P16</span><span>3 jul · Kansas City</span><span class="ko-status pend">7:30 PM SV</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇨🇴</div><div class="ko-name">Colombia</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇬🇭</div><div class="ko-name">Ghana</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ko-round-title">🏅 OCTAVOS DE FINAL · LLAVES OFICIALES</div>
+  <div class="ko-wrap">
+
+    <div class="ko-match done">
+      <div class="ko-hd"><span class="ko-num">O1</span><span>Sáb 4 jul · 11:00 AM SV · Houston</span><span class="ko-status done">CONFIRMADO</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇨🇦</div><div class="ko-name winner">Canadá</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">🇲🇦</div><div class="ko-name winner">Marruecos</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">O2</span><span>Sáb 4 jul · 4:00 PM SV · Filadelfia</span><span class="ko-status pend">P10 (FRA/SWE)</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇵🇾</div><div class="ko-name winner">Paraguay</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">❓</div><div class="ko-name">Gan. Francia/Suecia</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">O3</span><span>Dom 5 jul · 3:00 PM SV · Nueva York/NJ</span><span class="ko-status pend">P5 (CIV/NOR)</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">🇧🇷</div><div class="ko-name winner">Brasil</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">❓</div><div class="ko-name">Gan. Costa Marfil/Noruega</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">O4</span><span>Dom 5 jul · 5:00 PM SV · Ciudad de México</span><span class="ko-status pend">P7/P8</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">❓</div><div class="ko-name">Gan. México/Ecuador</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">❓</div><div class="ko-name">Gan. Inglaterra/RD Congo</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">O5</span><span>Lun 6 jul · 1:00 PM SV · Dallas</span><span class="ko-status pend">P11/P12</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">❓</div><div class="ko-name">Gan. Portugal/Croacia</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">❓</div><div class="ko-name">Gan. España/Austria</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">O6</span><span>Lun 6 jul · 4:00 PM SV · Seattle</span><span class="ko-status pend">P9/P10</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">❓</div><div class="ko-name">Gan. EEUU/Bosnia</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">❓</div><div class="ko-name">Gan. Bélgica/Senegal</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">O7</span><span>Mar 7 jul · 11:00 AM SV · Atlanta</span><span class="ko-status pend">P14/P15</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">❓</div><div class="ko-name">Gan. Argentina/Cabo Verde</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">❓</div><div class="ko-name">Gan. Australia/Egipto</div></div>
+      </div>
+    </div>
+
+    <div class="ko-match">
+      <div class="ko-hd"><span class="ko-num">O8</span><span>Mar 7 jul · 12:00 PM SV · Vancouver</span><span class="ko-status pend">P13/P16</span></div>
+      <div class="ko-body">
+        <div class="ko-team"><div class="ko-flag">❓</div><div class="ko-name">Gan. Suiza/Argelia</div></div>
+        <div class="ko-vs">vs</div>
+        <div class="ko-team right"><div class="ko-flag">❓</div><div class="ko-name">Gan. Colombia/Ghana</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.15);border-radius:8px;padding:11px;margin-top:14px;font-size:10px;color:var(--gray);line-height:1.8;">
+
+    🏆 <strong style="color:var(--white);">Cuartos de final:</strong> 9-11 jul · <strong style="color:var(--white);">Semifinales:</strong> 14-15 jul · <strong style="color:var(--gold);">Final:</strong> 19 jul · MetLife Stadium, Nueva Jersey
   </div>
 </div>
 
